@@ -59,52 +59,51 @@
     });
   </script>
 
-  <!-- ទាញយក Font Kantumruy Pro -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Kantumruy+Pro:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-
   <style>
     @layer reset, variables, ui, components;
     @layer ui {
       @layer tablist, spinner, button, input, layout;
     }
+  </style>
 
-    /* Font អក្សរខ្មែរ Kantumruy Pro */
+  <!-- Custom CSS កែពណ៌ Theme និង Font ខ្មែរ -->
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Kantumruy+Pro:wght@400;500;600;700&display=swap');
+
     * {
-      font-family: 'Kantumruy Pro', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif !important;
+      font-family: 'Kantumruy Pro', sans-serif !important;
     }
 
-    /* លេខ ១៖ Header ផ្នែកខាងលើ (ពណ៌លឿងស្រទន់) */
-    .sidebar-header,
-    .middle-column-header,
-    .chat-info,
+    /* លេខ ១៖ Header ផ្នែកខាងលើ (ពណ៌លឿង) */
+    .LeftHeader,
+    .MiddleHeader,
     .Header {
       background-color: #fff089 !important;
     }
 
-    /* លេខ ២៖ បញ្ជី Chat ខាងឆ្វេង (ពណ៌ក្រហមស្រាល Pastel) */
-    #LeftColumn,
-    #LeftColumn-main,
-    .left-column,
+    /* លេខ ២៖ បញ្ជី Chat ខាងឆ្វេងទាំងមូល (ពណ៌ក្រហមស្រាល) */
+    .LeftColumn,
     .chat-list,
-    .ChatList,
-    .ListItem-button {
+    .Transition {
       background-color: #ffebee !important;
     }
 
-    /* ពណ៌ពេលដាក់ Mouse លើ Chat ខាងឆ្វេង */
-    .chat-list .ListItem:hover,
-    .chat-list .Chat:hover,
-    .ListItem-button:hover {
+    /* ធ្វើឱ្យផ្ទៃ Chat នីមួយៗថ្លា និងដូរពណ៌ពេលដាក់ Mouse ពីលើ */
+    .ListItem, .chat-list-item {
+      background-color: transparent !important;
+    }
+    .ListItem:hover, .chat-list-item:hover {
       background-color: #ffd8dd !important;
+    }
+    .ListItem.active {
+      background-color: #ffc4cc !important;
     }
 
     /* ផ្ទាំង Chat កណ្ដាល (ផ្កាឈូកកាត់លឿង Pastel) */
+    .MiddleColumn,
     #MiddleColumn, 
     .chat-background, 
     .messages-layout, 
-    .theme-background,
     .bubbles {
       background: linear-gradient(135deg, #fbc2eb 0%, #ffdde1 45%, #ffeaa7 100%) !important;
     }
@@ -117,7 +116,6 @@
       color: #2b2b2b !important;
       border: 1px solid #f8c0d3 !important;
     }
-
     .message-outgoing .message-time,
     .Message.own .message-time {
       color: #8f6277 !important;
