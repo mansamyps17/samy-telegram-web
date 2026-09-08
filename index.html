@@ -4,30 +4,30 @@
 <head>
   <meta charset="UTF-8">
 
-  <title>Telegram</title>
+  <title>Mii mama gram</title>
 
-  <meta name="title" content="Telegram">
+  <meta name="title" content="Mii mama gram">
   <meta name="description"
     content="Telegram is a cloud-based mobile and desktop messaging app with a focus on security and speed.">
   <meta name="viewport"
         content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no, viewport-fit=cover">
   <meta name="mobile-web-app-capable" content="yes">
-  <meta name="mobile-web-app-title" content="Telegram">
+  <meta name="mobile-web-app-title" content="Mii mama gram">
   <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-title" content="Telegram">
-  <meta name="application-name" content="Telegram">
+  <meta name="apple-mobile-web-app-title" content="Mii mama gram">
+  <meta name="application-name" content="Mii mama gram">
   <meta name="msapplication-TileColor" content="#2b5797">
   <meta name="msapplication-config" content="./browserconfig.xml">
-  <meta name="theme-color" content="#ffffff">
+  <meta name="theme-color" content="#fff089">
   <meta name="google" content="notranslate">
 
-  <!-- អនុញ្ញាតឱ្យទាញយក Font ពី Google Fonts ដោយមិនជាប់ CSP Error -->
+  <!-- CSP អនុញ្ញាតឱ្យដំណើរការ Font Google និង Custom CSS -->
   <meta http-equiv="Content-Security-Policy" content="default-src 'self'; connect-src 'self' wss://*.web.telegram.org blob: http: https: ; script-src 'self' 'wasm-unsafe-eval' https://t.me/_websync_ https://telegram.me/_websync_ https://telegram.dog/_websync_; worker-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' data: https://fonts.gstatic.com; img-src 'self' data: blob: https://ss3.4sqi.net/img/categories_v2/; media-src 'self' blob: data:; object-src 'none'; frame-src http: https: bitkeep: bnc: bybitapp: echooo: imtokenv2: mytonwallet-tc: nicegram-tc: safepal-tc: tonkeeper-pro-tc: tonkeeper-tc:; base-uri 'none'; form-action 'none';">
 
   <!-- Open Graph / Facebook -->
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://web.telegram.org/a">
-  <meta property="og:title" content="Telegram">
+  <meta property="og:title" content="Mii mama gram">
   <meta property="og:description"
         content="Telegram is a cloud-based mobile and desktop messaging app with a focus on security and speed.">
   <meta property="og:image" content="./icon-192x192.png">
@@ -35,7 +35,7 @@
   <!-- Twitter -->
   <meta property="twitter:card" content="summary_large_image">
   <meta property="twitter:url" content="https://web.telegram.org/a">
-  <meta property="twitter:title" content="Telegram">
+  <meta property="twitter:title" content="Mii mama gram">
   <meta property="twitter:description"
     content="Telegram is a cloud-based mobile and desktop messaging app with a focus on security and speed.">
   <meta property="twitter:image" content="./icon-192x192.png">
@@ -50,24 +50,57 @@
   <link rel="manifest" id="the-manifest-placeholder" href="./site.webmanifest">
 
   <script src="./redirect.js"></script>
-  <style>
-    @layer reset, variables, ui, components;
-    @layer ui {
-      @layer tablist, spinner, button, input, layout;
-    }
-  </style>
+
+  <!-- ចាក់សោឈ្មោះមិនឱ្យ Telegram ដូរតាមឈ្មោះ Chat -->
+  <script>
+    Object.defineProperty(document, 'title', {
+      get: function() { return "Mii mama gram"; },
+      set: function() { }
+    });
+  </script>
 
   <!-- ទាញយក Font Kantumruy Pro -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Kantumruy+Pro:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
-  <!-- Custom Theme: Kantumruy Pro & Pastel Pink-Yellow -->
   <style>
+    @layer reset, variables, ui, components;
+    @layer ui {
+      @layer tablist, spinner, button, input, layout;
+    }
+
+    /* Font អក្សរខ្មែរ Kantumruy Pro */
     * {
       font-family: 'Kantumruy Pro', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif !important;
     }
 
+    /* លេខ ១៖ Header ផ្នែកខាងលើ (ពណ៌លឿងស្រទន់) */
+    .sidebar-header,
+    .middle-column-header,
+    .chat-info,
+    .Header {
+      background-color: #fff089 !important;
+    }
+
+    /* លេខ ២៖ បញ្ជី Chat ខាងឆ្វេង (ពណ៌ក្រហមស្រាល Pastel) */
+    #LeftColumn,
+    #LeftColumn-main,
+    .left-column,
+    .chat-list,
+    .ChatList,
+    .ListItem-button {
+      background-color: #ffebee !important;
+    }
+
+    /* ពណ៌ពេលដាក់ Mouse លើ Chat ខាងឆ្វេង */
+    .chat-list .ListItem:hover,
+    .chat-list .Chat:hover,
+    .ListItem-button:hover {
+      background-color: #ffd8dd !important;
+    }
+
+    /* ផ្ទាំង Chat កណ្ដាល (ផ្កាឈូកកាត់លឿង Pastel) */
     #MiddleColumn, 
     .chat-background, 
     .messages-layout, 
@@ -76,6 +109,7 @@
       background: linear-gradient(135deg, #fbc2eb 0%, #ffdde1 45%, #ffeaa7 100%) !important;
     }
 
+    /* ប្រអប់សារផ្ញើចេញ */
     .bubble.is-out,
     .message-outgoing .bubble,
     .Message.own .bubble {
