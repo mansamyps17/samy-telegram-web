@@ -1,53 +1,27 @@
 <!DOCTYPE html>
 <html lang="en" translate="no" class="notranslate">
-
 <head>
   <meta charset="UTF-8">
-
   <title>Mii mama gram</title>
 
   <meta name="title" content="Mii mama gram">
-  <meta name="description"
-    content="Telegram is a cloud-based mobile and desktop messaging app with a focus on security and speed.">
-  <meta name="viewport"
-        content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no, viewport-fit=cover">
+  <meta name="description" content="Telegram is a cloud-based mobile and desktop messaging app with a focus on security and speed.">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no, viewport-fit=cover">
   <meta name="mobile-web-app-capable" content="yes">
   <meta name="mobile-web-app-title" content="Mii mama gram">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-title" content="Mii mama gram">
   <meta name="application-name" content="Mii mama gram">
-  <meta name="msapplication-TileColor" content="#2b5797">
-  <meta name="msapplication-config" content="./browserconfig.xml">
-  <meta name="theme-color" content="#fff089">
+  <meta name="theme-color" content="#ffffff">
   <meta name="google" content="notranslate">
 
-  <!-- CSP អនុញ្ញាតឱ្យដំណើរការ Font Google និង Custom CSS -->
-  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; connect-src 'self' wss://*.web.telegram.org blob: http: https: ; script-src 'self' 'wasm-unsafe-eval' https://t.me/_websync_ https://telegram.me/_websync_ https://telegram.dog/_websync_; worker-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' data: https://fonts.gstatic.com; img-src 'self' data: blob: https://ss3.4sqi.net/img/categories_v2/; media-src 'self' blob: data:; object-src 'none'; frame-src http: https: bitkeep: bnc: bybitapp: echooo: imtokenv2: mytonwallet-tc: nicegram-tc: safepal-tc: tonkeeper-pro-tc: tonkeeper-tc:; base-uri 'none'; form-action 'none';">
+  <!-- CSP អនុញ្ញាតឱ្យដំណើរការ Font Google, Custom CSS និង JS -->
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; connect-src 'self' wss://*.web.telegram.org blob: http: https: ; script-src 'self' 'unsafe-inline' 'wasm-unsafe-eval' https://t.me/_websync_ https://telegram.me/_websync_ https://telegram.dog/_websync_; worker-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' data: https://fonts.gstatic.com; img-src 'self' data: blob: https://ss3.4sqi.net/img/categories_v2/; media-src 'self' blob: data:; object-src 'none'; frame-src http: https: bitkeep: bnc: bybitapp: echooo: imtokenv2: mytonwallet-tc: nicegram-tc: safepal-tc: tonkeeper-pro-tc: tonkeeper-tc:; base-uri 'none'; form-action 'none';">
 
-  <!-- Open Graph / Facebook -->
-  <meta property="og:type" content="website">
-  <meta property="og:url" content="https://web.telegram.org/a">
-  <meta property="og:title" content="Mii mama gram">
-  <meta property="og:description"
-        content="Telegram is a cloud-based mobile and desktop messaging app with a focus on security and speed.">
-  <meta property="og:image" content="./icon-192x192.png">
-
-  <!-- Twitter -->
-  <meta property="twitter:card" content="summary_large_image">
-  <meta property="twitter:url" content="https://web.telegram.org/a">
-  <meta property="twitter:title" content="Mii mama gram">
-  <meta property="twitter:description"
-    content="Telegram is a cloud-based mobile and desktop messaging app with a focus on security and speed.">
-  <meta property="twitter:image" content="./icon-192x192.png">
-
-  <link rel="canonical" href="https://web.telegram.org/a">
-  <link rel="apple-touch-icon" sizes="180x180" href="./apple-touch-icon.png">
   <link rel="icon" href="./favicon.svg" type="image/svg+xml">
   <link rel="icon" type="image/png" sizes="16x16" href="./favicon-16x16.png">
   <link rel="icon" type="image/png" sizes="32x32" href="./favicon-32x32.png">
   <link rel="icon" type="image/png" sizes="192x192" href="./icon-192x192.png">
-  <link rel="alternate icon" href="./favicon.ico" type="image/x-icon">
-  <link rel="manifest" id="the-manifest-placeholder" href="./site.webmanifest">
 
   <script src="./redirect.js"></script>
 
@@ -59,68 +33,161 @@
     });
   </script>
 
+  <!-- ទាញយក Font Kantumruy Pro -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Kantumruy+Pro:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- =============================== -->
+  <!-- ប្រព័ន្ធកំណត់ Theme ទាំង ៦ ពណ៌ -->
+  <!-- =============================== -->
   <style>
-    @layer reset, variables, ui, components;
-    @layer ui {
-      @layer tablist, spinner, button, input, layout;
+    /* 1. Pink Cute Theme (លំនាំដើម) */
+    :root {
+      --bg-header: #fff089;
+      --bg-sidebar: #ffebee;
+      --bg-chat: linear-gradient(135deg, #fbc2eb 0%, #ffdde1 45%, #ffeaa7 100%);
+      --bg-bubble-out: #ffe3ec;
+      --bg-bubble-in: #ffffff;
+      --color-text: #2b2b2b;
+      --bg-hover: #ffd8dd;
     }
+    
+    /* 2. Dark Night Theme */
+    [data-theme="dark-night"] {
+      --bg-header: #17212b;
+      --bg-sidebar: #0e1621;
+      --bg-chat: #0f1418;
+      --bg-bubble-out: #2b5278;
+      --bg-bubble-in: #182533;
+      --color-text: #ffffff;
+      --bg-hover: #202b36;
+    }
+
+    /* 3. Green Nature Theme */
+    [data-theme="green-nature"] {
+      --bg-header: #81c784;
+      --bg-sidebar: #e8f5e9;
+      --bg-chat: linear-gradient(135deg, #c8e6c9 0%, #f1f8e9 100%);
+      --bg-bubble-out: #a5d6a7;
+      --bg-bubble-in: #ffffff;
+      --color-text: #1b5e20;
+      --bg-hover: #c8e6c9;
+    }
+
+    /* 4. Anime Sky Theme */
+    [data-theme="anime-sky"] {
+      --bg-header: #64b5f6;
+      --bg-sidebar: #e3f2fd;
+      --bg-chat: linear-gradient(135deg, #bbdefb 0%, #e3f2fd 100%);
+      --bg-bubble-out: #90caf9;
+      --bg-bubble-in: #ffffff;
+      --color-text: #0d47a1;
+      --bg-hover: #bbdefb;
+    }
+
+    /* 5. Cartoon Bear Theme */
+    [data-theme="cartoon-bear"] {
+      --bg-header: #ffb74d;
+      --bg-sidebar: #fff3e0;
+      --bg-chat: linear-gradient(135deg, #ffe0b2 0%, #fff8e1 100%);
+      --bg-bubble-out: #ffcc80;
+      --bg-bubble-in: #ffffff;
+      --color-text: #e65100;
+      --bg-hover: #ffe0b2;
+    }
+
+    /* 6. Minimal Gradient Theme */
+    [data-theme="minimal-gradient"] {
+      --bg-header: #ce93d8;
+      --bg-sidebar: #f3e5f5;
+      --bg-chat: linear-gradient(135deg, #e1bee7 0%, #bbdefb 100%);
+      --bg-bubble-out: #e1bee7;
+      --bg-bubble-in: #ffffff;
+      --color-text: #4a148c;
+      --bg-hover: #e1bee7;
+    }
+
+    /* អនុវត្ត CSS ទៅលើកម្មវិធី Telegram ទាំងមូល */
+    * { font-family: 'Kantumruy Pro', sans-serif !important; }
+
+    .LeftHeader, .MiddleHeader, .RightHeader, .Header { background-color: var(--bg-header) !important; }
+    .LeftColumn, .chat-list, .Transition { background-color: var(--bg-sidebar) !important; }
+    
+    .ListItem, .chat-list-item { background-color: transparent !important; }
+    .ListItem:hover, .chat-list-item:hover, .ListItem.active { background-color: var(--bg-hover) !important; }
+    
+    .MiddleColumn, #MiddleColumn, .chat-background, .messages-layout, .bubbles { background: var(--bg-chat) !important; }
+    
+    /* សារផ្ញើចេញ */
+    .bubble.is-out, .message-outgoing .bubble, .Message.own .bubble {
+      background: var(--bg-bubble-out) !important;
+      color: var(--color-text) !important;
+      border: none !important;
+    }
+    
+    /* សារចូល */
+    .bubble:not(.is-out), .message-incoming .bubble, .Message:not(.own) .bubble {
+      background: var(--bg-bubble-in) !important;
+      color: var(--color-text) !important;
+      border: none !important;
+    }
+
+    .message-time { color: var(--color-text) !important; opacity: 0.7; }
+
+    /* =============================== */
+    /* រចនាប៊ូតុង និងផ្ទាំង Theme Switcher */
+    /* =============================== */
+    #theme-switcher-btn {
+      position: fixed;
+      bottom: 20px;
+      left: 20px;
+      width: 50px;
+      height: 50px;
+      background: rgba(255, 255, 255, 0.9);
+      backdrop-filter: blur(10px);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 24px;
+      cursor: pointer;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+      z-index: 9999;
+      transition: transform 0.2s;
+    }
+    #theme-switcher-btn:hover { transform: scale(1.1); }
+    
+    #theme-panel {
+      display: none;
+      position: fixed;
+      bottom: 80px;
+      left: 20px;
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(15px);
+      padding: 15px;
+      border-radius: 15px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+      z-index: 9999;
+      width: 220px;
+    }
+    #theme-panel h3 { margin: 0 0 15px 0; font-size: 16px; color: #333; text-align: center; }
+    
+    .theme-grid { display: flex; flex-direction: column; gap: 8px; }
+    .theme-btn {
+      padding: 10px; border: none; border-radius: 8px; cursor: pointer;
+      font-weight: 600; font-family: 'Kantumruy Pro', sans-serif; transition: opacity 0.2s;
+    }
+    .theme-btn:hover { opacity: 0.8; }
   </style>
 
-  <!-- Custom CSS កែពណ៌ Theme និង Font ខ្មែរ -->
-  <style>
-    @import url('https://fonts.googleapis.com/css2?family=Kantumruy+Pro:wght@400;500;600;700&display=swap');
-
-    * {
-      font-family: 'Kantumruy Pro', sans-serif !important;
-    }
-
-    /* លេខ ១៖ Header ផ្នែកខាងលើ (ពណ៌លឿង) */
-    .LeftHeader,
-    .MiddleHeader,
-    .Header {
-      background-color: #fff089 !important;
-    }
-
-    /* លេខ ២៖ បញ្ជី Chat ខាងឆ្វេងទាំងមូល (ពណ៌ក្រហមស្រាល) */
-    .LeftColumn,
-    .chat-list,
-    .Transition {
-      background-color: #ffebee !important;
-    }
-
-    /* ធ្វើឱ្យផ្ទៃ Chat នីមួយៗថ្លា និងដូរពណ៌ពេលដាក់ Mouse ពីលើ */
-    .ListItem, .chat-list-item {
-      background-color: transparent !important;
-    }
-    .ListItem:hover, .chat-list-item:hover {
-      background-color: #ffd8dd !important;
-    }
-    .ListItem.active {
-      background-color: #ffc4cc !important;
-    }
-
-    /* ផ្ទាំង Chat កណ្ដាល (ផ្កាឈូកកាត់លឿង Pastel) */
-    .MiddleColumn,
-    #MiddleColumn, 
-    .chat-background, 
-    .messages-layout, 
-    .bubbles {
-      background: linear-gradient(135deg, #fbc2eb 0%, #ffdde1 45%, #ffeaa7 100%) !important;
-    }
-
-    /* ប្រអប់សារផ្ញើចេញ */
-    .bubble.is-out,
-    .message-outgoing .bubble,
-    .Message.own .bubble {
-      background: #ffe3ec !important;
-      color: #2b2b2b !important;
-      border: 1px solid #f8c0d3 !important;
-    }
-    .message-outgoing .message-time,
-    .Message.own .message-time {
-      color: #8f6277 !important;
-    }
-  </style>
+  <!-- កូដដំណើរការទាញយក Theme ដែលបាន Save ទុកពីមុនមកប្រើ -->
+  <script>
+    (function() {
+      const savedTheme = localStorage.getItem('mii-mama-theme') || 'default';
+      document.documentElement.setAttribute('data-theme', savedTheme);
+    })();
+  </script>
 
   <script type="module" crossorigin src="./assets/index-CsuxnLyz.js"></script>
   <link rel="modulepreload" crossorigin href="./assets/rolldown-runtime-hePW80VL.js">
@@ -159,6 +226,33 @@
   </noscript>
   <div id="portals"></div>
   <script src="./compatTest.js"></script>
-</body>
 
+  <!-- HTML: ផ្ទាំងប៊ូតុង Theme Switcher ដាក់នៅខាងឆ្វេងផ្នែកខាងក្រោម -->
+  <div id="theme-switcher-btn" onclick="toggleThemePanel()">🎨</div>
+  <div id="theme-panel">
+    <h3>ជ្រើសរើស Theme</h3>
+    <div class="theme-grid">
+      <button class="theme-btn" onclick="setTheme('default')" style="background:#ffa6c9; color:#fff;">1. Pink Cute</button>
+      <button class="theme-btn" onclick="setTheme('dark-night')" style="background:#17212b; color:#fff;">2. Dark Night</button>
+      <button class="theme-btn" onclick="setTheme('green-nature')" style="background:#81c784; color:#fff;">3. Green Nature</button>
+      <button class="theme-btn" onclick="setTheme('anime-sky')" style="background:#64b5f6; color:#fff;">4. Anime Sky</button>
+      <button class="theme-btn" onclick="setTheme('cartoon-bear')" style="background:#ffb74d; color:#fff;">5. Cartoon Bear</button>
+      <button class="theme-btn" onclick="setTheme('minimal-gradient')" style="background:#ce93d8; color:#fff;">6. Minimal Gradient</button>
+    </div>
+  </div>
+
+  <!-- JavaScript សម្រាប់បញ្ជាប៊ូតុង និង Save ទុក្ខ -->
+  <script>
+    function toggleThemePanel() {
+      const panel = document.getElementById('theme-panel');
+      panel.style.display = panel.style.display === 'block' ? 'none' : 'block';
+    }
+
+    function setTheme(themeName) {
+      document.documentElement.setAttribute('data-theme', themeName);
+      localStorage.setItem('mii-mama-theme', themeName);
+      toggleThemePanel(); // បិទផ្ទាំងវិញពេលចុចរើសរួច
+    }
+  </script>
+</body>
 </html>
