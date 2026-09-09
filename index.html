@@ -5,23 +5,11 @@
   <title>Mii mama gram</title>
 
   <meta name="title" content="Mii mama gram">
-  <meta name="description" content="Telegram is a cloud-based mobile and desktop messaging app with a focus on security and speed.">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no, viewport-fit=cover">
-  <meta name="mobile-web-app-capable" content="yes">
-  <meta name="mobile-web-app-title" content="Mii mama gram">
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-title" content="Mii mama gram">
-  <meta name="application-name" content="Mii mama gram">
-  <meta name="theme-color" content="#ffffff">
-  <meta name="google" content="notranslate">
-
+  
   <meta http-equiv="Content-Security-Policy" content="default-src 'self'; connect-src 'self' wss://*.web.telegram.org blob: http: https: ; script-src 'self' 'unsafe-inline' 'wasm-unsafe-eval' https://t.me/_websync_ https://telegram.me/_websync_ https://telegram.dog/_websync_; worker-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' data: https://fonts.gstatic.com; img-src 'self' data: blob: https://ss3.4sqi.net/img/categories_v2/; media-src 'self' blob: data:; object-src 'none'; frame-src http: https: bitkeep: bnc: bybitapp: echooo: imtokenv2: mytonwallet-tc: nicegram-tc: safepal-tc: tonkeeper-pro-tc: tonkeeper-tc:; base-uri 'none'; form-action 'none';">
 
   <link rel="icon" href="./favicon.svg" type="image/svg+xml">
-  <link rel="icon" type="image/png" sizes="16x16" href="./favicon-16x16.png">
-  <link rel="icon" type="image/png" sizes="32x32" href="./favicon-32x32.png">
-  <link rel="icon" type="image/png" sizes="192x192" href="./icon-192x192.png">
-
   <script src="./redirect.js"></script>
   <script>
     Object.defineProperty(document, 'title', { get: function() { return "Mii mama gram"; }, set: function() { } });
@@ -32,16 +20,18 @@
   <link href="https://fonts.googleapis.com/css2?family=Kantumruy+Pro:wght@400;500;600;700&display=swap" rel="stylesheet">
 
   <!-- ========================================== -->
-  <!-- MII MAMA PREMIUM THEME (Modern Soft UI)    -->
+  <!-- MII MAMA MODERN THEME (បង្ខំដូរ UI ១០០%)     -->
   <!-- ========================================== -->
   <style>
     /* អក្សរខ្មែរទូទាំងកម្មវិធី */
     * { font-family: 'Kantumruy Pro', sans-serif !important; }
 
-    /* 1. Sidebar ផ្នែកខាងឆ្វេងបង្អស់ (ពណ៌ផ្ទៃមេឃស្រាល) */
-    .TabBar, .folders-tab {
+    /* 1. Sidebar ខាងឆ្វេងបង្អស់ (ពណ៌ផ្ទៃមេឃស្រាល) */
+    .TabBar, .folders-tab, .LeftColumn-main {
       background-color: #ebf0fe !important;
     }
+    .Tab.active { color: #7a75ff !important; }
+    .Tab.active .badge { background-color: #7a75ff !important; }
 
     /* 2. ផ្ទាំងបញ្ជី Chat និង Settings (ពណ៌ស) */
     .LeftColumn, .LeftHeader, .chat-list, .Transition, .Settings-main {
@@ -54,43 +44,43 @@
       border-radius: 20px !important;
     }
 
-    /* 4. Chat ដែលកំពុងជ្រើសរើស (ពណ៌ស្វាយ-ខៀវ ជ្រុងកោងមូល) */
+    /* 4. Chat ដែលកំពុងជ្រើសរើស (ពណ៌ស្វាយ-ខៀវ) */
     .ListItem.active, .chat-list-item.active {
       background: linear-gradient(90deg, #7a75ff 0%, #9089ff 100%) !important;
       border-radius: 15px !important;
-      margin: 2px 8px !important;
+      margin: 4px 8px !important;
       width: calc(100% - 16px) !important;
       box-shadow: 0 4px 10px rgba(122, 117, 255, 0.3) !important;
+      border: none !important;
     }
     .ListItem.active .title, .ListItem.active .subtitle, .ListItem.active .message-time, .ListItem.active i, .ListItem.active .peer-title {
       color: #ffffff !important;
     }
 
-    /* 5. ពណ៌ពេលដាក់ Mouse លើ Chat */
+    /* 5. Hover លើ Chat */
     .ListItem:hover:not(.active), .chat-list-item:hover:not(.active) {
       background-color: #f4f5f7 !important;
       border-radius: 15px !important;
-      margin: 2px 8px !important;
+      margin: 4px 8px !important;
       width: calc(100% - 16px) !important;
     }
 
-    /* 6. ក្បាលខាងលើផ្នែកកណ្ដាល (ព្រិលៗ Blur ដូច iOS) */
+    /* 6. ក្បាលខាងលើ (ព្រិល Blur) */
     .MiddleHeader, .Header {
       background-color: rgba(255, 255, 255, 0.75) !important;
       backdrop-filter: blur(12px) !important;
-      -webkit-backdrop-filter: blur(12px) !important;
       border-bottom: 1px solid rgba(0,0,0,0.03) !important;
     }
 
-    /* 7. ផ្ទៃ Background ផ្ទាំង Chat ធំ (Gradient ផ្ទៃមេឃកាត់ផ្កាឈូកស្រាល) */
-    .MiddleColumn, #MiddleColumn, .chat-background, .messages-layout, .Pattern {
+    /* 7. ផ្ទៃ Chat (Gradient) */
+    .MiddleColumn, #MiddleColumn, .chat-background, .messages-layout, .Pattern, .MessageList {
       background: linear-gradient(135deg, #e0e8ff 0%, #fcecfc 50%, #e0e8ff 100%) !important;
     }
 
-    /* 8. រចនាប្រអប់សារ (Bubble) ឱ្យកោងមូលស្អាត និងលាក់កន្ទុយចោល */
-    .svg-appendix { display: none !important; } /* លាក់កន្ទុយសារ */
+    /* 8. លាក់កន្ទុយប្រអប់សារចេញ */
+    .svg-appendix { display: none !important; }
     
-    /* សារផ្ញើចេញ (ពណ៌ស្វាយស្រាល) */
+    /* 9. សារផ្ញើចេញ (ស្វាយស្រាល) */
     .message-outgoing .bubble, .Message.own .bubble {
       background-color: #f0f0fe !important;
       color: #1a1a1a !important;
@@ -99,7 +89,7 @@
       border: 1px solid rgba(122, 117, 255, 0.1) !important;
     }
     
-    /* សារផ្ញើចូល (ពណ៌ស) */
+    /* 10. សារផ្ញើចូល (ស) */
     .message-incoming .bubble, .Message:not(.own) .bubble {
       background-color: #ffffff !important;
       color: #1a1a1a !important;
@@ -140,7 +130,6 @@
   <link rel="stylesheet" crossorigin href="./assets/lock-CFec2QyT.css">
   <link rel="stylesheet" crossorigin href="./assets/index-BWls9a4Z.css">
 </head>
-
 <body id="root">
   <noscript><video src="./nojs.mp4" class="nojs-video" muted loop autoplay playsinline disablePictureInPicture></video><h1>Telegram Web</h1></noscript>
   <div id="portals"></div>
