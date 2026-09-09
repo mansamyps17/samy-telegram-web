@@ -18,7 +18,7 @@
 
   <style>
     /* ================================================================= */
-    /* ១. រៀបចំផ្ទៃ FRAME និង TITLE BAR ឱ្យស្មើគ្នា មិនឱ្យដាច់ខាងក្រោម     */
+    /* ១. រៀបចំ FLEXBOX ធានាថាខាងលើស្មើគ្នា និងខាងក្រោមមិនដាច់ ១០០%        */
     /* ================================================================= */
     html, body {
       margin: 0 !important;
@@ -26,149 +26,187 @@
       width: 100vw !important;
       height: 100vh !important;
       overflow: hidden !important;
+      display: flex !important;
+      flex-direction: column !important;
       background-color: #eaeffe !important;
     }
 
-    /* របារចំណងជើង Mii mama gram ខាងលើបង្អស់ */
+    /* របារ Title Bar កម្ពស់ 32px ស្មើជួរគ្នាជាមួយប៊ូតុង Windows */
     #custom-titlebar {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: calc(100% - 140px);
-      height: 36px;
+      height: 32px !important;
+      min-height: 32px !important;
+      max-height: 32px !important;
+      width: 100% !important;
+      flex-shrink: 0 !important;
       background-color: #eaeffe !important;
-      display: flex;
-      align-items: center;
-      padding-left: 14px;
-      z-index: 99999999;
-      -webkit-app-region: drag;
-      user-select: none;
+      display: flex !important;
+      align-items: center !important;
+      padding-left: 14px !important;
+      box-sizing: border-box !important;
+      -webkit-app-region: drag !important;
+      user-select: none !important;
+      z-index: 9999999 !important;
+      border-bottom: 1px solid rgba(0, 0, 0, 0.04) !important;
     }
     .titlebar-box {
       display: flex;
       align-items: center;
-      gap: 9px;
+      gap: 8px;
     }
     .titlebar-logo {
-      width: 20px;
-      height: 20px;
-      filter: drop-shadow(0 2px 5px rgba(42, 171, 238, 0.4));
+      width: 19px;
+      height: 19px;
+      filter: drop-shadow(0 2px 4px rgba(42, 171, 238, 0.4));
     }
     .titlebar-text {
       font-family: 'Kantumruy Pro', sans-serif;
       font-size: 13px;
       font-weight: 700;
       color: #1e293b;
-      letter-spacing: 0.2px;
     }
 
-    /* ចាប់ផ្ទាំង Telegram ទាំងមូលឱ្យនៅចន្លោះ 36px ដល់បាតក្រោមបង្អស់ (មិនដាច់) */
+    /* ផ្ទាំង Telegram ទាំងមូលត្រូវបំពេញផ្ទៃខាងក្រោម 32px ដោយមិនដាច់បាត */
     #root {
-      position: fixed !important;
-      top: 36px !important;
-      bottom: 0 !important;
-      left: 0 !important;
-      right: 0 !important;
+      flex: 1 1 0% !important;
+      min-height: 0 !important;
       width: 100vw !important;
-      height: calc(100vh - 36px) !important;
+      height: auto !important;
+      position: relative !important;
+      overflow: hidden !important;
       margin: 0 !important;
       padding: 0 !important;
-      overflow: hidden !important;
-      box-sizing: border-box !important;
+      display: flex !important;
     }
 
     /* ================================================================= */
-    /* ២. កម្ទេចពណ៌បៃតងចាស់ (OVERRIDE CSS VARIABLES របស់ TELEGRAM)        */
+    /* ២. កម្ទេចពណ៌បៃតងចាស់ និងប្ដូរទៅ THEME MODERN BLUE-PURPLE         */
     /* ================================================================= */
     * { font-family: 'Kantumruy Pro', sans-serif !important; }
 
     :root, html, body, #root, .theme-light, .theme-dark, .theme-tinted {
       --color-background-compact-menu: #eaeffe !important;
-      --color-background-compact-menu-hover: #dfe6fd !important;
-      --color-background-compact-menu-active: #d5e0fc !important;
       --color-background: #ffffff !important;
       --color-background-secondary: #f1f4fa !important;
       --color-background-secondary-accent: #eaeffe !important;
       --color-header-background: rgba(255, 255, 255, 0.9) !important;
       --color-chat-active: #675eff !important;
       --color-primary: #675eff !important;
+      --color-primary-shade: #554bf0 !important;
+      --color-green: #675eff !important;
+      --color-accent-green: #675eff !important;
+      --color-message-status-read: #675eff !important;
+      --color-voice-record: #675eff !important;
       --color-background-own: #eeeaff !important;
       --color-text-own: #1e293b !important;
     }
 
-    /* បញ្ជី Folder ខាងឆ្វេងបង្អស់ (ដកពណ៌បៃតងចេញ ជំនួសដោយពណ៌ផ្ទៃមេឃស្រាល) */
-    #LeftColumn-main,
-    .LeftColumn-main,
+    /* ជួរ Folder ខាងឆ្វេងបង្អស់ (ពណ៌ផ្ទៃមេឃស្រាល) */
+    #Main > *:first-child,
+    #root > *:first-child,
+    #root nav,
+    nav,
     .sidebar-compact,
     .sidebar-compact-wrapper,
     .folders-tabs,
+    .folders-tab,
     .TabList,
-    nav {
+    [class*="sidebar"],
+    [class*="compact"] {
       background: #eaeffe !important;
       background-color: #eaeffe !important;
       border-right: 1px solid rgba(0, 0, 0, 0.04) !important;
     }
-
     .Tab.active, .Tab.active i { color: #675eff !important; }
     .Tab.active .badge { background-color: #675eff !important; color: #fff !important; }
 
-    /* ================================================================= */
-    /* ៣. តម្រឹម HEADER ខាងលើឱ្យស្មើជួរគ្នា និងបញ្ជី CHAT កោងមូលស្អាត       */
-    /* ================================================================= */
-    /* Header ខាងឆ្វេង និង Header ខាងស្ដាំ ត្រូវតែស្មើកំពស់ និងពណ៌ដូចគ្នា */
+    /* Header ខាងឆ្វេង និងស្ដាំ (កម្ពស់ស្មើគ្នា 56px ត្រង់ភ្លឹង) */
     .Header, .LeftHeader, .MiddleHeader, .RightHeader, .sidebar-header {
       height: 56px !important;
       min-height: 56px !important;
-      max-height: 56px !important;
       background-color: rgba(255, 255, 255, 0.9) !important;
       backdrop-filter: blur(14px) !important;
       -webkit-backdrop-filter: blur(14px) !important;
       border-bottom: 1px solid rgba(0, 0, 0, 0.05) !important;
-      box-sizing: border-box !important;
+    }
+
+    /* ផ្ទាំង Audio Player ខាងលើ (ដោះស្រាយកុំឱ្យចេញប្រហោងស និងរុញ Header) */
+    .AudioPlayer, .pinned-audio, [class*="AudioPlayer"], [class*="pinned-audio"] {
+      background-color: #eaeffe !important;
+      border-bottom: 1px solid rgba(103, 94, 255, 0.15) !important;
     }
 
     /* បញ្ជីឈ្មោះ Chat ពណ៌សកោងមូលស្អាត */
-    .LeftColumn, 
-    .chat-list, 
-    .Transition, 
-    .Settings-main {
+    .LeftColumn, .chat-list, .Transition, .Settings-main {
       background-color: #ffffff !important;
-      border-radius: 18px 0 0 0 !important;
     }
-
     .SearchInput .input-field, .SearchInput .input-field-input {
       background-color: #f1f4fa !important;
       border-radius: 20px !important;
     }
 
-    /* Animation និងពណ៌លើ Chat List */
-    .ListItem, .chat-list-item {
-      transition: all 0.2s cubic-bezier(0.34, 1.56, 0.64, 1) !important;
+    /* ================================================================= */
+    /* ៣. ដោះស្រាយបញ្ហាដុំស (WHITE BLOB) លើ ACTIVE CHAT                 */
+    /* ================================================================= */
+    .ListItem.active, .chat-list-item.active {
+      background: linear-gradient(100deg, #675eff 0%, #877eff 100%) !important;
       border-radius: 14px !important;
       margin: 3px 8px !important;
       width: calc(100% - 16px) !important;
-    }
-    .ListItem:hover:not(.active), .chat-list-item:hover:not(.active) {
-      background-color: #f4f6fd !important;
-      transform: translateX(4px) !important;
-    }
-
-    /* Chat ដែលកំពុងបើក (Gradient ស្វាយ-ខៀវ) */
-    .ListItem.active, .chat-list-item.active {
-      background: linear-gradient(100deg, #675eff 0%, #877eff 100%) !important;
       box-shadow: 0 4px 14px rgba(103, 94, 255, 0.35) !important;
       border: none !important;
     }
-    .ListItem.active * { color: #ffffff !important; }
+    .ListItem.active .title,
+    .ListItem.active .subtitle,
+    .ListItem.active .message-time,
+    .ListItem.active .last-message,
+    .ListItem.active p,
+    .ListItem.active span:not(.badge):not(.Badge) {
+      color: #ffffff !important;
+    }
+    /* Badge ក្នុង Active Chat ឱ្យចេញអក្សរស្វាយលើផ្ទៃសច្បាស់ស្អាត */
+    .ListItem.active .badge,
+    .ListItem.active .Badge,
+    .ListItem.active [class*="badge"] {
+      background-color: #ffffff !important;
+      color: #675eff !important;
+      font-weight: 700 !important;
+      border-radius: 10px !important;
+      padding: 2px 7px !important;
+    }
+    .ListItem.active i, .ListItem.active .icon {
+      color: #ffffff !important;
+      fill: #ffffff !important;
+    }
 
     /* ================================================================= */
-    /* ៤. ផ្ទៃ CHAT ខាងស្ដាំ និងប្រអប់សារ (BUBBLES)                      */
+    /* ៤. ប្ដូរពណ៌សញ្ញាធីក ✔✔ និង VOICE MESSAGE ពីបៃតង ទៅស្វាយ/ខៀវ        */
     /* ================================================================= */
+    .icon-message-read,
+    .icon-check,
+    .icon-double-check,
+    .Message-status,
+    .message-status,
+    [class*="status-read"],
+    [class*="message-read"] {
+      color: #675eff !important;
+      fill: #675eff !important;
+    }
+
+    /* ប៊ូតុង Play Voice Message */
+    .Audio .toggle-action,
+    .Audio button,
+    .voice-play-button,
+    [class*="Audio"] button {
+      background-color: #675eff !important;
+      color: #ffffff !important;
+    }
+
+    /* ផ្ទាំង Chat ធំ (Gradient ផ្ទៃមេឃកាត់ផ្កាឈូកស្រាល) */
     .MiddleColumn, #MiddleColumn, .chat-background, .messages-layout, .Pattern, .MessageList {
       background: linear-gradient(135deg, #e4ecfe 0%, #fbeaf7 50%, #e6effe 100%) !important;
     }
 
-    .svg-appendix { display: none !important; } /* លុបកន្ទុយសារ */
+    .svg-appendix { display: none !important; }
 
     /* ប្រអប់សារផ្ញើចេញ */
     .message-outgoing .bubble, .Message.own .bubble {
@@ -187,7 +225,7 @@
       box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04) !important;
     }
 
-    /* ធានាថាប្រអប់ Input ខាងក្រោមបង្ហាញពេញភ្នែក មិនដាច់ */
+    /* ធានាថាប្រអប់វាយអក្សរខាងក្រោមបង្ហាញពេញភ្នែក */
     .middle-column-footer, .chat-input, .Composer {
       background-color: transparent !important;
       padding-bottom: 8px !important;
@@ -224,7 +262,7 @@
   <link rel="stylesheet" crossorigin href="./assets/index-BWls9a4Z.css">
 </head>
 
-<body id="root">
+<body id="root-body">
   <!-- Title Bar Custom -->
   <div id="custom-titlebar">
     <div class="titlebar-box">
@@ -240,22 +278,24 @@
   <div id="portals"></div>
   <script src="./compatTest.js"></script>
 
-  <!-- កម្ចាត់ Theme Tinted (ពណ៌បៃតង) គ្រប់វិនាទី -->
+  <!-- Script បោសសម្អាតពណ៌បៃតងលើ Folder Sidebar ខាងឆ្វេងដោយស្វ័យប្រវត្តិ -->
   <script>
-    const cleanTintedTheme = () => {
+    function enforceTheme() {
       document.body.classList.remove('theme-tinted');
       document.body.classList.add('theme-light');
-      document.documentElement.classList.remove('theme-tinted');
-
-      // បង្ខំលុប background ពណ៌បៃតងលើ Folder sidebar
-      const sidebars = document.querySelectorAll('#LeftColumn-main, .LeftColumn-main, .sidebar-compact, .folders-tabs, nav');
-      sidebars.forEach(el => {
-        el.style.setProperty('background-color', '#eaeffe', 'important');
-        el.style.setProperty('background', '#eaeffe', 'important');
-      });
-    };
-    cleanTintedTheme();
-    setInterval(cleanTintedTheme, 200);
+      
+      const allEls = document.querySelectorAll('*');
+      for (let i = 0; i < allEls.length; i++) {
+        const el = allEls[i];
+        const rect = el.getBoundingClientRect();
+        // រកមើល Element ទាំងឡាយណាដែលស្ថិតនៅខាងឆ្វេងបង្អស់ (Folder Bar)
+        if (rect.left < 90 && rect.width > 30 && rect.height > 120) {
+          el.style.setProperty('background', '#eaeffe', 'important');
+          el.style.setProperty('background-color', '#eaeffe', 'important');
+        }
+      }
+    }
+    setInterval(enforceTheme, 200);
   </script>
 </body>
 </html>
