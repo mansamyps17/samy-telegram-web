@@ -12,10 +12,8 @@
   <link rel="icon" href="./favicon.svg" type="image/svg+xml">
   <script src="./redirect.js"></script>
 
-  <!-- លុបប្រព័ន្ធ Theme ចាស់ចោលការពារកុំឱ្យរំខាន -->
+  <!-- ចាក់សោឈ្មោះ Mii mama gram -->
   <script>
-    localStorage.removeItem('mii-theme-id');
-    document.documentElement.removeAttribute('data-mii-theme');
     Object.defineProperty(document, 'title', { get: function() { return "Mii mama gram"; }, set: function() { } });
   </script>
 
@@ -23,86 +21,112 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Kantumruy+Pro:wght@400;500;600;700&display=swap" rel="stylesheet">
 
-  <!-- ========================================== -->
-  <!-- MII MAMA MODERN UI THEME (ពណ៌ផ្ទៃមេឃ)       -->
-  <!-- ========================================== -->
+  <!-- ======================================================= -->
+  <!-- កម្ទេចពណ៌បៃតង (Tinted) និងដាក់ពណ៌ Modern Pastel Blue-Purple -->
+  <!-- ======================================================= -->
   <style>
-    /* អក្សរខ្មែរទូទាំងកម្មវិធី */
+    /* ១. បង្ខំកែប្រែ CSS Variables ដើមរបស់ Telegram Web A ទាំងស្រុង */
+    :root, html, body, body.theme-light, body.theme-tinted, body.theme-dark, #root {
+      --color-background-compact-menu: #eaeffd !important; /* បញ្ជី Folder ខាងឆ្វេងបង្អស់ */
+      --color-background: #ffffff !important;               /* ផ្ទាំងបញ្ជី Chat សុទ្ធ */
+      --color-background-secondary: #f1f3f7 !important;     /* ប្រអប់ Search */
+      --color-background-secondary-accent: #eaeffd !important;
+      --color-header-background: rgba(255, 255, 255, 0.9) !important;
+      --color-chat-active: #6e67ff !important;              /* Chat ដែលកំពុងចុច */
+      --color-chat-active-hover: #5e54f0 !important;
+      --color-chat-hover: #f3f5fa !important;
+      --color-primary: #6e67ff !important;
+      --color-primary-shade: #5e54f0 !important;
+      --color-background-own: #eeedfe !important;           /* សារផ្ញើចេញ */
+      --color-background-own-selected: #e0deff !important;
+      --color-text-own: #1a1a1a !important;
+    }
+
     * { font-family: 'Kantumruy Pro', sans-serif !important; }
 
-    /* 1. Sidebar ខាងឆ្វេងបង្អស់ (ពណ៌ផ្ទៃមេឃស្រាល) */
-    .TabBar, .folders-tab, .LeftColumn-main {
-      background-color: #ebf0fe !important;
+    /* ២. បញ្ជី Folder ខាងឆ្វេងបង្អស់ (ពណ៌ផ្ទៃមេឃស្រាល) */
+    .LeftColumn-main,
+    #LeftColumn-main,
+    .folders-tabs,
+    .TabList,
+    .sidebar-left,
+    nav {
+      background-color: #eaeffd !important;
     }
-    .Tab.active { color: #7a75ff !important; }
-    .Tab.active .badge { background-color: #7a75ff !important; }
-
-    /* 2. ផ្ទាំងបញ្ជី Chat និង Settings (ពណ៌ស) */
-    .LeftColumn, .LeftHeader, .chat-list, .Transition, .Settings-main {
-      background-color: #ffffff !important;
+    .Tab.active, .Tab.active i {
+      color: #6e67ff !important;
     }
-
-    /* 3. ប្រអប់ Search កោងមូល */
-    .SearchInput .input-field, .SearchInput .input-field-input {
-      background-color: #f4f5f7 !important;
-      border-radius: 20px !important;
-    }
-
-    /* 4. Chat ដែលកំពុងជ្រើសរើស (ពណ៌ស្វាយ-ខៀវ) */
-    .ListItem.active, .chat-list-item.active {
-      background: linear-gradient(90deg, #7a75ff 0%, #9089ff 100%) !important;
-      border-radius: 15px !important;
-      margin: 4px 8px !important;
-      width: calc(100% - 16px) !important;
-      box-shadow: 0 4px 10px rgba(122, 117, 255, 0.3) !important;
-      border: none !important;
-    }
-    .ListItem.active .title, .ListItem.active .subtitle, .ListItem.active .message-time, .ListItem.active i, .ListItem.active .peer-title {
+    .Tab.active .badge {
+      background-color: #6e67ff !important;
       color: #ffffff !important;
     }
 
-    /* 5. Hover លើ Chat */
+    /* ៣. បញ្ជី Chat និង Settings (ពណ៌សស្អាត) */
+    .LeftColumn, 
+    .LeftHeader, 
+    .chat-list, 
+    .Transition, 
+    .Settings-main {
+      background-color: #ffffff !important;
+    }
+
+    /* ៤. ប្រអប់ Search មូល */
+    .SearchInput .input-field, .SearchInput .input-field-input {
+      background-color: #f1f3f7 !important;
+      border-radius: 20px !important;
+    }
+
+    /* ៥. Chat ដែលកំពុងជ្រើសរើស (ពណ៌ស្វាយ-ខៀវ កោងមូល) */
+    .ListItem.active, .chat-list-item.active {
+      background: linear-gradient(90deg, #6e67ff 0%, #8880ff 100%) !important;
+      border-radius: 14px !important;
+      margin: 3px 8px !important;
+      width: calc(100% - 16px) !important;
+      box-shadow: 0 4px 10px rgba(110, 103, 255, 0.25) !important;
+      border: none !important;
+    }
+    .ListItem.active * {
+      color: #ffffff !important;
+    }
+
+    /* ៦. ពណ៌ពេលដាក់ Mouse លើ Chat */
     .ListItem:hover:not(.active), .chat-list-item:hover:not(.active) {
-      background-color: #f4f5f7 !important;
-      border-radius: 15px !important;
-      margin: 4px 8px !important;
+      background-color: #f3f5fa !important;
+      border-radius: 14px !important;
+      margin: 3px 8px !important;
       width: calc(100% - 16px) !important;
     }
 
-    /* 6. ក្បាលខាងលើ (ព្រិល Blur) */
-    .MiddleHeader, .Header {
-      background-color: rgba(255, 255, 255, 0.75) !important;
-      backdrop-filter: blur(12px) !important;
-      -webkit-backdrop-filter: blur(12px) !important;
-      border-bottom: 1px solid rgba(0,0,0,0.03) !important;
+    /* ៧. ក្បាលខាងលើ Header (ពណ៌សថ្លា Blur) */
+    .Header, .MiddleHeader, .RightHeader, .sidebar-header {
+      background-color: rgba(255, 255, 255, 0.9) !important;
+      backdrop-filter: blur(10px) !important;
+      border-bottom: 1px solid rgba(0,0,0,0.05) !important;
     }
 
-    /* 7. ផ្ទៃ Chat (Gradient) */
+    /* ៨. ផ្ទៃ Chat ខាងស្ដាំ (Gradient ផ្ទៃមេឃកាត់ផ្កាឈូកស្រាល) */
     .MiddleColumn, #MiddleColumn, .chat-background, .messages-layout, .Pattern, .MessageList {
-      background: linear-gradient(135deg, #e0e8ff 0%, #fcecfc 50%, #e0e8ff 100%) !important;
+      background: linear-gradient(135deg, #e3ebfe 0%, #faeaf6 50%, #e8f0fe 100%) !important;
     }
 
-    /* 8. លាក់កន្ទុយប្រអប់សារចេញ */
+    /* ៩. លុបកន្ទុយប្រអប់សារចោល */
     .svg-appendix { display: none !important; }
-    
-    /* 9. សារផ្ញើចេញ (ស្វាយស្រាល) */
+
+    /* ១០. ប្រអប់សារផ្ញើចេញ (ស្វាយស្រាល) */
     .message-outgoing .bubble, .Message.own .bubble {
-      background-color: #f0f0fe !important;
+      background-color: #eeedfe !important;
       color: #1a1a1a !important;
-      border-radius: 18px 18px 4px 18px !important;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.03) !important;
-      border: 1px solid rgba(122, 117, 255, 0.1) !important;
+      border-radius: 16px 16px 4px 16px !important;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.04) !important;
     }
-    
-    /* 10. សារផ្ញើចូល (ស) */
+
+    /* ១១. ប្រអប់សារផ្ញើចូល (ពណ៌ស) */
     .message-incoming .bubble, .Message:not(.own) .bubble {
       background-color: #ffffff !important;
       color: #1a1a1a !important;
-      border-radius: 18px 18px 18px 4px !important;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.03) !important;
+      border-radius: 16px 16px 16px 4px !important;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.04) !important;
     }
-    
-    .message-time, .Message-time { color: #888888 !important; }
   </style>
 
   <!-- Telegram Core Scripts -->
@@ -135,9 +159,22 @@
   <link rel="stylesheet" crossorigin href="./assets/lock-CFec2QyT.css">
   <link rel="stylesheet" crossorigin href="./assets/index-BWls9a4Z.css">
 </head>
+
 <body id="root">
   <noscript><video src="./nojs.mp4" class="nojs-video" muted loop autoplay playsinline disablePictureInPicture></video><h1>Telegram Web</h1></noscript>
   <div id="portals"></div>
   <script src="./compatTest.js"></script>
+
+  <!-- កម្ចាត់ Class Tinted (ពណ៌បៃតង) ចេញដោយស្វ័យប្រវត្តិ -->
+  <script>
+    const stripGreenTheme = () => {
+      if (document.body.classList.contains('theme-tinted')) {
+        document.body.classList.remove('theme-tinted');
+        document.body.classList.add('theme-light');
+      }
+    };
+    stripGreenTheme();
+    new MutationObserver(stripGreenTheme).observe(document.body, { attributes: true, attributeFilter: ['class'] });
+  </script>
 </body>
 </html>
