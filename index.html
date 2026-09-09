@@ -32,82 +32,83 @@
   <link href="https://fonts.googleapis.com/css2?family=Kantumruy+Pro:wght@400;500;600;700&display=swap" rel="stylesheet">
 
   <!-- ========================================== -->
-  <!-- CSS THEME ENGINE (ម៉ត់ចត់ ១០០%)            -->
+  <!-- MII MAMA PREMIUM THEME (Modern Soft UI)    -->
   <!-- ========================================== -->
   <style>
-    /* 1. Pink Cute */
-    [data-mii-theme="1"] {
-      --m-header-bg: #fff089; --m-sidebar-bg: #ffebee;
-      --m-chat-bg: linear-gradient(135deg, #fbc2eb 0%, #ffdde1 45%, #ffeaa7 100%);
-      --m-bubble-out: #ffd8e4; --m-bubble-in: #ffffff;
-      --m-text-main: #2b2b2b; --m-accent: #ff8fa3; --m-hover: rgba(255, 143, 163, 0.15);
-    }
-    /* 2. Dark Night */
-    [data-mii-theme="2"] {
-      --m-header-bg: #17212b; --m-sidebar-bg: #0e1621;
-      --m-chat-bg: #0f1418;
-      --m-bubble-out: #2b5278; --m-bubble-in: #182533;
-      --m-text-main: #ffffff; --m-accent: #2b5278; --m-hover: rgba(255, 255, 255, 0.05);
-    }
-    /* 3. Green Nature */
-    [data-mii-theme="3"] {
-      --m-header-bg: #dcedc1; --m-sidebar-bg: #f1f8e9;
-      --m-chat-bg: linear-gradient(135deg, #c8e6c9 0%, #e8f5e9 100%);
-      --m-bubble-out: #a5d6a7; --m-bubble-in: #ffffff;
-      --m-text-main: #1b5e20; --m-accent: #81c784; --m-hover: rgba(129, 199, 132, 0.2);
-    }
-    /* 4. Anime Sky */
-    [data-mii-theme="4"] {
-      --m-header-bg: #bbdefb; --m-sidebar-bg: #e3f2fd;
-      --m-chat-bg: linear-gradient(135deg, #90caf9 0%, #e3f2fd 100%);
-      --m-bubble-out: #bbdefb; --m-bubble-in: #ffffff;
-      --m-text-main: #0d47a1; --m-accent: #64b5f6; --m-hover: rgba(100, 181, 246, 0.2);
-    }
-    /* 5. Cartoon Bear */
-    [data-mii-theme="5"] {
-      --m-header-bg: #ffe0b2; --m-sidebar-bg: #fff3e0;
-      --m-chat-bg: linear-gradient(135deg, #ffcc80 0%, #fff8e1 100%);
-      --m-bubble-out: #ffb74d; --m-bubble-in: #ffffff;
-      --m-text-main: #e65100; --m-accent: #ffa726; --m-hover: rgba(255, 167, 38, 0.2);
-    }
-    /* 6. Minimal Gradient */
-    [data-mii-theme="6"] {
-      --m-header-bg: #e1bee7; --m-sidebar-bg: #f3e5f5;
-      --m-chat-bg: linear-gradient(135deg, #ce93d8 0%, #f3e5f5 100%);
-      --m-bubble-out: #e1bee7; --m-bubble-in: #ffffff;
-      --m-text-main: #4a148c; --m-accent: #ab47bc; --m-hover: rgba(171, 71, 188, 0.2);
-    }
-
-    /* === ការវាយលុកកូដ CSS របស់ Telegram ផ្ទាល់ === */
+    /* អក្សរខ្មែរទូទាំងកម្មវិធី */
     * { font-family: 'Kantumruy Pro', sans-serif !important; }
 
-    /* ផ្ទាំង Header និង Sidebar */
-    .Header, .MiddleHeader, .LeftHeader, .RightHeader, .sidebar-header { background: var(--m-header-bg) !important; }
-    .LeftColumn, .LeftColumn-main, .Settings-main, .chat-list, .Transition, .folders-tab, .Tab, .TabBar { background: var(--m-sidebar-bg) !important; }
-    
-    /* ផ្ទាំង Chat កណ្តាល */
-    .MiddleColumn, #MiddleColumn, .chat-background, .messages-layout, .bubbles, .Pattern, .MessageList { background: var(--m-chat-bg) !important; }
+    /* 1. Sidebar ផ្នែកខាងឆ្វេងបង្អស់ (ពណ៌ផ្ទៃមេឃស្រាល) */
+    .TabBar, .folders-tab {
+      background-color: #ebf0fe !important;
+    }
 
-    /* ប្រអប់សារ និងអក្សរ */
-    .message-outgoing .bubble, .Message.own .bubble { background: var(--m-bubble-out) !important; color: var(--m-text-main) !important; border: none !important; box-shadow: 0 1px 2px rgba(0,0,0,0.1) !important; }
-    .message-incoming .bubble, .Message:not(.own) .bubble { background: var(--m-bubble-in) !important; color: var(--m-text-main) !important; border: none !important; box-shadow: 0 1px 2px rgba(0,0,0,0.1) !important; }
-    .message-time, .Message-time { color: var(--m-text-main) !important; opacity: 0.8; }
-    
-    /* កន្ទុយប្រអប់សារ (SVG Tails) ឱ្យស៊ីពណ៌គ្នា */
-    .message-outgoing .svg-appendix { fill: var(--m-bubble-out) !important; }
-    .message-incoming .svg-appendix { fill: var(--m-bubble-in) !important; }
+    /* 2. ផ្ទាំងបញ្ជី Chat និង Settings (ពណ៌ស) */
+    .LeftColumn, .LeftHeader, .chat-list, .Transition, .Settings-main {
+      background-color: #ffffff !important;
+    }
 
-    /* ពណ៌ពេលដាក់ Mouse លើ និងពេល Select */
-    .ListItem:hover, .chat-list-item:hover, .ListItem-button:hover { background-color: var(--m-hover) !important; }
-    .ListItem.active, .ListItem.active .ListItem-button, .chat-list-item.active, .Tab.active { background-color: var(--m-accent) !important; color: white !important; }
-    .ListItem.active .title, .ListItem.active .subtitle, .ListItem.active .message-time, .ListItem.active i { color: white !important; }
+    /* 3. ប្រអប់ Search កោងមូល */
+    .SearchInput .input-field, .SearchInput .input-field-input {
+      background-color: #f4f5f7 !important;
+      border-radius: 20px !important;
+    }
+
+    /* 4. Chat ដែលកំពុងជ្រើសរើស (ពណ៌ស្វាយ-ខៀវ ជ្រុងកោងមូល) */
+    .ListItem.active, .chat-list-item.active {
+      background: linear-gradient(90deg, #7a75ff 0%, #9089ff 100%) !important;
+      border-radius: 15px !important;
+      margin: 2px 8px !important;
+      width: calc(100% - 16px) !important;
+      box-shadow: 0 4px 10px rgba(122, 117, 255, 0.3) !important;
+    }
+    .ListItem.active .title, .ListItem.active .subtitle, .ListItem.active .message-time, .ListItem.active i, .ListItem.active .peer-title {
+      color: #ffffff !important;
+    }
+
+    /* 5. ពណ៌ពេលដាក់ Mouse លើ Chat */
+    .ListItem:hover:not(.active), .chat-list-item:hover:not(.active) {
+      background-color: #f4f5f7 !important;
+      border-radius: 15px !important;
+      margin: 2px 8px !important;
+      width: calc(100% - 16px) !important;
+    }
+
+    /* 6. ក្បាលខាងលើផ្នែកកណ្ដាល (ព្រិលៗ Blur ដូច iOS) */
+    .MiddleHeader, .Header {
+      background-color: rgba(255, 255, 255, 0.75) !important;
+      backdrop-filter: blur(12px) !important;
+      -webkit-backdrop-filter: blur(12px) !important;
+      border-bottom: 1px solid rgba(0,0,0,0.03) !important;
+    }
+
+    /* 7. ផ្ទៃ Background ផ្ទាំង Chat ធំ (Gradient ផ្ទៃមេឃកាត់ផ្កាឈូកស្រាល) */
+    .MiddleColumn, #MiddleColumn, .chat-background, .messages-layout, .Pattern {
+      background: linear-gradient(135deg, #e0e8ff 0%, #fcecfc 50%, #e0e8ff 100%) !important;
+    }
+
+    /* 8. រចនាប្រអប់សារ (Bubble) ឱ្យកោងមូលស្អាត និងលាក់កន្ទុយចោល */
+    .svg-appendix { display: none !important; } /* លាក់កន្ទុយសារ */
+    
+    /* សារផ្ញើចេញ (ពណ៌ស្វាយស្រាល) */
+    .message-outgoing .bubble, .Message.own .bubble {
+      background-color: #f0f0fe !important;
+      color: #1a1a1a !important;
+      border-radius: 18px 18px 4px 18px !important;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.03) !important;
+      border: 1px solid rgba(122, 117, 255, 0.1) !important;
+    }
+    
+    /* សារផ្ញើចូល (ពណ៌ស) */
+    .message-incoming .bubble, .Message:not(.own) .bubble {
+      background-color: #ffffff !important;
+      color: #1a1a1a !important;
+      border-radius: 18px 18px 18px 4px !important;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.03) !important;
+    }
+    
+    .message-time, .Message-time { color: #888888 !important; }
   </style>
-
-  <!-- Load Theme ភ្លាមៗការពារកុំឱ្យព្រិចភ្នែក -->
-  <script>
-    const savedTheme = localStorage.getItem('mii-theme-id') || '1';
-    document.documentElement.setAttribute('data-mii-theme', savedTheme);
-  </script>
 
   <!-- Telegram Core Scripts -->
   <style> @layer reset, variables, ui, components; @layer ui { @layer tablist, spinner, button, input, layout; } </style>
@@ -144,57 +145,5 @@
   <noscript><video src="./nojs.mp4" class="nojs-video" muted loop autoplay playsinline disablePictureInPicture></video><h1>Telegram Web</h1></noscript>
   <div id="portals"></div>
   <script src="./compatTest.js"></script>
-
-  <!-- ========================================== -->
-  <!-- UI ផ្ទាំង Theme Modal ចំកណ្តាលអេក្រង់       -->
-  <!-- ========================================== -->
-  <div id="mii-theme-modal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.4); z-index: 999999; align-items: center; justify-content: center; backdrop-filter: blur(3px);">
-    <div style="background: white; border-radius: 16px; padding: 25px; width: 360px; box-shadow: 0 15px 40px rgba(0,0,0,0.2);">
-      <h2 style="margin: 0 0 20px 0; font-size: 20px; color: #333; text-align: center;">🎨 Mii Mama Themes</h2>
-      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px;">
-        <button onclick="applyTheme('1')" style="padding: 12px; border-radius: 10px; border: none; background: #ffa6c9; color: #fff; font-weight: bold; cursor: pointer;">1. Pink Cute</button>
-        <button onclick="applyTheme('2')" style="padding: 12px; border-radius: 10px; border: none; background: #17212b; color: #fff; font-weight: bold; cursor: pointer;">2. Dark Night</button>
-        <button onclick="applyTheme('3')" style="padding: 12px; border-radius: 10px; border: none; background: #81c784; color: #fff; font-weight: bold; cursor: pointer;">3. Green Nature</button>
-        <button onclick="applyTheme('4')" style="padding: 12px; border-radius: 10px; border: none; background: #64b5f6; color: #fff; font-weight: bold; cursor: pointer;">4. Anime Sky</button>
-        <button onclick="applyTheme('5')" style="padding: 12px; border-radius: 10px; border: none; background: #ffb74d; color: #fff; font-weight: bold; cursor: pointer;">5. Cartoon Bear</button>
-        <button onclick="applyTheme('6')" style="padding: 12px; border-radius: 10px; border: none; background: #ce93d8; color: #fff; font-weight: bold; cursor: pointer;">6. Minimal Gradient</button>
-      </div>
-      <button onclick="closeThemeModal()" style="margin-top: 25px; width: 100%; padding: 12px; border-radius: 10px; border: none; background: #f0f0f0; color: #333; font-weight: bold; cursor: pointer;">បិទ (Close)</button>
-    </div>
-  </div>
-
-  <!-- ========================================== -->
-  <!-- JAVASCRIPT: បញ្ចូលប៊ូតុងទៅក្នុង Settings ផ្ទាល់ -->
-  <!-- ========================================== -->
-  <script>
-    function openThemeModal() { document.getElementById('mii-theme-modal').style.display = 'flex'; }
-    function closeThemeModal() { document.getElementById('mii-theme-modal').style.display = 'none'; }
-    function applyTheme(id) {
-      document.documentElement.setAttribute('data-mii-theme', id);
-      localStorage.setItem('mii-theme-id', id);
-    }
-
-    // MutationObserver: ចាំចាប់យកពេល Settings របស់ Telegram លោតចេញមក
-    const observer = new MutationObserver(() => {
-      // ស្វែងរកទីតាំងបញ្ជី Settings របស់ Telegram
-      const settingsList = document.querySelector('.Settings-main .scrollable');
-      if (settingsList && !document.getElementById('mii-setting-btn')) {
-        
-        // បង្កើតប៊ូតុងក្លែងបន្លំឱ្យដូចរបស់ Telegram បេះបិទ
-        const themeBtn = document.createElement('div');
-        themeBtn.id = 'mii-setting-btn';
-        themeBtn.className = 'ListItem chat-item-clickable';
-        themeBtn.innerHTML = `
-          <div class="ListItem-button" role="button" tabindex="0" onclick="openThemeModal()">
-            <i class="icon" style="font-style: normal; font-size: 22px; margin-right: 20px; text-align: center; width: 32px; display: inline-block;">🎨</i>
-            <span class="title" style="font-weight: 500; font-size: 16px;">Mii Mama Themes</span>
-          </div>`;
-          
-        // បញ្ចូលប៊ូតុងនេះទៅខាងលើគេបង្អស់ក្នុងបញ្ជី Settings
-        settingsList.insertBefore(themeBtn, settingsList.firstChild);
-      }
-    });
-    observer.observe(document.body, { childList: true, subtree: true });
-  </script>
 </body>
 </html>
