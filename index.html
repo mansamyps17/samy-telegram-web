@@ -11,7 +11,11 @@
 
   <link rel="icon" href="./favicon.svg" type="image/svg+xml">
   <script src="./redirect.js"></script>
+
+  <!-- លុបប្រព័ន្ធ Theme ចាស់ចោលការពារកុំឱ្យរំខាន -->
   <script>
+    localStorage.removeItem('mii-theme-id');
+    document.documentElement.removeAttribute('data-mii-theme');
     Object.defineProperty(document, 'title', { get: function() { return "Mii mama gram"; }, set: function() { } });
   </script>
 
@@ -20,7 +24,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Kantumruy+Pro:wght@400;500;600;700&display=swap" rel="stylesheet">
 
   <!-- ========================================== -->
-  <!-- MII MAMA MODERN THEME (បង្ខំដូរ UI ១០០%)     -->
+  <!-- MII MAMA MODERN UI THEME (ពណ៌ផ្ទៃមេឃ)       -->
   <!-- ========================================== -->
   <style>
     /* អក្សរខ្មែរទូទាំងកម្មវិធី */
@@ -69,6 +73,7 @@
     .MiddleHeader, .Header {
       background-color: rgba(255, 255, 255, 0.75) !important;
       backdrop-filter: blur(12px) !important;
+      -webkit-backdrop-filter: blur(12px) !important;
       border-bottom: 1px solid rgba(0,0,0,0.03) !important;
     }
 
