@@ -17,16 +17,26 @@
   <link href="https://fonts.googleapis.com/css2?family=Kantumruy+Pro:wght@400;500;600;700&display=swap" rel="stylesheet">
 
   <style>
-    /* ========================================================= */
-    /* ១. TITLE BAR "Mii mama gram" អណ្តែតខាងលើបង្អស់             */
-    /* ========================================================= */
+    /* ================================================================= */
+    /* ១. រៀបចំផ្ទៃ FRAME និង TITLE BAR ឱ្យស្មើគ្នា មិនឱ្យដាច់ខាងក្រោម     */
+    /* ================================================================= */
+    html, body {
+      margin: 0 !important;
+      padding: 0 !important;
+      width: 100vw !important;
+      height: 100vh !important;
+      overflow: hidden !important;
+      background-color: #eaeffe !important;
+    }
+
+    /* របារចំណងជើង Mii mama gram ខាងលើបង្អស់ */
     #custom-titlebar {
       position: fixed;
       top: 0;
       left: 0;
       width: calc(100% - 140px);
-      height: 38px;
-      background: #e9eefb !important;
+      height: 36px;
+      background-color: #eaeffe !important;
       display: flex;
       align-items: center;
       padding-left: 14px;
@@ -40,146 +50,147 @@
       gap: 9px;
     }
     .titlebar-logo {
-      width: 22px;
-      height: 22px;
-      filter: drop-shadow(0 2px 6px rgba(42, 171, 238, 0.4));
-      transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
-    }
-    .titlebar-box:hover .titlebar-logo {
-      transform: rotate(15deg) scale(1.12);
+      width: 20px;
+      height: 20px;
+      filter: drop-shadow(0 2px 5px rgba(42, 171, 238, 0.4));
     }
     .titlebar-text {
       font-family: 'Kantumruy Pro', sans-serif;
-      font-size: 13.5px;
+      font-size: 13px;
       font-weight: 700;
       color: #1e293b;
-      letter-spacing: 0.3px;
+      letter-spacing: 0.2px;
     }
 
-    #root, #Main, .Main {
-      margin-top: 38px !important;
-      height: calc(100vh - 38px) !important;
-      background: #e9eefb !important;
+    /* ចាប់ផ្ទាំង Telegram ទាំងមូលឱ្យនៅចន្លោះ 36px ដល់បាតក្រោមបង្អស់ (មិនដាច់) */
+    #root {
+      position: fixed !important;
+      top: 36px !important;
+      bottom: 0 !important;
+      left: 0 !important;
+      right: 0 !important;
+      width: 100vw !important;
+      height: calc(100vh - 36px) !important;
+      margin: 0 !important;
+      padding: 0 !important;
+      overflow: hidden !important;
+      box-sizing: border-box !important;
     }
 
-    /* ========================================================= */
-    /* ២. ANIMATION & MODERN GLASSMORPHISM UI                   */
-    /* ========================================================= */
+    /* ================================================================= */
+    /* ២. កម្ទេចពណ៌បៃតងចាស់ (OVERRIDE CSS VARIABLES របស់ TELEGRAM)        */
+    /* ================================================================= */
     * { font-family: 'Kantumruy Pro', sans-serif !important; }
 
-    /* បញ្ជី Folder ខាងឆ្វេង (Frosted Glass ពណ៌ផ្ទៃមេឃស្រាល) */
-    #LeftColumn-main,
-    .LeftColumn-main,
-    .folders-tabs,
-    .sidebar-compact,
-    nav {
-      background: #e9eefb !important;
-      background-color: #e9eefb !important;
-    }
-    
-    /* Animation រីកមាឌលើ Folder Icon ពេល Hover */
-    .Tab, .folders-tab button {
-      transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1) !important;
-    }
-    .Tab:hover, .folders-tab button:hover {
-      transform: scale(1.15) !important;
+    :root, html, body, #root, .theme-light, .theme-dark, .theme-tinted {
+      --color-background-compact-menu: #eaeffe !important;
+      --color-background-compact-menu-hover: #dfe6fd !important;
+      --color-background-compact-menu-active: #d5e0fc !important;
+      --color-background: #ffffff !important;
+      --color-background-secondary: #f1f4fa !important;
+      --color-background-secondary-accent: #eaeffe !important;
+      --color-header-background: rgba(255, 255, 255, 0.9) !important;
+      --color-chat-active: #675eff !important;
+      --color-primary: #675eff !important;
+      --color-background-own: #eeeaff !important;
+      --color-text-own: #1e293b !important;
     }
 
-    /* បញ្ជី Chat ក្លាយជាកាតសមូលស្អាត (Card UI) */
+    /* បញ្ជី Folder ខាងឆ្វេងបង្អស់ (ដកពណ៌បៃតងចេញ ជំនួសដោយពណ៌ផ្ទៃមេឃស្រាល) */
+    #LeftColumn-main,
+    .LeftColumn-main,
+    .sidebar-compact,
+    .sidebar-compact-wrapper,
+    .folders-tabs,
+    .TabList,
+    nav {
+      background: #eaeffe !important;
+      background-color: #eaeffe !important;
+      border-right: 1px solid rgba(0, 0, 0, 0.04) !important;
+    }
+
+    .Tab.active, .Tab.active i { color: #675eff !important; }
+    .Tab.active .badge { background-color: #675eff !important; color: #fff !important; }
+
+    /* ================================================================= */
+    /* ៣. តម្រឹម HEADER ខាងលើឱ្យស្មើជួរគ្នា និងបញ្ជី CHAT កោងមូលស្អាត       */
+    /* ================================================================= */
+    /* Header ខាងឆ្វេង និង Header ខាងស្ដាំ ត្រូវតែស្មើកំពស់ និងពណ៌ដូចគ្នា */
+    .Header, .LeftHeader, .MiddleHeader, .RightHeader, .sidebar-header {
+      height: 56px !important;
+      min-height: 56px !important;
+      max-height: 56px !important;
+      background-color: rgba(255, 255, 255, 0.9) !important;
+      backdrop-filter: blur(14px) !important;
+      -webkit-backdrop-filter: blur(14px) !important;
+      border-bottom: 1px solid rgba(0, 0, 0, 0.05) !important;
+      box-sizing: border-box !important;
+    }
+
+    /* បញ្ជីឈ្មោះ Chat ពណ៌សកោងមូលស្អាត */
     .LeftColumn, 
     .chat-list, 
     .Transition, 
     .Settings-main {
       background-color: #ffffff !important;
-      border-radius: 22px 0 0 22px !important;
-      box-shadow: -4px 0 25px rgba(0, 0, 0, 0.04) !important;
-    }
-    .LeftHeader {
-      background-color: #ffffff !important;
-      border-top-left-radius: 22px !important;
+      border-radius: 18px 0 0 0 !important;
     }
 
-    /* ប្រអប់ Search រាងពងក្រពើ */
     .SearchInput .input-field, .SearchInput .input-field-input {
       background-color: #f1f4fa !important;
-      border-radius: 22px !important;
-      transition: all 0.25s ease !important;
-    }
-    .SearchInput .input-field:focus-within {
-      background-color: #ffffff !important;
-      box-shadow: 0 0 0 2px #7068ff !important;
+      border-radius: 20px !important;
     }
 
-    /* Animation រំកិលរលូន (Glide & Spring) ពេលដាក់ Mouse លើ Chat */
+    /* Animation និងពណ៌លើ Chat List */
     .ListItem, .chat-list-item {
-      transition: all 0.25s cubic-bezier(0.34, 1.56, 0.64, 1) !important;
-      border-radius: 16px !important;
-      margin: 4px 10px !important;
-      width: calc(100% - 20px) !important;
+      transition: all 0.2s cubic-bezier(0.34, 1.56, 0.64, 1) !important;
+      border-radius: 14px !important;
+      margin: 3px 8px !important;
+      width: calc(100% - 16px) !important;
     }
     .ListItem:hover:not(.active), .chat-list-item:hover:not(.active) {
       background-color: #f4f6fd !important;
-      transform: translateX(6px) scale(1.01) !important;
-      box-shadow: 0 4px 14px rgba(112, 104, 255, 0.08) !important;
+      transform: translateX(4px) !important;
     }
 
-    /* Chat កំពុងចុច (Active): មាន Breathing Aura Glow Animation ដ៏អស្ចារ្យ */
-    @keyframes activePulse {
-      0%, 100% { box-shadow: 0 4px 15px rgba(112, 104, 255, 0.35); }
-      50% { box-shadow: 0 8px 25px rgba(112, 104, 255, 0.55); }
-    }
+    /* Chat ដែលកំពុងបើក (Gradient ស្វាយ-ខៀវ) */
     .ListItem.active, .chat-list-item.active {
-      background: linear-gradient(110deg, #6c63ff 0%, #8b80ff 100%) !important;
-      animation: activePulse 2.5s infinite ease-in-out !important;
-      transform: scale(1.02) !important;
+      background: linear-gradient(100deg, #675eff 0%, #877eff 100%) !important;
+      box-shadow: 0 4px 14px rgba(103, 94, 255, 0.35) !important;
       border: none !important;
     }
     .ListItem.active * { color: #ffffff !important; }
 
-    /* Header ខាងលើ (កញ្ចក់ Blur ថ្លាដូច iOS) */
-    .Header, .MiddleHeader, .RightHeader, .sidebar-header {
-      background-color: rgba(255, 255, 255, 0.8) !important;
-      backdrop-filter: blur(16px) !important;
-      -webkit-backdrop-filter: blur(16px) !important;
-      border-bottom: 1px solid rgba(0, 0, 0, 0.04) !important;
-    }
-
-    /* ផ្ទៃផ្ទាំង Chat (Aurora Mesh Gradient បែប Apple) */
+    /* ================================================================= */
+    /* ៤. ផ្ទៃ CHAT ខាងស្ដាំ និងប្រអប់សារ (BUBBLES)                      */
+    /* ================================================================= */
     .MiddleColumn, #MiddleColumn, .chat-background, .messages-layout, .Pattern, .MessageList {
-      background: radial-gradient(at 0% 0%, #e0e7ff 0px, transparent 50%),
-                  radial-gradient(at 100% 0%, #fae8ff 0px, transparent 50%),
-                  radial-gradient(at 100% 100%, #dbeafe 0px, transparent 50%),
-                  #f5f7fd !important;
+      background: linear-gradient(135deg, #e4ecfe 0%, #fbeaf7 50%, #e6effe 100%) !important;
     }
 
-    /* លុបកន្ទុយសារចេញ ឱ្យសល់តែគ្រាប់សារមូលស្អាត */
-    .svg-appendix { display: none !important; }
+    .svg-appendix { display: none !important; } /* លុបកន្ទុយសារ */
 
-    /* Animation Pop-in ពេលសារធ្លាក់មក */
-    @keyframes messagePop {
-      0% { opacity: 0; transform: translateY(12px) scale(0.97); }
-      100% { opacity: 1; transform: translateY(0) scale(1); }
-    }
-    .message, .Message {
-      animation: messagePop 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards !important;
-    }
-
-    /* ប្រអប់សារផ្ញើចេញ (Outgoing) */
+    /* ប្រអប់សារផ្ញើចេញ */
     .message-outgoing .bubble, .Message.own .bubble {
-      background: linear-gradient(135deg, #eeeaff 0%, #e5e0ff 100%) !important;
+      background: #eeeaff !important;
       color: #1e293b !important;
-      border-radius: 20px 20px 4px 20px !important;
-      border: 1px solid rgba(108, 99, 255, 0.15) !important;
-      box-shadow: 0 4px 12px rgba(108, 99, 255, 0.08) !important;
+      border-radius: 18px 18px 4px 18px !important;
+      border: 1px solid rgba(103, 94, 255, 0.12) !important;
+      box-shadow: 0 2px 6px rgba(103, 94, 255, 0.05) !important;
     }
 
-    /* ប្រអប់សារផ្ញើចូល (Incoming) */
+    /* ប្រអប់សារផ្ញើចូល */
     .message-incoming .bubble, .Message:not(.own) .bubble {
       background: #ffffff !important;
       color: #1e293b !important;
-      border-radius: 20px 20px 20px 4px !important;
-      border: 1px solid rgba(0, 0, 0, 0.04) !important;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04) !important;
+      border-radius: 18px 18px 18px 4px !important;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04) !important;
+    }
+
+    /* ធានាថាប្រអប់ Input ខាងក្រោមបង្ហាញពេញភ្នែក មិនដាច់ */
+    .middle-column-footer, .chat-input, .Composer {
+      background-color: transparent !important;
+      padding-bottom: 8px !important;
     }
   </style>
 
@@ -229,15 +240,22 @@
   <div id="portals"></div>
   <script src="./compatTest.js"></script>
 
-  <!-- Script បោសសម្អាត Class ពណ៌បៃតងជាស្វ័យប្រវត្តិ -->
+  <!-- កម្ចាត់ Theme Tinted (ពណ៌បៃតង) គ្រប់វិនាទី -->
   <script>
-    const stripGreen = () => {
-      document.body.classList.remove('theme-tinted', 'theme-dark');
+    const cleanTintedTheme = () => {
+      document.body.classList.remove('theme-tinted');
       document.body.classList.add('theme-light');
-      document.documentElement.classList.remove('theme-tinted', 'theme-dark');
+      document.documentElement.classList.remove('theme-tinted');
+
+      // បង្ខំលុប background ពណ៌បៃតងលើ Folder sidebar
+      const sidebars = document.querySelectorAll('#LeftColumn-main, .LeftColumn-main, .sidebar-compact, .folders-tabs, nav');
+      sidebars.forEach(el => {
+        el.style.setProperty('background-color', '#eaeffe', 'important');
+        el.style.setProperty('background', '#eaeffe', 'important');
+      });
     };
-    stripGreen();
-    setInterval(stripGreen, 200);
+    cleanTintedTheme();
+    setInterval(cleanTintedTheme, 200);
   </script>
 </body>
 </html>
