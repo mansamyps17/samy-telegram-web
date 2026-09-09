@@ -18,35 +18,33 @@
 
   <style>
     /* ================================================================= */
-    /* ១. រៀបចំ FLEXBOX ធានាថាខាងលើស្មើគ្នា និងខាងក្រោមមិនដាច់ ១០០%        */
+    /* ១. រៀបចំផ្ទៃ FRAME ធានាថាខាងលើស្មើជួរគ្នា និងខាងក្រោមមិនដាច់       */
     /* ================================================================= */
-    html, body {
+    html, body#root {
       margin: 0 !important;
       padding: 0 !important;
       width: 100vw !important;
       height: 100vh !important;
+      box-sizing: border-box !important;
       overflow: hidden !important;
-      display: flex !important;
-      flex-direction: column !important;
       background-color: #eaeffe !important;
     }
 
-    /* របារ Title Bar កម្ពស់ 32px ស្មើជួរគ្នាជាមួយប៊ូតុង Windows */
+    /* របារ Title Bar កម្ពស់ 32px ស្មើជួរជាមួយប៊ូតុង Windows */
     #custom-titlebar {
-      height: 32px !important;
-      min-height: 32px !important;
-      max-height: 32px !important;
-      width: 100% !important;
-      flex-shrink: 0 !important;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: calc(100% - 140px);
+      height: 32px;
       background-color: #eaeffe !important;
-      display: flex !important;
-      align-items: center !important;
-      padding-left: 14px !important;
-      box-sizing: border-box !important;
-      -webkit-app-region: drag !important;
-      user-select: none !important;
-      z-index: 9999999 !important;
-      border-bottom: 1px solid rgba(0, 0, 0, 0.04) !important;
+      display: flex;
+      align-items: center;
+      padding-left: 14px;
+      z-index: 99999999;
+      -webkit-app-region: drag;
+      user-select: none;
+      box-sizing: border-box;
     }
     .titlebar-box {
       display: flex;
@@ -65,17 +63,14 @@
       color: #1e293b;
     }
 
-    /* ផ្ទាំង Telegram ទាំងមូលត្រូវបំពេញផ្ទៃខាងក្រោម 32px ដោយមិនដាច់បាត */
-    #root {
-      flex: 1 1 0% !important;
-      min-height: 0 !important;
-      width: 100vw !important;
-      height: auto !important;
-      position: relative !important;
-      overflow: hidden !important;
-      margin: 0 !important;
-      padding: 0 !important;
-      display: flex !important;
+    /* រុញផ្ទៃក្នុង Telegram ចុះក្រោម 32px ដើម្បីកុំឱ្យបាំង Title Bar និងមិនដាច់បាត */
+    body#root {
+      padding-top: 32px !important;
+    }
+    #Main, .Main {
+      height: 100% !important;
+      max-height: 100% !important;
+      box-sizing: border-box !important;
     }
 
     /* ================================================================= */
@@ -83,8 +78,10 @@
     /* ================================================================= */
     * { font-family: 'Kantumruy Pro', sans-serif !important; }
 
-    :root, html, body, #root, .theme-light, .theme-dark, .theme-tinted {
+    :root, html, body#root, .theme-light, .theme-dark, .theme-tinted {
       --color-background-compact-menu: #eaeffe !important;
+      --color-background-compact-menu-hover: #dfe6fd !important;
+      --color-background-compact-menu-active: #d5e0fc !important;
       --color-background: #ffffff !important;
       --color-background-secondary: #f1f4fa !important;
       --color-background-secondary-accent: #eaeffe !important;
@@ -101,17 +98,14 @@
     }
 
     /* ជួរ Folder ខាងឆ្វេងបង្អស់ (ពណ៌ផ្ទៃមេឃស្រាល) */
-    #Main > *:first-child,
-    #root > *:first-child,
-    #root nav,
-    nav,
+    #LeftColumn-main,
+    .LeftColumn-main,
     .sidebar-compact,
     .sidebar-compact-wrapper,
     .folders-tabs,
     .folders-tab,
     .TabList,
-    [class*="sidebar"],
-    [class*="compact"] {
+    nav {
       background: #eaeffe !important;
       background-color: #eaeffe !important;
       border-right: 1px solid rgba(0, 0, 0, 0.04) !important;
@@ -127,12 +121,7 @@
       backdrop-filter: blur(14px) !important;
       -webkit-backdrop-filter: blur(14px) !important;
       border-bottom: 1px solid rgba(0, 0, 0, 0.05) !important;
-    }
-
-    /* ផ្ទាំង Audio Player ខាងលើ (ដោះស្រាយកុំឱ្យចេញប្រហោងស និងរុញ Header) */
-    .AudioPlayer, .pinned-audio, [class*="AudioPlayer"], [class*="pinned-audio"] {
-      background-color: #eaeffe !important;
-      border-bottom: 1px solid rgba(103, 94, 255, 0.15) !important;
+      box-sizing: border-box !important;
     }
 
     /* បញ្ជីឈ្មោះ Chat ពណ៌សកោងមូលស្អាត */
@@ -144,9 +133,7 @@
       border-radius: 20px !important;
     }
 
-    /* ================================================================= */
-    /* ៣. ដោះស្រាយបញ្ហាដុំស (WHITE BLOB) លើ ACTIVE CHAT                 */
-    /* ================================================================= */
+    /* Chat ដែលកំពុងចុច (Active Chat) */
     .ListItem.active, .chat-list-item.active {
       background: linear-gradient(100deg, #675eff 0%, #877eff 100%) !important;
       border-radius: 14px !important;
@@ -159,19 +146,14 @@
     .ListItem.active .subtitle,
     .ListItem.active .message-time,
     .ListItem.active .last-message,
-    .ListItem.active p,
-    .ListItem.active span:not(.badge):not(.Badge) {
+    .ListItem.active p {
       color: #ffffff !important;
     }
-    /* Badge ក្នុង Active Chat ឱ្យចេញអក្សរស្វាយលើផ្ទៃសច្បាស់ស្អាត */
-    .ListItem.active .badge,
     .ListItem.active .Badge,
-    .ListItem.active [class*="badge"] {
+    .ListItem.active .badge {
       background-color: #ffffff !important;
       color: #675eff !important;
       font-weight: 700 !important;
-      border-radius: 10px !important;
-      padding: 2px 7px !important;
     }
     .ListItem.active i, .ListItem.active .icon {
       color: #ffffff !important;
@@ -179,7 +161,7 @@
     }
 
     /* ================================================================= */
-    /* ៤. ប្ដូរពណ៌សញ្ញាធីក ✔✔ និង VOICE MESSAGE ពីបៃតង ទៅស្វាយ/ខៀវ        */
+    /* ៣. ប្ដូរពណ៌សញ្ញាធីក ✔✔ និង VOICE MESSAGE ពីបៃតង ទៅស្វាយ/ខៀវ        */
     /* ================================================================= */
     .icon-message-read,
     .icon-check,
@@ -192,7 +174,6 @@
       fill: #675eff !important;
     }
 
-    /* ប៊ូតុង Play Voice Message */
     .Audio .toggle-action,
     .Audio button,
     .voice-play-button,
@@ -225,7 +206,7 @@
       box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04) !important;
     }
 
-    /* ធានាថាប្រអប់វាយអក្សរខាងក្រោមបង្ហាញពេញភ្នែក */
+    /* ធានាថាប្រអប់វាយអក្សរខាងក្រោមមិនកាត់ដាច់ */
     .middle-column-footer, .chat-input, .Composer {
       background-color: transparent !important;
       padding-bottom: 8px !important;
@@ -262,7 +243,7 @@
   <link rel="stylesheet" crossorigin href="./assets/index-BWls9a4Z.css">
 </head>
 
-<body id="root-body">
+<body id="root">
   <!-- Title Bar Custom -->
   <div id="custom-titlebar">
     <div class="titlebar-box">
@@ -278,24 +259,22 @@
   <div id="portals"></div>
   <script src="./compatTest.js"></script>
 
-  <!-- Script បោសសម្អាតពណ៌បៃតងលើ Folder Sidebar ខាងឆ្វេងដោយស្វ័យប្រវត្តិ -->
+  <!-- Script បោសសម្អាតពណ៌បៃតងលើ Folder Sidebar -->
   <script>
-    function enforceTheme() {
-      document.body.classList.remove('theme-tinted');
-      document.body.classList.add('theme-light');
-      
-      const allEls = document.querySelectorAll('*');
-      for (let i = 0; i < allEls.length; i++) {
-        const el = allEls[i];
-        const rect = el.getBoundingClientRect();
-        // រកមើល Element ទាំងឡាយណាដែលស្ថិតនៅខាងឆ្វេងបង្អស់ (Folder Bar)
-        if (rect.left < 90 && rect.width > 30 && rect.height > 120) {
-          el.style.setProperty('background', '#eaeffe', 'important');
-          el.style.setProperty('background-color', '#eaeffe', 'important');
-        }
+    function enforceModernTheme() {
+      if (document.body) {
+        document.body.classList.remove('theme-tinted');
+        document.body.classList.add('theme-light');
       }
+      document.documentElement.classList.remove('theme-tinted');
+
+      const sidebars = document.querySelectorAll('#LeftColumn-main, .LeftColumn-main, .sidebar-compact, .folders-tabs, nav, .TabList');
+      sidebars.forEach(el => {
+        el.style.setProperty('background-color', '#eaeffe', 'important');
+        el.style.setProperty('background', '#eaeffe', 'important');
+      });
     }
-    setInterval(enforceTheme, 200);
+    setInterval(enforceModernTheme, 200);
   </script>
 </body>
 </html>
