@@ -3,7 +3,6 @@
 <head>
   <meta charset="UTF-8">
   <title>Mii mama gram</title>
-
   <meta name="title" content="Mii mama gram">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no, viewport-fit=cover">
   <meta http-equiv="Content-Security-Policy" content="default-src 'self'; connect-src 'self' wss://*.web.telegram.org blob: http: https: ; script-src 'self' 'unsafe-inline' 'wasm-unsafe-eval' https://t.me/_websync_ https://telegram.me/_websync_ https://telegram.dog/_websync_; worker-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' data: https://fonts.gstatic.com; img-src 'self' data: blob: https://ss3.4sqi.net/img/categories_v2/; media-src 'self' blob: data:; object-src 'none'; frame-src http: https: bitkeep: bnc: bybitapp: echooo: imtokenv2: mytonwallet-tc: nicegram-tc: safepal-tc: tonkeeper-pro-tc: tonkeeper-tc:; base-uri 'none'; form-action 'none';">
@@ -11,159 +10,103 @@
   <link rel="icon" href="./favicon.svg" type="image/svg+xml">
   <script src="./redirect.js"></script>
   <script>Object.defineProperty(document, 'title', { get: function() { return "Mii mama gram"; }, set: function() { } });</script>
-
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Kantumruy+Pro:wght@400;500;600;700&display=swap" rel="stylesheet">
 
   <style>
-    /* ========================================================= */
-    /* ១. រចនាសម្ព័ន្ធមេ - រួមបញ្ចូលទាំងការលាក់ Title Bar ពេលមើលរូប */
-    /* ========================================================= */
-    html, body {
-      margin: 0 !important; padding: 0 !important;
-      width: 100vw !important; height: 100vh !important;
-      overflow: hidden !important; display: flex !important;
-      flex-direction: column !important; background-color: #eaeffe !important;
-    }
-
-    /* Title Bar លំនាំដើម (ពណ៌ផ្ទៃមេឃ) */
-    #custom-titlebar {
-      height: 32px !important; min-height: 32px !important; max-height: 32px !important;
-      width: 100% !important; flex-shrink: 0 !important;
-      background: #eaeffe !important; display: flex !important;
-      align-items: center !important; padding-left: 14px !important;
-      -webkit-app-region: drag !important; user-select: none !important;
-      z-index: 9999999 !important; border-bottom: 1px solid rgba(0,0,0,0.04) !important;
-      box-sizing: border-box !important;
-      transition: background 0.3s ease, border-color 0.3s ease !important;
-    }
-    
-    /* ពេលបើកផ្ទាំងរូបភាព (Media Viewer Active) វានឹងប្ដូរទៅជាពណ៌ខ្មៅ */
-    body.media-viewer-active #custom-titlebar {
-      background: #000000 !important; /* ពណ៌ខ្មៅសុទ្ធស៊ីគ្នានឹង Media Viewer */
-      border-bottom: 1px solid rgba(255, 255, 255, 0.05) !important;
-    }
-    body.media-viewer-active .titlebar-text {
-      color: #ffffff !important; /* អក្សរដូរទៅពណ៌សវិញ */
-    }
-
-    .titlebar-box { display: flex; align-items: center; gap: 9px; }
-    .titlebar-logo { 
-      width: 19px; height: 19px; filter: drop-shadow(0 2px 4px rgba(42, 171, 238, 0.4));
-      transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
-    }
-    .titlebar-box:hover .titlebar-logo { transform: rotate(15deg) scale(1.15); }
-    .titlebar-text { font-family: 'Kantumruy Pro', sans-serif; font-size: 13px; font-weight: 700; color: #1e293b; transition: color 0.3s ease; }
-
-    #root {
-      flex: 1 1 0% !important; height: calc(100vh - 32px) !important;
-      width: 100vw !important; position: relative !important; overflow: hidden !important;
-      transform: translateZ(0) !important; 
-      display: flex !important;
-    }
-
-    /* ========================================================= */
-    /* ២. MODERN UI - MODERN BLUE-PURPLE THEME                   */
-    /* ========================================================= */
     * { font-family: 'Kantumruy Pro', sans-serif !important; }
 
-    :root, html, body, #root, .theme-light, .theme-dark, .theme-tinted {
-      --color-background-compact-menu: #eaeffe !important;
+    /* ================================================================= */
+    /* ១. របារ TITLE BAR (z-index ទាប ដើម្បីឱ្យលាក់នៅក្រោមផ្ទាំងរូបថត) */
+    /* ================================================================= */
+    #custom-titlebar {
+      position: fixed; top: 0; left: 0;
+      width: calc(100% - 135px); /* ទុកកន្លែងឱ្យប៊ូតុង Windows Min/Max/Close */
+      height: 32px; background: #e9eefb;
+      display: flex; align-items: center; padding-left: 14px; box-sizing: border-box;
+      -webkit-app-region: drag; user-select: none;
+      z-index: 99; /* លេខតូច ពេលបើករូបថត វានឹងត្រូវរូបថតបាំងពីលើបាត់! */
+    }
+    .titlebar-box { display: flex; align-items: center; gap: 8px; }
+    .titlebar-logo { width: 18px; height: 18px; filter: drop-shadow(0 2px 4px rgba(42, 171, 238, 0.4)); }
+    .titlebar-text { font-size: 13px; font-weight: 700; color: #1e293b; }
+
+    /* ================================================================= */
+    /* ២. រុញ HEADER ចុះក្រោម 32px ជំនួសការកាត់ #root (ការពារដាច់បាត) */
+    /* ================================================================= */
+    .Header, .LeftHeader, .MiddleHeader, .RightHeader, .sidebar-header {
+      padding-top: 32px !important; /* បង្កើតចន្លោះឱ្យ Title Bar អង្គុយ */
+      height: 88px !important;      /* កម្ពស់ដើម 56px + 32px */
+      background-color: rgba(255, 255, 255, 0.85) !important;
+      backdrop-filter: blur(12px) !important; -webkit-backdrop-filter: blur(12px) !important;
+      border-bottom: 1px solid rgba(0, 0, 0, 0.04) !important;
+      box-sizing: border-box !important;
+    }
+    
+    /* រុញជួរ Folder ខាងឆ្វេងបង្អស់ចុះក្រោម 32px ដែរ ទើបស្មើគ្នាត្រង់ភ្លឹង */
+    nav, .sidebar-compact, .sidebar-compact-wrapper, .folders-tabs, .TabList {
+      padding-top: 32px !important;
+      box-sizing: border-box !important;
+      background-color: #e9eefb !important;
+      background: #e9eefb !important;
+      border-right: 1px solid rgba(0,0,0,0.03) !important;
+    }
+
+    /* ================================================================= */
+    /* ៣. បង្ខំលាបពណ៌ THEME MODERN (កម្ទេច Dark Mode)                   */
+    /* ================================================================= */
+    :root, html, body, .theme-light, .theme-dark, .theme-tinted {
+      --color-background-compact-menu: #e9eefb !important;
+      --color-background-compact-menu-hover: #dce4f9 !important;
+      --color-background-compact-menu-active: #c5d2f6 !important;
       --color-background: #ffffff !important;
       --color-background-secondary: #f1f4fa !important;
-      --color-background-secondary-accent: #eaeffe !important;
-      --color-header-background: rgba(255, 255, 255, 0.85) !important;
+      --color-header-background: rgba(255,255,255,0.85) !important;
       --color-chat-active: #6c63ff !important;
       --color-primary: #6c63ff !important;
-      --color-primary-shade: #5b54ff !important;
       --color-background-own: #eeeaff !important;
-      --color-text-own: #1e293b !important;
+      --color-text: #1e293b !important; /* បង្ខំអក្សរឱ្យខ្មៅ ទោះនៅ Dark Mode */
+      --color-text-secondary: #64748b !important;
     }
 
-    /* ជួរ Folder (Leftmost) */
-    nav, .sidebar-compact, .folders-tabs, .TabList, #LeftColumn-main, .LeftColumn-main, div[class*="sidebar-compact"] {
-      background: #eaeffe !important; background-color: #eaeffe !important;
-      border-right: 1px solid rgba(0, 0, 0, 0.04) !important;
-    }
+    /* Tab & Badge */
     .Tab.active, .Tab.active i { color: #6c63ff !important; }
     .Tab.active .badge { background-color: #6c63ff !important; color: #fff !important; }
-    .Tab, .folders-tab button { transition: all 0.3s ease !important; }
-    .Tab:hover, .folders-tab button:hover { transform: scale(1.15) !important; }
 
-    /* Headers (Blur Effect) */
-    .Header, .LeftHeader, .MiddleHeader, .RightHeader, .sidebar-header {
-      height: 56px !important; min-height: 56px !important;
-      background-color: rgba(255, 255, 255, 0.85) !important;
-      backdrop-filter: blur(16px) !important; -webkit-backdrop-filter: blur(16px) !important;
-      border-bottom: 1px solid rgba(0, 0, 0, 0.04) !important; box-sizing: border-box !important;
-    }
+    /* បញ្ជី Chat */
+    .LeftColumn, .chat-list, .Transition { background-color: #ffffff !important; }
+    .SearchInput .input-field, .SearchInput .input-field-input { background-color: #f1f4fa !important; border-radius: 20px !important; }
 
-    /* បញ្ជី Chat (White Rounded Cards) */
-    .LeftColumn, .chat-list, .Transition, .Settings-main {
-      background-color: #ffffff !important; border-radius: 20px 0 0 20px !important;
-      box-shadow: -4px 0 25px rgba(0, 0, 0, 0.03) !important;
-    }
-    .SearchInput .input-field, .SearchInput .input-field-input {
-      background-color: #f1f4fa !important; border-radius: 20px !important; transition: all 0.25s ease !important;
-    }
-    .SearchInput .input-field:focus-within { background-color: #ffffff !important; box-shadow: 0 0 0 2px #6c63ff !important; }
-
-    /* Chat Hover (Glide Effect) */
-    .ListItem, .chat-list-item {
-      transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1) !important;
-      border-radius: 16px !important; margin: 4px 10px !important; width: calc(100% - 20px) !important;
-    }
-    .ListItem:hover:not(.active), .chat-list-item:hover:not(.active) {
-      background-color: #f4f6fd !important; transform: translateX(6px) !important;
-      box-shadow: 0 4px 14px rgba(108, 99, 255, 0.06) !important;
-    }
-
-    /* Active Chat (Aura Glow Effect) */
-    @keyframes activePulse {
-      0%, 100% { box-shadow: 0 4px 15px rgba(108, 99, 255, 0.3); }
-      50% { box-shadow: 0 8px 20px rgba(108, 99, 255, 0.5); }
-    }
+    /* Active Chat & Hover */
+    .ListItem, .chat-list-item { transition: all 0.25s ease !important; border-radius: 14px !important; margin: 3px 8px !important; width: calc(100% - 16px) !important; }
+    .ListItem:hover:not(.active), .chat-list-item:hover:not(.active) { background-color: #f4f6fd !important; transform: translateX(4px) !important; }
     .ListItem.active, .chat-list-item.active {
       background: linear-gradient(110deg, #6c63ff 0%, #8b80ff 100%) !important;
-      animation: activePulse 3s infinite ease-in-out !important; border: none !important;
-      transform: scale(1.02) !important;
+      box-shadow: 0 4px 12px rgba(108, 99, 255, 0.3) !important; border: none !important;
     }
     .ListItem.active * { color: #ffffff !important; fill: #ffffff !important; }
-    .ListItem.active .badge, .ListItem.active .Badge {
-      background-color: #ffffff !important; color: #6c63ff !important; font-weight: bold !important;
+    .ListItem.active .badge, .ListItem.active .Badge { background-color: #ffffff !important; color: #6c63ff !important; font-weight: bold !important; }
+
+    /* ផ្ទៃផ្ទាំង Chat (Gradient ស្រាល) */
+    .MiddleColumn, .chat-background, .Pattern, .MessageList {
+      background: linear-gradient(135deg, #e4ecfe 0%, #fbeaf7 50%, #e6effe 100%) !important;
     }
 
-    /* ========================================================= */
-    /* ៣. ផ្ទាំង CHAT និង BUBBLES                                 */
-    /* ========================================================= */
-    .MiddleColumn, #MiddleColumn, .chat-background, .messages-layout, .Pattern, .MessageList {
-      background: radial-gradient(at 0% 0%, #e0e7ff 0px, transparent 50%),
-                  radial-gradient(at 100% 0%, #fae8ff 0px, transparent 50%),
-                  radial-gradient(at 100% 100%, #dbeafe 0px, transparent 50%),
-                  #f5f7fd !important;
-    }
-
-    .icon-message-read, .icon-check, .icon-double-check, .Message-status, .message-status { color: #6c63ff !important; fill: #6c63ff !important; }
+    /* ពណ៌សញ្ញាធីក និងប៊ូតុង Voice */
+    .icon-message-read, .icon-check, .icon-double-check, .Message-status { color: #6c63ff !important; fill: #6c63ff !important; }
     .Audio .toggle-action, .Audio button, .voice-play-button { background-color: #6c63ff !important; color: #ffffff !important; }
 
-    @keyframes messagePop {
-      0% { opacity: 0; transform: translateY(15px) scale(0.95); }
-      100% { opacity: 1; transform: translateY(0) scale(1); }
-    }
-    .message, .Message { animation: messagePop 0.35s cubic-bezier(0.16, 1, 0.3, 1) forwards !important; }
-
+    /* ប្រអប់សារ */
     .svg-appendix { display: none !important; }
     .message-outgoing .bubble, .Message.own .bubble {
-      background: linear-gradient(135deg, #eeeaff 0%, #e5e0ff 100%) !important;
-      color: #1e293b !important; border-radius: 20px 20px 4px 20px !important;
-      border: 1px solid rgba(108, 99, 255, 0.12) !important; box-shadow: 0 4px 12px rgba(108, 99, 255, 0.08) !important;
+      background: linear-gradient(135deg, #eeeaff 0%, #e5e0ff 100%) !important; color: #1e293b !important;
+      border-radius: 18px 18px 4px 18px !important; border: 1px solid rgba(108, 99, 255, 0.12) !important;
     }
     .message-incoming .bubble, .Message:not(.own) .bubble {
       background: #ffffff !important; color: #1e293b !important;
-      border-radius: 20px 20px 20px 4px !important; box-shadow: 0 4px 12px rgba(0,0,0,0.04) !important; border: 1px solid rgba(0,0,0,0.03) !important;
+      border-radius: 18px 18px 18px 4px !important; box-shadow: 0 2px 5px rgba(0,0,0,0.04) !important;
     }
-
     .middle-column-footer, .chat-input, .Composer { background-color: transparent !important; padding-bottom: 8px !important; }
   </style>
 
@@ -198,6 +141,7 @@
 </head>
 
 <body>
+  <!-- របារ Title Bar ផ្ទាល់ខ្លួន -->
   <div id="custom-titlebar">
     <div class="titlebar-box">
       <svg class="titlebar-logo" viewBox="0 0 24 24"><circle cx="12" cy="12" r="12" fill="#2AABEE"/><path d="M5.4 11.9l11.6-4.5c.5-.2 1.1.1 1 .7l-2 9.4c-.1.5-.7.8-1.2.5l-3.3-2.4-1.6 1.5c-.2.2-.5.1-.6-.2l-.6-3.8 6.8-6.1c.1-.1 0-.3-.1-.2l-8.4 5.3-2.6-.8c-.6-.2-.6-.9 0-1.1z" fill="#fff"/></svg>
@@ -209,31 +153,23 @@
   <div id="portals"></div>
   <script src="./compatTest.js"></script>
 
-  <!-- ស្គ្រីប Media Viewer & បោសសំអាត Theme ពណ៌បៃតង -->
+  <!-- កម្ទេច Dark Mode ចោលយ៉ាងកាចសាហាវ -->
   <script>
-    function monitorUI() {
-      // 1. បោសសំអាត Theme ពណ៌បៃតង
-      document.body.classList.remove('theme-tinted', 'theme-dark');
-      document.body.classList.add('theme-light');
-      document.documentElement.classList.remove('theme-tinted', 'theme-dark');
-      
-      document.querySelectorAll('nav, .sidebar-compact, .folders-tabs').forEach(el => {
-        el.style.setProperty('background-color', '#eaeffe', 'important');
-      });
-
-      // 2. ពិនិត្យមើលថាតើ Media Viewer (ផ្ទាំងមើលរូប) កំពុងបើកឬអត់
-      const mediaViewerActive = document.querySelector('.MediaViewer') || document.querySelector('[class*="MediaViewer"]');
-      
-      if (mediaViewerActive) {
-        document.body.classList.add('media-viewer-active');
-        // ជួយកែពណ៌ប៊ូតុង Windows Control (ពី IPC របស់ Electron បើមាន) ទៅជាពណ៌ស
-        window.dispatchEvent(new CustomEvent('update-titlebar-theme', { detail: 'dark' }));
-      } else {
-        document.body.classList.remove('media-viewer-active');
-        window.dispatchEvent(new CustomEvent('update-titlebar-theme', { detail: 'light' }));
+    function obliterateDarkMode() {
+      if (document.body.classList.contains('theme-dark') || document.body.classList.contains('theme-tinted')) {
+        document.body.classList.remove('theme-dark', 'theme-tinted');
+        document.body.classList.add('theme-light');
+      }
+      if (document.documentElement.classList.contains('theme-dark') || document.documentElement.classList.contains('theme-tinted')) {
+        document.documentElement.classList.remove('theme-dark', 'theme-tinted');
+        document.documentElement.classList.add('theme-light');
+      }
+      // បង្ខំឱ្យប្រព័ន្ធចងចាំថាវាជា Light Mode
+      if (localStorage.getItem('theme') !== 'light') {
+        localStorage.setItem('theme', 'light');
       }
     }
-    setInterval(monitorUI, 150); // រត់ជារៀងរាល់ 150ms ដើម្បីចាប់ផ្ទាំងឲ្យបានលឿន
+    setInterval(obliterateDarkMode, 100);
   </script>
 </body>
 </html>
