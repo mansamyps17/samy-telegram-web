@@ -3,7 +3,6 @@
 <head>
   <meta charset="UTF-8">
   <title>Mii mama gram</title>
-  <meta name="title" content="Mii mama gram">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no, viewport-fit=cover">
   <meta http-equiv="Content-Security-Policy" content="default-src 'self'; connect-src 'self' wss://*.web.telegram.org blob: http: https: ; script-src 'self' 'unsafe-inline' 'wasm-unsafe-eval' https://t.me/_websync_ https://telegram.me/_websync_ https://telegram.dog/_websync_; worker-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' data: https://fonts.gstatic.com; img-src 'self' data: blob: https://ss3.4sqi.net/img/categories_v2/; media-src 'self' blob: data:; object-src 'none'; frame-src http: https: bitkeep: bnc: bybitapp: echooo: imtokenv2: mytonwallet-tc: nicegram-tc: safepal-tc: tonkeeper-pro-tc: tonkeeper-tc:; base-uri 'none'; form-action 'none';">
 
@@ -14,31 +13,28 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Kantumruy+Pro:wght@400;500;600;700&display=swap" rel="stylesheet">
 
-  <style>
+  <style id="mii-mama-nuclear-style">
     /* ===================================================================== */
-    /* 1. FORCE THEME OVERRIDES (វាយលុករាល់ពណ៌ Dynamic Theme)                 */
+    /* 1. NUCLEAR OVERRIDE: បង្ខំ Element ទាំងអស់ឱ្យស្តាប់តាមពណ៌នេះ! */
     /* ===================================================================== */
-    * { font-family: 'Kantumruy Pro', sans-serif !important; }
-
-    /* បង្ខំ CSS Variables សំខាន់ៗទាំងអស់ គ្រប់ទីកន្លែង */
-    html, body, #root, :root, [class*="theme-"] {
-      --color-background-compact-menu: #e9eefb !important; /* ពណ៌ផ្ទៃមេឃស្រាលសម្រាប់ Sidebar */
+    * {
+      font-family: 'Kantumruy Pro', sans-serif !important;
+      --color-background-compact-menu: #e9eefb !important;
       --color-background-compact-menu-hover: #dce4f9 !important;
       --color-background-compact-menu-active: #c5d2f6 !important;
       --color-background: #ffffff !important;
       --color-background-secondary: #f1f4fa !important;
       --color-header-background: rgba(255,255,255,0.85) !important;
-      --color-chat-active: #6c63ff !important; /* ពណ៌ស្វាយ-ខៀវ */
+      --color-chat-active: #6c63ff !important;
       --color-primary: #6c63ff !important;
-      --color-primary-shade: #5b54ff !important;
       --color-background-own: #eeeaff !important;
       --color-text: #1e293b !important;
-      --color-borders: rgba(0, 0, 0, 0.05) !important;
-      --pattern-color: transparent !important; /* លុប Pattern ខាងក្រោយចោលបណ្តោះអាសន្ន */
+      --pattern-color: transparent !important;
+      --color-borders: rgba(0,0,0,0.04) !important;
     }
 
     /* ===================================================================== */
-    /* 2. LAYOUT & FRAMEWORK (មិនរុញក្បាល មិនដាច់បាត)                          */
+    /* 2. BASE LAYOUT */
     /* ===================================================================== */
     html, body {
       margin: 0 !important; padding: 0 !important;
@@ -51,58 +47,43 @@
     }
 
     /* ===================================================================== */
-    /* 3. HARDCODE COLORS FOR SPECIFIC ELEMENTS                               */
+    /* 3. ACTIVE CHAT & LIST */
     /* ===================================================================== */
-    
-    /* 3.1 Sidebar (Folder Bar) ខាងឆ្វេងបង្អស់ ត្រូវតែចេញផ្ទៃមេឃស្រាល! */
-    nav, .sidebar-compact, .sidebar-compact-wrapper, .folders-tabs, .TabList, #LeftColumn-main, .LeftColumn-main {
-      background-color: #e9eefb !important;
-      background: #e9eefb !important;
-      border-right: 1px solid rgba(0,0,0,0.03) !important;
-    }
-    /* Icons & Badges ក្នុង Sidebar */
-    .Tab.active, .Tab.active i, .Tab.active .icon { color: #6c63ff !important; }
-    .Tab.active .badge, .badge.active { background-color: #6c63ff !important; color: #fff !important; }
-    
-    /* 3.2 បញ្ជី Chat កណ្តាល ត្រូវតែស */
-    .LeftColumn, .chat-list, .Transition, .Transition-main { 
-      background-color: #ffffff !important; 
-    }
-    .SearchInput .input-field, .SearchInput .input-field-input { 
-      background-color: #f1f4fa !important; border-radius: 20px !important; 
-    }
+    .LeftColumn, .chat-list, .Transition { background-color: #ffffff !important; }
+    .SearchInput .input-field, .SearchInput .input-field-input { background-color: #f1f4fa !important; border-radius: 20px !important; }
 
-    /* 3.3 Active Chat ត្រូវតែ Gradient ស្វាយ */
-    .ListItem, .chat-list-item { 
-      transition: all 0.2s ease !important; border-radius: 14px !important; margin: 3px 8px !important; width: calc(100% - 16px) !important; background-color: transparent !important;
-    }
-    .ListItem:hover:not(.active), .chat-list-item:hover:not(.active) { 
-      background-color: #f4f6fd !important; transform: translateX(3px) !important; 
-    }
+    .ListItem, .chat-list-item { transition: all 0.25s ease !important; border-radius: 14px !important; margin: 3px 8px !important; width: calc(100% - 16px) !important; }
+    .ListItem:hover:not(.active), .chat-list-item:hover:not(.active) { background-color: #f4f6fd !important; transform: translateX(4px) !important; }
+    
     .ListItem.active, .chat-list-item.active {
       background: linear-gradient(110deg, #6c63ff 0%, #8b80ff 100%) !important;
       box-shadow: 0 4px 12px rgba(108, 99, 255, 0.3) !important; border: none !important;
     }
     .ListItem.active *, .chat-list-item.active * { color: #ffffff !important; fill: #ffffff !important; }
-    .ListItem.active .badge, .ListItem.active .Badge { background-color: #ffffff !important; color: #6c63ff !important; font-weight: bold !important; }
+    .ListItem.active span[class*="badge"], .ListItem.active .badge, .ListItem.active .Badge { 
+      background-color: #ffffff !important; color: #6c63ff !important; font-weight: bold !important; 
+    }
+    
+    .Tab.active, .Tab.active i { color: #6c63ff !important; }
+    .Tab.active .badge { background-color: #6c63ff !important; color: #fff !important; }
 
-    /* 3.4 Headers (Left & Right) */
+    /* ===================================================================== */
+    /* 4. HEADERS & CHAT BACKGROUND */
+    /* ===================================================================== */
     .Header, .LeftHeader, .MiddleHeader, .RightHeader, .sidebar-header {
       background-color: rgba(255, 255, 255, 0.85) !important;
       backdrop-filter: blur(12px) !important; -webkit-backdrop-filter: blur(12px) !important;
       border-bottom: 1px solid rgba(0, 0, 0, 0.04) !important;
     }
-
-    /* 3.5 ផ្ទាំង Chat ធំ ខាងស្តាំ ត្រូវតែចេញពណ៌ផ្ទៃមេឃ/ស្វាយស្រាល */
     .MiddleColumn, .chat-background, .Pattern, .MessageList {
-      background: linear-gradient(135deg, #e4ecfe 0%, #f4ebfa 50%, #e6effe 100%) !important;
+      background: linear-gradient(135deg, #e4ecfe 0%, #fbeaf7 50%, #e6effe 100%) !important;
     }
 
-    /* 3.6 សញ្ញាធីក និងប៊ូតុង ត្រូវតែស្វាយ */
-    .icon-message-read, .icon-check, .icon-double-check, .Message-status, [class*="status-read"] { color: #6c63ff !important; fill: #6c63ff !important; }
+    /* ===================================================================== */
+    /* 5. BUBBLES & ICONS */
+    /* ===================================================================== */
+    .icon-message-read, .icon-check, .icon-double-check, .Message-status { color: #6c63ff !important; fill: #6c63ff !important; }
     .Audio .toggle-action, .Audio button, .voice-play-button { background-color: #6c63ff !important; color: #ffffff !important; }
-
-    /* 3.7 ប្រអប់សារ (Bubbles) */
     .svg-appendix { display: none !important; }
     .message-outgoing .bubble, .Message.own .bubble {
       background: linear-gradient(135deg, #eeeaff 0%, #e5e0ff 100%) !important; color: #1e293b !important;
@@ -145,36 +126,33 @@
 </head>
 
 <body>
-  <!-- Telegram App Container -->
   <div id="root"></div>
   <div id="portals"></div>
   <script src="./compatTest.js"></script>
 
-  <!-- JAVASCRIPT: បង្ខំលុបពណ៌ផ្សេងៗ និងកំណត់ Style ផ្ទាល់ទៅ Element គ្រប់វិនាទី (Aggressive Force) -->
+  <!-- កូដកម្ទេចពណ៌ក្រហម/បៃតង ដោយប្រើបច្ចេកទេសទីតាំងប្រអប់ (Physical Bounding Box Attack) -->
   <script>
-    function forceMasterTheme() {
-      // 1. លុប Theme Classes ផ្សេងៗចោល
-      ['theme-dark', 'theme-tinted', 'theme-colorful'].forEach(c => {
-        document.body.classList.remove(c);
-        document.documentElement.classList.remove(c);
-      });
-      document.body.classList.add('theme-light');
-      document.documentElement.classList.add('theme-light');
+    setInterval(() => {
+      // 1. រុញ Style របស់យើងទៅក្រោយគេបង្អស់ជានិច្ច ដើម្បីកុំឱ្យ Telegram យក Theme វាមកជាន់
+      const nuclearStyle = document.getElementById('mii-mama-nuclear-style');
+      if (nuclearStyle) { document.head.appendChild(nuclearStyle); }
 
-      // 2. បង្ខំ Sidebar ឱ្យចេញពណ៌ផ្ទៃមេឃស្រាល
-      const sidebars = document.querySelectorAll('nav, .sidebar-compact, .sidebar-compact-wrapper, .folders-tabs, .TabList, #LeftColumn-main, .LeftColumn-main');
-      sidebars.forEach(el => {
-        el.setAttribute('style', 'background-color: #e9eefb !important; background: #e9eefb !important;');
-      });
+      // 2. លុប Class Theme ក្រហមចេញពី Body
+      document.body.className = 'theme-light';
+      document.documentElement.className = 'theme-light';
 
-      // 3. បង្ខំ Chat Background ឱ្យចេញ Gradient ផ្ទៃមេឃ-ស្វាយ
-      const chatsBg = document.querySelectorAll('.MiddleColumn, .chat-background, .Pattern');
-      chatsBg.forEach(el => {
-         el.setAttribute('style', 'background: linear-gradient(135deg, #e4ecfe 0%, #f4ebfa 50%, #e6effe 100%) !important;');
+      // 3. ស្វែងរកប្រអប់ Sidebar ខាងឆ្វេងបង្អស់ (កម្ចាត់ពណ៌ក្រហមដិត)
+      const allDivs = document.querySelectorAll('div, nav, aside');
+      allDivs.forEach(el => {
+          const rect = el.getBoundingClientRect();
+          // ប្រសិនបើវាជាប្រអប់ដែលឈរនៅខាងឆ្វេងកៀនគេ (Left ជិត 0) និងមានទំហំទទឹងចន្លោះ 50px-100px (ទំហំ Folder Sidebar)
+          if (rect.left <= 10 && rect.width >= 50 && rect.width <= 105 && rect.height > 300) {
+              el.style.setProperty('background-color', '#e9eefb', 'important');
+              el.style.setProperty('background', '#e9eefb', 'important');
+              el.style.setProperty('background-image', 'none', 'important'); // លុបកុំឱ្យជាប់ Gradient ក្រហម
+          }
       });
-    }
-    // ដំណើរការរៀងរាល់ 100ms ដើម្បីកុំឱ្យ Telegram អាចប្តូរពណ៌បានវិញ
-    setInterval(forceMasterTheme, 100);
+    }, 200); // ឆែកនិងវាយប្រហាររៀងរាល់ 0.2 វិនាទីម្តង
   </script>
 </body>
 </html>
