@@ -13,63 +13,86 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Kantumruy+Pro:wght@400;500;600;700&display=swap" rel="stylesheet">
 
-  <style id="mii-mama-nuclear-style">
-    /* ===================================================================== */
-    /* 1. NUCLEAR OVERRIDE: បង្ខំ Element ទាំងអស់ឱ្យស្តាប់តាមពណ៌នេះ! */
-    /* ===================================================================== */
-    * {
-      font-family: 'Kantumruy Pro', sans-serif !important;
-      --color-background-compact-menu: #e9eefb !important;
-      --color-background-compact-menu-hover: #dce4f9 !important;
-      --color-background-compact-menu-active: #c5d2f6 !important;
-      --color-background: #ffffff !important;
-      --color-background-secondary: #f1f4fa !important;
-      --color-header-background: rgba(255,255,255,0.85) !important;
-      --color-chat-active: #6c63ff !important;
-      --color-primary: #6c63ff !important;
-      --color-background-own: #eeeaff !important;
-      --color-text: #1e293b !important;
-      --pattern-color: transparent !important;
-      --color-borders: rgba(0,0,0,0.04) !important;
-    }
+  <style>
+    * { font-family: 'Kantumruy Pro', sans-serif !important; }
 
     /* ===================================================================== */
-    /* 2. BASE LAYOUT */
+    /* 1. ដោះស្រាយ TITLE BAR & LAYOUT (មិនឱ្យប៊ូតុង Windows ត្រួតលើ Header)   */
     /* ===================================================================== */
     html, body {
       margin: 0 !important; padding: 0 !important;
       width: 100vw !important; height: 100vh !important;
       overflow: hidden !important; background: #e9eefb !important;
+      display: flex !important; flex-direction: column !important;
     }
+
+    /* របារ Title Bar ឱ្យប៊ូតុង Windows អង្គុយពីលើ */
+    #custom-titlebar {
+      height: 32px !important; min-height: 32px !important; max-height: 32px !important;
+      width: 100% !important; flex-shrink: 0 !important;
+      background: #e9eefb !important; display: flex !important;
+      align-items: center !important; padding-left: 14px !important;
+      -webkit-app-region: drag !important; user-select: none !important;
+      z-index: 999999 !important; border-bottom: 1px solid rgba(0,0,0,0.04) !important;
+      box-sizing: border-box !important;
+    }
+    .titlebar-box { display: flex; align-items: center; gap: 8px; }
+    .titlebar-logo { width: 18px; height: 18px; filter: drop-shadow(0 2px 4px rgba(42, 171, 238, 0.4)); }
+    .titlebar-text { font-size: 13px; font-weight: 700; color: #1e293b; }
+
     #root {
-      width: 100vw !important; height: 100vh !important;
-      overflow: hidden !important; position: relative !important;
+      flex: 1 1 0% !important; height: calc(100vh - 32px) !important;
+      width: 100vw !important; position: relative !important; overflow: hidden !important;
+      transform: translateZ(0) !important; /* ទប់មិនឱ្យដាច់បាត */
     }
 
     /* ===================================================================== */
-    /* 3. ACTIVE CHAT & LIST */
+    /* 2. កម្ទេចពណ៌ក្រហមដិត (Sidebar) និងពណ៌បៃតង                             */
+    /* ===================================================================== */
+    :root, html, body, .theme-light, .theme-dark, .theme-tinted {
+      --color-background-compact-menu: #e9eefb !important;
+      --color-background: #ffffff !important;
+      --color-background-secondary: #f1f4fa !important;
+      --color-chat-active: #6c63ff !important;
+      --color-primary: #6c63ff !important;
+      --color-background-own: #eeeaff !important;
+      --color-text: #1e293b !important;
+      --pattern-color: transparent !important;
+    }
+
+    /* វាយប្រហារចំ Sidebar ខាងឆ្វេង (បំបាត់ background-image ពណ៌ក្រហម) */
+    nav, .sidebar-compact, .folders-tabs, .TabList, #LeftColumn-main, .LeftColumn-main {
+      background-color: #e9eefb !important;
+      background-image: none !important; /* នេះជាចំណុចសម្លាប់ពណ៌ក្រហម! */
+      background: #e9eefb !important;
+      border-right: 1px solid rgba(0,0,0,0.03) !important;
+    }
+
+    /* កម្ចាត់ពណ៌បៃតងលើ Badges (លេខសារ) និង Online Dot */
+    .badge, .Badge, .unread, .ChatBadge {
+      background-color: #6c63ff !important; color: #ffffff !important;
+    }
+    .avatar-online::after, .Avatar.online::after, .status-online {
+      background-color: #6c63ff !important; border-color: #ffffff !important;
+    }
+
+    /* ===================================================================== */
+    /* 3. ពណ៌ MODERN UI (Chat List & Chat Area)                            */
     /* ===================================================================== */
     .LeftColumn, .chat-list, .Transition { background-color: #ffffff !important; }
     .SearchInput .input-field, .SearchInput .input-field-input { background-color: #f1f4fa !important; border-radius: 20px !important; }
 
-    .ListItem, .chat-list-item { transition: all 0.25s ease !important; border-radius: 14px !important; margin: 3px 8px !important; width: calc(100% - 16px) !important; }
-    .ListItem:hover:not(.active), .chat-list-item:hover:not(.active) { background-color: #f4f6fd !important; transform: translateX(4px) !important; }
-    
+    /* Active Chat Gradient ស្វាយ */
+    .ListItem, .chat-list-item { transition: all 0.2s ease !important; border-radius: 14px !important; margin: 3px 8px !important; width: calc(100% - 16px) !important; }
+    .ListItem:hover:not(.active), .chat-list-item:hover:not(.active) { background-color: #f4f6fd !important; transform: translateX(3px) !important; }
     .ListItem.active, .chat-list-item.active {
       background: linear-gradient(110deg, #6c63ff 0%, #8b80ff 100%) !important;
       box-shadow: 0 4px 12px rgba(108, 99, 255, 0.3) !important; border: none !important;
     }
     .ListItem.active *, .chat-list-item.active * { color: #ffffff !important; fill: #ffffff !important; }
-    .ListItem.active span[class*="badge"], .ListItem.active .badge, .ListItem.active .Badge { 
-      background-color: #ffffff !important; color: #6c63ff !important; font-weight: bold !important; 
-    }
-    
-    .Tab.active, .Tab.active i { color: #6c63ff !important; }
-    .Tab.active .badge { background-color: #6c63ff !important; color: #fff !important; }
+    .ListItem.active .badge, .ListItem.active .Badge { background-color: #ffffff !important; color: #6c63ff !important; }
 
-    /* ===================================================================== */
-    /* 4. HEADERS & CHAT BACKGROUND */
-    /* ===================================================================== */
+    /* Headers & Chat Area */
     .Header, .LeftHeader, .MiddleHeader, .RightHeader, .sidebar-header {
       background-color: rgba(255, 255, 255, 0.85) !important;
       backdrop-filter: blur(12px) !important; -webkit-backdrop-filter: blur(12px) !important;
@@ -79,9 +102,7 @@
       background: linear-gradient(135deg, #e4ecfe 0%, #fbeaf7 50%, #e6effe 100%) !important;
     }
 
-    /* ===================================================================== */
-    /* 5. BUBBLES & ICONS */
-    /* ===================================================================== */
+    /* ប្រអប់សារ និង Icons */
     .icon-message-read, .icon-check, .icon-double-check, .Message-status { color: #6c63ff !important; fill: #6c63ff !important; }
     .Audio .toggle-action, .Audio button, .voice-play-button { background-color: #6c63ff !important; color: #ffffff !important; }
     .svg-appendix { display: none !important; }
@@ -126,33 +147,30 @@
 </head>
 
 <body>
+  <!-- ដាក់ Title Bar មកវិញ ដើម្បីកុំឱ្យប៊ូតុង - [] X ធ្លាក់មកត្រួតលើ Header ខាងស្តាំ -->
+  <div id="custom-titlebar">
+    <div class="titlebar-box">
+      <svg class="titlebar-logo" viewBox="0 0 24 24"><circle cx="12" cy="12" r="12" fill="#2AABEE"/><path d="M5.4 11.9l11.6-4.5c.5-.2 1.1.1 1 .7l-2 9.4c-.1.5-.7.8-1.2.5l-3.3-2.4-1.6 1.5c-.2.2-.5.1-.6-.2l-.6-3.8 6.8-6.1c.1-.1 0-.3-.1-.2l-8.4 5.3-2.6-.8c-.6-.2-.6-.9 0-1.1z" fill="#fff"/></svg>
+      <span class="titlebar-text">Mii mama gram</span>
+    </div>
+  </div>
+
   <div id="root"></div>
   <div id="portals"></div>
   <script src="./compatTest.js"></script>
 
-  <!-- កូដកម្ទេចពណ៌ក្រហម/បៃតង ដោយប្រើបច្ចេកទេសទីតាំងប្រអប់ (Physical Bounding Box Attack) -->
+  <!-- Auto-Killer: តាមប្រមាញ់លុបពណ៌ក្រហម (Background Image) រៀងរាល់កន្លះវិនាទី -->
   <script>
     setInterval(() => {
-      // 1. រុញ Style របស់យើងទៅក្រោយគេបង្អស់ជានិច្ច ដើម្បីកុំឱ្យ Telegram យក Theme វាមកជាន់
-      const nuclearStyle = document.getElementById('mii-mama-nuclear-style');
-      if (nuclearStyle) { document.head.appendChild(nuclearStyle); }
-
-      // 2. លុប Class Theme ក្រហមចេញពី Body
       document.body.className = 'theme-light';
       document.documentElement.className = 'theme-light';
-
-      // 3. ស្វែងរកប្រអប់ Sidebar ខាងឆ្វេងបង្អស់ (កម្ចាត់ពណ៌ក្រហមដិត)
-      const allDivs = document.querySelectorAll('div, nav, aside');
-      allDivs.forEach(el => {
-          const rect = el.getBoundingClientRect();
-          // ប្រសិនបើវាជាប្រអប់ដែលឈរនៅខាងឆ្វេងកៀនគេ (Left ជិត 0) និងមានទំហំទទឹងចន្លោះ 50px-100px (ទំហំ Folder Sidebar)
-          if (rect.left <= 10 && rect.width >= 50 && rect.width <= 105 && rect.height > 300) {
-              el.style.setProperty('background-color', '#e9eefb', 'important');
-              el.style.setProperty('background', '#e9eefb', 'important');
-              el.style.setProperty('background-image', 'none', 'important'); // លុបកុំឱ្យជាប់ Gradient ក្រហម
-          }
+      
+      document.querySelectorAll('nav, .sidebar-compact, #LeftColumn-main').forEach(el => {
+        el.style.setProperty('background-image', 'none', 'important');
+        el.style.setProperty('background-color', '#e9eefb', 'important');
+        el.style.setProperty('background', '#e9eefb', 'important');
       });
-    }, 200); // ឆែកនិងវាយប្រហាររៀងរាល់ 0.2 វិនាទីម្តង
+    }, 500);
   </script>
 </body>
 </html>
