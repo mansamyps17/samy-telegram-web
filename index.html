@@ -3,9 +3,11 @@
 <head>
   <meta charset="UTF-8">
   <title>Mii mama gram</title>
+  <meta name="title" content="Mii mama gram">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no, viewport-fit=cover">
   <meta http-equiv="Content-Security-Policy" content="default-src 'self'; connect-src 'self' wss://*.web.telegram.org blob: http: https: ; script-src 'self' 'unsafe-inline' 'wasm-unsafe-eval' https://t.me/_websync_ https://telegram.me/_websync_ https://telegram.dog/_websync_; worker-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' data: https://fonts.gstatic.com; img-src 'self' data: blob: https://ss3.4sqi.net/img/categories_v2/; media-src 'self' blob: data:; object-src 'none'; frame-src http: https: bitkeep: bnc: bybitapp: echooo: imtokenv2: mytonwallet-tc: nicegram-tc: safepal-tc: tonkeeper-pro-tc: tonkeeper-tc:; base-uri 'none'; form-action 'none';">
 
+  <link rel="icon" href="./favicon.svg" type="image/svg+xml">
   <script src="./redirect.js"></script>
   <script>Object.defineProperty(document, 'title', { get: function() { return "Mii mama gram"; }, set: function() { } });</script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -13,110 +15,103 @@
   <link href="https://fonts.googleapis.com/css2?family=Kantumruy+Pro:wght@400;500;600;700&display=swap" rel="stylesheet">
 
   <style>
+    /* ===================================================================== */
+    /* 1. FORCE THEME OVERRIDES (វាយលុករាល់ពណ៌ Dynamic Theme)                 */
+    /* ===================================================================== */
     * { font-family: 'Kantumruy Pro', sans-serif !important; }
 
-    /* ================================================================= */
-    /* ១. បង្ខំឱ្យផ្ទៃមេ ថ្លាឆ្លុះដល់ Desktop Background                      */
-    /* ================================================================= */
+    /* បង្ខំ CSS Variables សំខាន់ៗទាំងអស់ គ្រប់ទីកន្លែង */
+    html, body, #root, :root, [class*="theme-"] {
+      --color-background-compact-menu: #e9eefb !important; /* ពណ៌ផ្ទៃមេឃស្រាលសម្រាប់ Sidebar */
+      --color-background-compact-menu-hover: #dce4f9 !important;
+      --color-background-compact-menu-active: #c5d2f6 !important;
+      --color-background: #ffffff !important;
+      --color-background-secondary: #f1f4fa !important;
+      --color-header-background: rgba(255,255,255,0.85) !important;
+      --color-chat-active: #6c63ff !important; /* ពណ៌ស្វាយ-ខៀវ */
+      --color-primary: #6c63ff !important;
+      --color-primary-shade: #5b54ff !important;
+      --color-background-own: #eeeaff !important;
+      --color-text: #1e293b !important;
+      --color-borders: rgba(0, 0, 0, 0.05) !important;
+      --pattern-color: transparent !important; /* លុប Pattern ខាងក្រោយចោលបណ្តោះអាសន្ន */
+    }
+
+    /* ===================================================================== */
+    /* 2. LAYOUT & FRAMEWORK (មិនរុញក្បាល មិនដាច់បាត)                          */
+    /* ===================================================================== */
     html, body {
       margin: 0 !important; padding: 0 !important;
       width: 100vw !important; height: 100vh !important;
-      overflow: hidden !important; 
-      background: transparent !important; /* បើកឱ្យឆ្លុះ */
+      overflow: hidden !important; background: #e9eefb !important;
     }
     #root {
       width: 100vw !important; height: 100vh !important;
       overflow: hidden !important; position: relative !important;
-      background: transparent !important; /* បើកឱ្យឆ្លុះ */
     }
 
-    /* របារ Title Bar ថ្លា (ដាក់ z-index តូច ដើម្បីកុំឱ្យបាំងពេលមើលរូបថត) */
-    #custom-titlebar {
-      position: fixed; top: 0; left: 0; width: calc(100% - 135px); height: 32px;
-      background: rgba(233, 238, 251, 0.4) !important;
-      backdrop-filter: blur(20px) !important; -webkit-backdrop-filter: blur(20px) !important;
-      display: flex; align-items: center; padding-left: 14px; box-sizing: border-box;
-      -webkit-app-region: drag; user-select: none;
-      z-index: 10; border-bottom: 1px solid rgba(255,255,255,0.2) !important;
-    }
-    .titlebar-box { display: flex; align-items: center; gap: 8px; }
-    .titlebar-logo { width: 18px; height: 18px; filter: drop-shadow(0 2px 4px rgba(42, 171, 238, 0.4)); }
-    .titlebar-text { font-size: 13px; font-weight: 700; color: #1e293b; }
-
-    /* រុញ Header និង Folder ចុះក្រោម 32px */
-    .Header, .LeftHeader, .MiddleHeader, .RightHeader, .sidebar-header, nav, .sidebar-compact, .sidebar-compact-wrapper, .folders-tabs, .TabList {
-      padding-top: 32px !important; box-sizing: border-box !important;
-    }
-    .Header, .LeftHeader, .MiddleHeader, .RightHeader, .sidebar-header { height: 88px !important; }
-
-    /* ================================================================= */
-    /* ២. កញ្ចក់ថ្លា Glassmorphism លើផ្ទាំង Chat ទាំងអស់                     */
-    /* ================================================================= */
-    :root, .theme-light, .theme-dark, .theme-tinted {
-      --color-background-compact-menu: rgba(233, 238, 251, 0.4) !important;
-      --color-background: transparent !important;
-      --color-background-secondary: rgba(255, 255, 255, 0.3) !important;
-      --color-header-background: rgba(255, 255, 255, 0.3) !important;
-      --color-chat-active: #6c63ff !important;
-      --color-primary: #6c63ff !important;
-      --color-background-own: rgba(238, 234, 255, 0.8) !important;
-      --color-text: #1e293b !important;
-    }
-
-    /* ផ្ទាំង Folder (ឆ្វេងបង្អស់) - កញ្ចក់ថ្លា */
+    /* ===================================================================== */
+    /* 3. HARDCODE COLORS FOR SPECIFIC ELEMENTS                               */
+    /* ===================================================================== */
+    
+    /* 3.1 Sidebar (Folder Bar) ខាងឆ្វេងបង្អស់ ត្រូវតែចេញផ្ទៃមេឃស្រាល! */
     nav, .sidebar-compact, .sidebar-compact-wrapper, .folders-tabs, .TabList, #LeftColumn-main, .LeftColumn-main {
-      background: rgba(233, 238, 251, 0.5) !important;
-      backdrop-filter: blur(25px) !important; -webkit-backdrop-filter: blur(25px) !important;
-      border-right: 1px solid rgba(255, 255, 255, 0.2) !important;
+      background-color: #e9eefb !important;
+      background: #e9eefb !important;
+      border-right: 1px solid rgba(0,0,0,0.03) !important;
     }
-    .Tab.active, .Tab.active i { color: #6c63ff !important; }
-    .Tab.active .badge { background-color: #6c63ff !important; color: #fff !important; }
-
-    /* ផ្ទាំងបញ្ជី Chat - កញ្ចក់ថ្លា */
-    .LeftColumn, .chat-list, .Transition { 
-      background: rgba(255, 255, 255, 0.45) !important; 
-      backdrop-filter: blur(25px) !important; -webkit-backdrop-filter: blur(25px) !important;
+    /* Icons & Badges ក្នុង Sidebar */
+    .Tab.active, .Tab.active i, .Tab.active .icon { color: #6c63ff !important; }
+    .Tab.active .badge, .badge.active { background-color: #6c63ff !important; color: #fff !important; }
+    
+    /* 3.2 បញ្ជី Chat កណ្តាល ត្រូវតែស */
+    .LeftColumn, .chat-list, .Transition, .Transition-main { 
+      background-color: #ffffff !important; 
     }
-    .SearchInput .input-field, .SearchInput .input-field-input { background: rgba(255, 255, 255, 0.6) !important; border-radius: 20px !important; }
-
-    /* ផ្ទាំង Chat ធំ - កញ្ចក់ថ្លា */
-    .MiddleColumn, .chat-background, .Pattern, .MessageList {
-      background: rgba(245, 247, 255, 0.45) !important; 
-      backdrop-filter: blur(25px) !important; -webkit-backdrop-filter: blur(25px) !important;
+    .SearchInput .input-field, .SearchInput .input-field-input { 
+      background-color: #f1f4fa !important; border-radius: 20px !important; 
     }
 
-    /* Header ខាងលើទាំងអស់ - កញ្ចក់ថ្លា */
-    .Header, .LeftHeader, .MiddleHeader, .RightHeader, .sidebar-header {
-      background: rgba(255, 255, 255, 0.5) !important;
-      backdrop-filter: blur(30px) !important; -webkit-backdrop-filter: blur(30px) !important;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.3) !important;
+    /* 3.3 Active Chat ត្រូវតែ Gradient ស្វាយ */
+    .ListItem, .chat-list-item { 
+      transition: all 0.2s ease !important; border-radius: 14px !important; margin: 3px 8px !important; width: calc(100% - 16px) !important; background-color: transparent !important;
     }
-
-    /* Chat ដែលកំពុងចុច (Active) */
-    .ListItem, .chat-list-item { transition: all 0.25s ease !important; border-radius: 14px !important; margin: 3px 8px !important; width: calc(100% - 16px) !important; }
-    .ListItem:hover:not(.active), .chat-list-item:hover:not(.active) { background: rgba(255, 255, 255, 0.6) !important; transform: translateX(4px) !important; }
+    .ListItem:hover:not(.active), .chat-list-item:hover:not(.active) { 
+      background-color: #f4f6fd !important; transform: translateX(3px) !important; 
+    }
     .ListItem.active, .chat-list-item.active {
       background: linear-gradient(110deg, #6c63ff 0%, #8b80ff 100%) !important;
       box-shadow: 0 4px 12px rgba(108, 99, 255, 0.3) !important; border: none !important;
     }
-    .ListItem.active * { color: #ffffff !important; fill: #ffffff !important; }
+    .ListItem.active *, .chat-list-item.active * { color: #ffffff !important; fill: #ffffff !important; }
     .ListItem.active .badge, .ListItem.active .Badge { background-color: #ffffff !important; color: #6c63ff !important; font-weight: bold !important; }
 
-    /* ប៊ូតុង និងសញ្ញាធីក */
-    .icon-message-read, .icon-check, .icon-double-check, .Message-status { color: #6c63ff !important; fill: #6c63ff !important; }
+    /* 3.4 Headers (Left & Right) */
+    .Header, .LeftHeader, .MiddleHeader, .RightHeader, .sidebar-header {
+      background-color: rgba(255, 255, 255, 0.85) !important;
+      backdrop-filter: blur(12px) !important; -webkit-backdrop-filter: blur(12px) !important;
+      border-bottom: 1px solid rgba(0, 0, 0, 0.04) !important;
+    }
+
+    /* 3.5 ផ្ទាំង Chat ធំ ខាងស្តាំ ត្រូវតែចេញពណ៌ផ្ទៃមេឃ/ស្វាយស្រាល */
+    .MiddleColumn, .chat-background, .Pattern, .MessageList {
+      background: linear-gradient(135deg, #e4ecfe 0%, #f4ebfa 50%, #e6effe 100%) !important;
+    }
+
+    /* 3.6 សញ្ញាធីក និងប៊ូតុង ត្រូវតែស្វាយ */
+    .icon-message-read, .icon-check, .icon-double-check, .Message-status, [class*="status-read"] { color: #6c63ff !important; fill: #6c63ff !important; }
     .Audio .toggle-action, .Audio button, .voice-play-button { background-color: #6c63ff !important; color: #ffffff !important; }
 
-    /* ប្រអប់សារ (Bubble ត្រូវតែពណ៌ដិតបន្តិច ទើបមើលអក្សរឃើញច្បាស់) */
+    /* 3.7 ប្រអប់សារ (Bubbles) */
     .svg-appendix { display: none !important; }
     .message-outgoing .bubble, .Message.own .bubble {
-      background: rgba(238, 234, 255, 0.9) !important; color: #1e293b !important;
-      border-radius: 18px 18px 4px 18px !important; border: 1px solid rgba(108, 99, 255, 0.15) !important;
+      background: linear-gradient(135deg, #eeeaff 0%, #e5e0ff 100%) !important; color: #1e293b !important;
+      border-radius: 18px 18px 4px 18px !important; border: 1px solid rgba(108, 99, 255, 0.12) !important;
     }
     .message-incoming .bubble, .Message:not(.own) .bubble {
-      background: rgba(255, 255, 255, 0.9) !important; color: #1e293b !important;
-      border-radius: 18px 18px 18px 4px !important; border: 1px solid rgba(255, 255, 255, 0.5) !important;
+      background: #ffffff !important; color: #1e293b !important;
+      border-radius: 18px 18px 18px 4px !important; box-shadow: 0 2px 5px rgba(0,0,0,0.04) !important; border: 1px solid rgba(0,0,0,0.03) !important;
     }
-    .middle-column-footer, .chat-input, .Composer { background-color: transparent !important; padding-bottom: 8px !important; }
   </style>
 
   <style> @layer reset, variables, ui, components; @layer ui { @layer tablist, spinner, button, input, layout; } </style>
@@ -150,31 +145,36 @@
 </head>
 
 <body>
-  <!-- របារ Title Bar ថ្លា និង z-index ទាប ដើម្បីកុំឱ្យបាំងរូបថត -->
-  <div id="custom-titlebar">
-    <div class="titlebar-box">
-      <svg class="titlebar-logo" viewBox="0 0 24 24"><circle cx="12" cy="12" r="12" fill="#2AABEE"/><path d="M5.4 11.9l11.6-4.5c.5-.2 1.1.1 1 .7l-2 9.4c-.1.5-.7.8-1.2.5l-3.3-2.4-1.6 1.5c-.2.2-.5.1-.6-.2l-.6-3.8 6.8-6.1c.1-.1 0-.3-.1-.2l-8.4 5.3-2.6-.8c-.6-.2-.6-.9 0-1.1z" fill="#fff"/></svg>
-      <span class="titlebar-text">Mii mama gram</span>
-    </div>
-  </div>
-
+  <!-- Telegram App Container -->
   <div id="root"></div>
   <div id="portals"></div>
   <script src="./compatTest.js"></script>
 
-  <!-- កម្ចាត់ Dark Mode និងដាក់ពណ៌កញ្ចក់ថ្លា -->
+  <!-- JAVASCRIPT: បង្ខំលុបពណ៌ផ្សេងៗ និងកំណត់ Style ផ្ទាល់ទៅ Element គ្រប់វិនាទី (Aggressive Force) -->
   <script>
-    setInterval(() => {
-      document.body.classList.remove('theme-dark', 'theme-tinted');
-      document.body.classList.add('theme-light');
-      document.documentElement.classList.remove('theme-dark', 'theme-tinted');
-      document.documentElement.classList.add('theme-light');
-      
-      document.querySelectorAll('nav, .sidebar-compact, .sidebar-compact-wrapper, .folders-tabs, .TabList, #LeftColumn-main, .LeftColumn-main').forEach(el => {
-        el.style.setProperty('background-color', 'rgba(233, 238, 251, 0.5)', 'important');
-        el.style.setProperty('background', 'rgba(233, 238, 251, 0.5)', 'important');
+    function forceMasterTheme() {
+      // 1. លុប Theme Classes ផ្សេងៗចោល
+      ['theme-dark', 'theme-tinted', 'theme-colorful'].forEach(c => {
+        document.body.classList.remove(c);
+        document.documentElement.classList.remove(c);
       });
-    }, 100);
+      document.body.classList.add('theme-light');
+      document.documentElement.classList.add('theme-light');
+
+      // 2. បង្ខំ Sidebar ឱ្យចេញពណ៌ផ្ទៃមេឃស្រាល
+      const sidebars = document.querySelectorAll('nav, .sidebar-compact, .sidebar-compact-wrapper, .folders-tabs, .TabList, #LeftColumn-main, .LeftColumn-main');
+      sidebars.forEach(el => {
+        el.setAttribute('style', 'background-color: #e9eefb !important; background: #e9eefb !important;');
+      });
+
+      // 3. បង្ខំ Chat Background ឱ្យចេញ Gradient ផ្ទៃមេឃ-ស្វាយ
+      const chatsBg = document.querySelectorAll('.MiddleColumn, .chat-background, .Pattern');
+      chatsBg.forEach(el => {
+         el.setAttribute('style', 'background: linear-gradient(135deg, #e4ecfe 0%, #f4ebfa 50%, #e6effe 100%) !important;');
+      });
+    }
+    // ដំណើរការរៀងរាល់ 100ms ដើម្បីកុំឱ្យ Telegram អាចប្តូរពណ៌បានវិញ
+    setInterval(forceMasterTheme, 100);
   </script>
 </body>
 </html>
