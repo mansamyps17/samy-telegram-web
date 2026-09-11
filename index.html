@@ -18,43 +18,21 @@
     * { font-family: 'Kantumruy Pro', sans-serif !important; }
 
     /* ================================================================= */
-    /* ១. របារ TITLE BAR (z-index ទាប ដើម្បីឱ្យលាក់នៅក្រោមផ្ទាំងរូបថត) */
+    /* ឱ្យ TELEGRAM រត់ពេញ 100% គ្មានរុញក្បាល គ្មានដាច់បាត                */
     /* ================================================================= */
-    #custom-titlebar {
-      position: fixed; top: 0; left: 0;
-      width: calc(100% - 135px); /* ទុកកន្លែងឱ្យប៊ូតុង Windows Min/Max/Close */
-      height: 32px; background: #e9eefb;
-      display: flex; align-items: center; padding-left: 14px; box-sizing: border-box;
-      -webkit-app-region: drag; user-select: none;
-      z-index: 99; /* លេខតូច ពេលបើករូបថត វានឹងត្រូវរូបថតបាំងពីលើបាត់! */
+    html, body {
+      margin: 0 !important; padding: 0 !important;
+      width: 100vw !important; height: 100vh !important;
+      overflow: hidden !important; background: #e9eefb !important;
     }
-    .titlebar-box { display: flex; align-items: center; gap: 8px; }
-    .titlebar-logo { width: 18px; height: 18px; filter: drop-shadow(0 2px 4px rgba(42, 171, 238, 0.4)); }
-    .titlebar-text { font-size: 13px; font-weight: 700; color: #1e293b; }
 
-    /* ================================================================= */
-    /* ២. រុញ HEADER ចុះក្រោម 32px ជំនួសការកាត់ #root (ការពារដាច់បាត) */
-    /* ================================================================= */
-    .Header, .LeftHeader, .MiddleHeader, .RightHeader, .sidebar-header {
-      padding-top: 32px !important; /* បង្កើតចន្លោះឱ្យ Title Bar អង្គុយ */
-      height: 88px !important;      /* កម្ពស់ដើម 56px + 32px */
-      background-color: rgba(255, 255, 255, 0.85) !important;
-      backdrop-filter: blur(12px) !important; -webkit-backdrop-filter: blur(12px) !important;
-      border-bottom: 1px solid rgba(0, 0, 0, 0.04) !important;
-      box-sizing: border-box !important;
-    }
-    
-    /* រុញជួរ Folder ខាងឆ្វេងបង្អស់ចុះក្រោម 32px ដែរ ទើបស្មើគ្នាត្រង់ភ្លឹង */
-    nav, .sidebar-compact, .sidebar-compact-wrapper, .folders-tabs, .TabList {
-      padding-top: 32px !important;
-      box-sizing: border-box !important;
-      background-color: #e9eefb !important;
-      background: #e9eefb !important;
-      border-right: 1px solid rgba(0,0,0,0.03) !important;
+    #root {
+      width: 100vw !important; height: 100vh !important;
+      overflow: hidden !important; position: relative !important;
     }
 
     /* ================================================================= */
-    /* ៣. បង្ខំលាបពណ៌ THEME MODERN (កម្ទេច Dark Mode)                   */
+    /* កម្ទេចពណ៌បៃតង និងលាបពណ៌ MODERN UI (ជម្រះ Dark Mode)               */
     /* ================================================================= */
     :root, html, body, .theme-light, .theme-dark, .theme-tinted {
       --color-background-compact-menu: #e9eefb !important;
@@ -66,11 +44,15 @@
       --color-chat-active: #6c63ff !important;
       --color-primary: #6c63ff !important;
       --color-background-own: #eeeaff !important;
-      --color-text: #1e293b !important; /* បង្ខំអក្សរឱ្យខ្មៅ ទោះនៅ Dark Mode */
-      --color-text-secondary: #64748b !important;
+      --color-text: #1e293b !important;
     }
 
-    /* Tab & Badge */
+    /* Sidebar / Folder */
+    nav, .sidebar-compact, .sidebar-compact-wrapper, .folders-tabs, .TabList, #LeftColumn-main, .LeftColumn-main {
+      background-color: #e9eefb !important;
+      background: #e9eefb !important;
+      border-right: 1px solid rgba(0,0,0,0.03) !important;
+    }
     .Tab.active, .Tab.active i { color: #6c63ff !important; }
     .Tab.active .badge { background-color: #6c63ff !important; color: #fff !important; }
 
@@ -87,6 +69,13 @@
     }
     .ListItem.active * { color: #ffffff !important; fill: #ffffff !important; }
     .ListItem.active .badge, .ListItem.active .Badge { background-color: #ffffff !important; color: #6c63ff !important; font-weight: bold !important; }
+
+    /* Header ខាងឆ្វេង និងស្ដាំ (កញ្ចក់ Blur ថ្លា) */
+    .Header, .LeftHeader, .MiddleHeader, .RightHeader, .sidebar-header {
+      background-color: rgba(255, 255, 255, 0.85) !important;
+      backdrop-filter: blur(12px) !important; -webkit-backdrop-filter: blur(12px) !important;
+      border-bottom: 1px solid rgba(0, 0, 0, 0.04) !important;
+    }
 
     /* ផ្ទៃផ្ទាំង Chat (Gradient ស្រាល) */
     .MiddleColumn, .chat-background, .Pattern, .MessageList {
@@ -107,7 +96,6 @@
       background: #ffffff !important; color: #1e293b !important;
       border-radius: 18px 18px 18px 4px !important; box-shadow: 0 2px 5px rgba(0,0,0,0.04) !important;
     }
-    .middle-column-footer, .chat-input, .Composer { background-color: transparent !important; padding-bottom: 8px !important; }
   </style>
 
   <style> @layer reset, variables, ui, components; @layer ui { @layer tablist, spinner, button, input, layout; } </style>
@@ -141,35 +129,24 @@
 </head>
 
 <body>
-  <!-- របារ Title Bar ផ្ទាល់ខ្លួន -->
-  <div id="custom-titlebar">
-    <div class="titlebar-box">
-      <svg class="titlebar-logo" viewBox="0 0 24 24"><circle cx="12" cy="12" r="12" fill="#2AABEE"/><path d="M5.4 11.9l11.6-4.5c.5-.2 1.1.1 1 .7l-2 9.4c-.1.5-.7.8-1.2.5l-3.3-2.4-1.6 1.5c-.2.2-.5.1-.6-.2l-.6-3.8 6.8-6.1c.1-.1 0-.3-.1-.2l-8.4 5.3-2.6-.8c-.6-.2-.6-.9 0-1.1z" fill="#fff"/></svg>
-      <span class="titlebar-text">Mii mama gram</span>
-    </div>
-  </div>
-
+  <!-- លែងប្រើ Custom Title Bar ហើយ (លុបចោល) ទុកឱ្យ Windows ជាអ្នករៀបចំ Title Bar ឱ្យ -->
   <div id="root"></div>
   <div id="portals"></div>
   <script src="./compatTest.js"></script>
 
-  <!-- កម្ទេច Dark Mode ចោលយ៉ាងកាចសាហាវ -->
+  <!-- Auto Purge Dark Mode/Green Theme -->
   <script>
-    function obliterateDarkMode() {
-      if (document.body.classList.contains('theme-dark') || document.body.classList.contains('theme-tinted')) {
-        document.body.classList.remove('theme-dark', 'theme-tinted');
-        document.body.classList.add('theme-light');
-      }
-      if (document.documentElement.classList.contains('theme-dark') || document.documentElement.classList.contains('theme-tinted')) {
-        document.documentElement.classList.remove('theme-dark', 'theme-tinted');
-        document.documentElement.classList.add('theme-light');
-      }
-      // បង្ខំឱ្យប្រព័ន្ធចងចាំថាវាជា Light Mode
-      if (localStorage.getItem('theme') !== 'light') {
-        localStorage.setItem('theme', 'light');
-      }
-    }
-    setInterval(obliterateDarkMode, 100);
+    setInterval(() => {
+      document.body.classList.remove('theme-dark', 'theme-tinted');
+      document.body.classList.add('theme-light');
+      document.documentElement.classList.remove('theme-dark', 'theme-tinted');
+      document.documentElement.classList.add('theme-light');
+      
+      document.querySelectorAll('nav, .sidebar-compact, .sidebar-compact-wrapper, .folders-tabs, .TabList, #LeftColumn-main, .LeftColumn-main').forEach(el => {
+        el.style.setProperty('background-color', '#e9eefb', 'important');
+        el.style.setProperty('background', '#e9eefb', 'important');
+      });
+    }, 100);
   </script>
 </body>
 </html>
