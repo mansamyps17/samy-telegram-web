@@ -17,7 +17,7 @@
     * { font-family: 'Kantumruy Pro', sans-serif !important; }
 
     /* ===================================================================== */
-    /* 1. TITLE BAR & LAYOUT                                                 */
+    /* 1. TITLE BAR & MAIN FRAME                                             */
     /* ===================================================================== */
     html, body {
       margin: 0 !important; padding: 0 !important;
@@ -32,7 +32,7 @@
       background: #e9eefb !important; display: flex !important;
       align-items: center !important; padding-left: 14px !important;
       -webkit-app-region: drag !important; user-select: none !important;
-      z-index: 999999 !important; border-bottom: 1px solid rgba(0,0,0,0.04) !important;
+      z-index: 9999 !important; border-bottom: 1px solid rgba(0,0,0,0.04) !important;
       box-sizing: border-box !important;
     }
     .titlebar-box { display: flex; align-items: center; gap: 8px; }
@@ -43,10 +43,11 @@
       flex: 1 1 0% !important; height: calc(100vh - 32px) !important;
       width: 100vw !important; position: relative !important; overflow: hidden !important;
       transform: translateZ(0) !important; 
+      background: #e9eefb !important;
     }
 
     /* ===================================================================== */
-    /* 2. កម្ទេចពណ៌ក្រហមដិត (Sidebar) និងពណ៌បៃតង                             */
+    /* 2. កម្ទេចពណ៌ឈាមជ្រូក (MAROON) ទាំងស្រុងលើ SIDEBAR & MAIN CONTAINER    */
     /* ===================================================================== */
     :root, html, body, .theme-light, .theme-dark, .theme-tinted {
       --color-background-compact-menu: #e9eefb !important;
@@ -59,18 +60,24 @@
       --pattern-color: transparent !important;
     }
 
-    nav, .sidebar-compact, .folders-tabs, .TabList, #LeftColumn-main, .LeftColumn-main {
+    /* បង្ខំផ្ទៃមេទាំងអស់ឱ្យចេញពណ៌ផ្ទៃមេឃស្រាល ដើម្បីកុំឱ្យធ្លុះពណ៌ឈាមជ្រូក */
+    #Main, .Main, #LeftColumn, #LeftColumn-main, .LeftColumn-main, 
+    nav, .sidebar-compact, .folders-tabs, .TabList {
       background-color: #e9eefb !important;
-      background-image: none !important; 
+      background-image: none !important;
       background: #e9eefb !important;
-      border-right: 1px solid rgba(0,0,0,0.03) !important;
     }
+    nav, .sidebar-compact, .folders-tabs { border-right: 1px solid rgba(0,0,0,0.04) !important; }
+
+    /* ប្តូរអក្សរ និង Icon ក្នុង Folder Sidebar ឱ្យចេញពណ៌ច្បាស់ស្អាត (មិនមែនសព្រាល) */
+    nav span, .sidebar-compact span, .folders-tabs span { color: #334155 !important; }
+    nav i, nav svg, .sidebar-compact i, .sidebar-compact svg { fill: #475569 !important; color: #475569 !important; }
 
     .badge, .Badge, .unread, .ChatBadge { background-color: #6c63ff !important; color: #ffffff !important; }
     .avatar-online::after, .Avatar.online::after, .status-online { background-color: #6c63ff !important; border-color: #ffffff !important; }
 
     /* ===================================================================== */
-    /* 3. ពណ៌ MODERN UI (Chat List & Chat Area)                            */
+    /* 3. MODERN UI FOR CHAT LIST & CHAT VIEW                               */
     /* ===================================================================== */
     .LeftColumn, .chat-list, .Transition { background-color: #ffffff !important; }
     .SearchInput .input-field, .SearchInput .input-field-input { background-color: #f1f4fa !important; border-radius: 20px !important; }
@@ -84,11 +91,17 @@
     .ListItem.active *, .chat-list-item.active * { color: #ffffff !important; fill: #ffffff !important; }
     .ListItem.active .badge, .ListItem.active .Badge { background-color: #ffffff !important; color: #6c63ff !important; font-weight: bold !important; }
 
-    .Header, .LeftHeader, .MiddleHeader, .RightHeader, .sidebar-header {
+    /* Header នៃផ្ទាំង Chat ធម្មតា (ពណ៌ស Blur) */
+    .Header:not([class*="Media"]):not([class*="media"]), 
+    .LeftHeader, 
+    .MiddleHeader, 
+    .RightHeader, 
+    .sidebar-header {
       background-color: rgba(255, 255, 255, 0.85) !important;
       backdrop-filter: blur(12px) !important; -webkit-backdrop-filter: blur(12px) !important;
       border-bottom: 1px solid rgba(0, 0, 0, 0.04) !important;
     }
+
     .MiddleColumn, .chat-background, .Pattern, .MessageList {
       background: linear-gradient(135deg, #e4ecfe 0%, #fbeaf7 50%, #e6effe 100%) !important;
     }
@@ -106,16 +119,49 @@
     }
 
     /* ===================================================================== */
-    /* 4. ដោះស្រាយបញ្ហាមើលរូបថតជាន់គ្នា (MEDIA VIEWER FIX)                    */
+    /* 4. ដោះស្រាយផ្ទាំងមើលរូបភាព (MEDIA VIEWER FIX) - លុបរបារស & កុំឱ្យជាន់ប៊ូតុង */
     /* ===================================================================== */
     
-    /* រុញប៊ូតុង Telegram មកខាងឆ្វេង ១៥០px ឱ្យផុតពីប៊ូតុង Windows X */
-    #portals header, 
-    #portals [class*="header"], 
+    /* ៤.១ បង្ខំក្បាល Header នៃផ្ទាំងមើលរូបថត ឱ្យថ្លា (TRANSPARENT) ដាច់ខាត */
+    #MediaViewer .Header,
+    #MediaViewer header,
+    .MediaViewer .Header,
+    .MediaViewer header,
+    [class*="MediaViewer"] .Header,
+    [class*="MediaViewer"] header,
+    [class*="media-viewer"] header,
+    [class*="media-viewer"] .Header,
     .MediaViewer-header,
-    [class*="MediaViewer"] header {
-      padding-right: 150px !important;
-      padding-top: 8px !important;
+    .media-viewer-header,
+    #portals .Header,
+    #portals header {
+      background: linear-gradient(to bottom, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0) 100%) !important;
+      background-color: transparent !important;
+      backdrop-filter: none !important;
+      -webkit-backdrop-filter: none !important;
+      border: none !important;
+      box-shadow: none !important;
+    }
+
+    /* ៤.២ រុញប៊ូតុងបញ្ជារបស់ Telegram ចុះក្រោម និងមកឆ្វេង ឱ្យផុតពីប៊ូតុង Windows X */
+    #MediaViewer [class*="actions"],
+    #MediaViewer [class*="tools"],
+    .MediaViewer [class*="actions"],
+    [class*="MediaViewer"] [class*="actions"],
+    [class*="MediaViewer"] [class*="tools"],
+    .MediaViewer-header-actions,
+    .media-viewer-actions,
+    [class*="MediaViewer"] header > div:last-child {
+      margin-top: 36px !important;     /* រុញចុះក្រោម ឱ្យផុតពី 32px នៃប៊ូតុង Windows */
+      margin-right: 15px !important;
+      padding-right: 140px !important;  /* ទុកចន្លោះ 140px កុំឱ្យបុកប៊ូតុង [X] ក្រហម */
+    }
+
+    /* ៤.៣ លាក់ Custom Titlebar ពេលកំពុងមើលរូបភាព */
+    body:has([class*="MediaViewer"]) #custom-titlebar,
+    body:has([class*="media-viewer"]) #custom-titlebar,
+    body:has(#MediaViewer) #custom-titlebar {
+      display: none !important;
     }
   </style>
 
@@ -150,7 +196,6 @@
 </head>
 
 <body>
-  <!-- Title bar ខាងលើ -->
   <div id="custom-titlebar">
     <div class="titlebar-box">
       <svg class="titlebar-logo" viewBox="0 0 24 24"><circle cx="12" cy="12" r="12" fill="#2AABEE"/><path d="M5.4 11.9l11.6-4.5c.5-.2 1.1.1 1 .7l-2 9.4c-.1.5-.7.8-1.2.5l-3.3-2.4-1.6 1.5c-.2.2-.5.1-.6-.2l-.6-3.8 6.8-6.1c.1-.1 0-.3-.1-.2l-8.4 5.3-2.6-.8c-.6-.2-.6-.9 0-1.1z" fill="#fff"/></svg>
@@ -162,33 +207,31 @@
   <div id="portals"></div>
   <script src="./compatTest.js"></script>
 
-  <!-- Auto-Cleaner សម្រាប់កម្ទេចពណ៌ក្រហម និងលាក់ Titlebar ពេលមើលរូបថត -->
+  <!-- JAVASCRIPT SCANNER: បោសសម្អាតពណ៌ឈាមជ្រូក និងការពារការជាន់ប៊ូតុងពេលមើលរូប -->
   <script>
     setInterval(() => {
-      // 1. បង្ខំឱ្យវាជា Light Theme ជានិច្ច
+      // 1. បង្ខំ Light Theme
       document.body.className = 'theme-light';
       document.documentElement.className = 'theme-light';
-      
-      // 2. លុបពណ៌ក្រហមចេញពី Sidebar
-      document.querySelectorAll('nav, .sidebar-compact, #LeftColumn-main').forEach(el => {
-        el.style.setProperty('background-image', 'none', 'important');
-        el.style.setProperty('background-color', '#e9eefb', 'important');
-        el.style.setProperty('background', '#e9eefb', 'important');
+
+      // 2. ស្វែងរកធាតុទាំងឡាយណាដែលស្ថិតនៅជួរ Folder ខាងឆ្វេង (x < 90px) ហើយលាបពណ៌ផ្ទៃមេឃស្រាល
+      const allDivs = document.querySelectorAll('div, nav, aside, ul');
+      allDivs.forEach(el => {
+        const rect = el.getBoundingClientRect();
+        if (rect.left < 90 && rect.width >= 40 && rect.width <= 110 && rect.height > 200) {
+          el.style.setProperty('background-color', '#e9eefb', 'important');
+          el.style.setProperty('background', '#e9eefb', 'important');
+          el.style.setProperty('background-image', 'none', 'important');
+        }
       });
 
-      // 3. ឆ្លាតវៃ៖ បើក/បិទ Title Bar ពណ៌ស ទៅតាមពេលដែលបងចុចមើលរូបភាព!
-      const portals = document.getElementById('portals');
+      // 3. ពិនិត្យមើលផ្ទាំងរូបភាព (MediaViewer) ដើម្បីលាក់ Titlebar
+      const hasViewer = document.querySelector('[class*="MediaViewer"], [class*="media-viewer"], #MediaViewer');
       const titleBar = document.getElementById('custom-titlebar');
-      
-      if (portals && titleBar) {
-        // បើមានគេបើករូបភាព (MediaViewer លេចឡើងក្នុង Portals)
-        if (portals.innerHTML.includes('MediaViewer') || portals.innerHTML.includes('media-viewer')) {
-           titleBar.style.setProperty('display', 'none', 'important');
-        } else {
-           titleBar.style.setProperty('display', 'flex', 'important');
-        }
+      if (titleBar) {
+        titleBar.style.setProperty('display', hasViewer ? 'none' : 'flex', 'important');
       }
-    }, 200); // ឆែករាល់ 0.2 វិនាទី
+    }, 200);
   </script>
 </body>
 </html>
