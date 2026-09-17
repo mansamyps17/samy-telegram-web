@@ -17,37 +17,22 @@
     * { font-family: 'Kantumruy Pro', sans-serif !important; }
 
     /* ===================================================================== */
-    /* 1. TITLE BAR & BASE LAYOUT                                            */
+    /* 1. LAYOUT ដើមពេញលេញ (គ្មាន Title Bar ក្លែងក្លាយ គ្មានដាច់បាត)             */
     /* ===================================================================== */
     html, body {
       margin: 0 !important; padding: 0 !important;
       width: 100vw !important; height: 100vh !important;
       overflow: hidden !important; background: #e9eefb !important;
-      display: flex !important; flex-direction: column !important;
     }
-
-    #custom-titlebar {
-      height: 32px !important; min-height: 32px !important; max-height: 32px !important;
-      width: 100% !important; flex-shrink: 0 !important;
-      background: #e9eefb !important; display: flex !important;
-      align-items: center !important; padding-left: 14px !important;
-      -webkit-app-region: drag !important; user-select: none !important;
-      z-index: 9999 !important; border-bottom: 1px solid rgba(0,0,0,0.04) !important;
-      box-sizing: border-box !important;
-    }
-    .titlebar-box { display: flex; align-items: center; gap: 8px; }
-    .titlebar-logo { width: 18px; height: 18px; filter: drop-shadow(0 2px 4px rgba(42, 171, 238, 0.4)); }
-    .titlebar-text { font-size: 13px; font-weight: 700; color: #1e293b; }
 
     #root {
-      flex: 1 1 0% !important; height: calc(100vh - 32px) !important;
-      width: 100vw !important; position: relative !important; overflow: hidden !important;
-      transform: translateZ(0) !important; 
+      width: 100vw !important; height: 100vh !important;
+      position: relative !important; overflow: hidden !important;
       background: #e9eefb !important;
     }
 
     /* ===================================================================== */
-    /* 2. THEME COLOR OVERRIDES (លុបពណ៌ឈាមជ្រូក និងបៃតង)                      */
+    /* 2. កម្ទេចពណ៌ឈាមជ្រូក (MAROON) និងពណ៌បៃតង                              */
     /* ===================================================================== */
     :root, html, body, .theme-light, .theme-dark, .theme-tinted {
       --color-background-compact-menu: #e9eefb !important;
@@ -60,19 +45,23 @@
       --pattern-color: transparent !important;
     }
 
+    /* បង្ខំផ្ទៃមេទាំងអស់ឱ្យចេញពណ៌ផ្ទៃមេឃស្រាល ដើម្បីកុំឱ្យធ្លុះពណ៌ឈាមជ្រូក */
     #Main, .Main, #LeftColumn, #LeftColumn-main, .LeftColumn-main, 
-    nav, .sidebar-compact, .folders-tabs, .TabList {
+    nav, .sidebar-compact, .folders-tabs, .TabList, div[class*="folder"], div[class*="sidebar"] {
       background-color: #e9eefb !important;
       background-image: none !important;
       background: #e9eefb !important;
     }
     nav, .sidebar-compact, .folders-tabs { border-right: 1px solid rgba(0,0,0,0.04) !important; }
 
+    nav span, .sidebar-compact span, .folders-tabs span { color: #334155 !important; }
+    nav i, nav svg, .sidebar-compact i, .sidebar-compact svg { fill: #475569 !important; color: #475569 !important; }
+
     .badge, .Badge, .unread, .ChatBadge { background-color: #6c63ff !important; color: #ffffff !important; }
     .avatar-online::after, .Avatar.online::after, .status-online { background-color: #6c63ff !important; border-color: #ffffff !important; }
 
     /* ===================================================================== */
-    /* 3. CHAT LIST & HEADER ធម្មតា (មិនប៉ះពាល់ MEDIA VIEWER)                */
+    /* 3. MODERN UI FOR CHAT LIST & CHAT VIEW                               */
     /* ===================================================================== */
     .LeftColumn, .chat-list, .Transition { background-color: #ffffff !important; }
     .SearchInput .input-field, .SearchInput .input-field-input { background-color: #f1f4fa !important; border-radius: 20px !important; }
@@ -84,10 +73,9 @@
       box-shadow: 0 4px 12px rgba(108, 99, 255, 0.3) !important; border: none !important;
     }
     .ListItem.active *, .chat-list-item.active * { color: #ffffff !important; fill: #ffffff !important; }
-    .ListItem.active .badge, .ListItem.active .Badge { background-color: #ffffff !important; color: #6c63ff !important; }
+    .ListItem.active .badge, .ListItem.active .Badge { background-color: #ffffff !important; color: #6c63ff !important; font-weight: bold !important; }
 
-    /* ចំណុចគន្លឹះ៖ កំណត់ Header ពណ៌ស សម្រាប់តែផ្ទាំង Chat ធម្មតា */
-    #Main > .Header, 
+    /* កំណត់ Header ពណ៌ស សម្រាប់តែផ្ទាំង Chat ធម្មតាប៉ុណ្ណោះ (មិនឱ្យប៉ះ MediaViewer) */
     #LeftColumn .Header, 
     #MiddleColumn .Header, 
     .LeftHeader, 
@@ -115,54 +103,28 @@
     }
 
     /* ===================================================================== */
-    /* 4. ដំណោះស្រាយផ្ទាំងរូបថត (MEDIA VIEWER FIX) - បំបាត់របារស & ជៀសប៊ូតុង X */
+    /* 4. ដោះស្រាយ MEDIA VIEWER (លុបរបារពណ៌សចោលទាំងស្រុង ១០០%)                */
     /* ===================================================================== */
-    
-    /* ៤.១ បង្ខំឱ្យ Header នៃផ្ទាំងមើលរូបថតថ្លា (Transparent) មិនឱ្យចេញរបារស */
+    #MediaViewer,
+    dialog#MediaViewer,
+    .MediaViewer,
+    #MediaViewer *,
+    dialog#MediaViewer *,
+    .MediaViewer * {
+      --color-header-background: transparent !important;
+      --color-background: transparent !important;
+    }
+
     #MediaViewer .Header,
-    .MediaViewer .Header,
-    [class*="MediaViewer"] .Header,
-    [class*="media-viewer"] .Header,
-    [class*="MediaViewer"] header,
-    [class*="media-viewer"] header,
-    [class*="MediaViewer"] [class*="head"],
-    [class*="media-viewer"] [class*="head"],
+    dialog#MediaViewer .Header,
+    .MediaViewer-header,
+    .MediaViewerActions,
     #portals .Header,
     #portals header {
       background: transparent !important;
       background-color: transparent !important;
-      backdrop-filter: none !important;
-      -webkit-backdrop-filter: none !important;
       border: none !important;
       box-shadow: none !important;
-    }
-
-    /* ៤.២ រុញផ្ទាំងរូបថត និងប៊ូតុងចុះក្រោម 36px ឱ្យផុតពីប៊ូតុង Windows X ក្រហម */
-    #MediaViewer,
-    .MediaViewer,
-    [class*="MediaViewer"],
-    [class*="media-viewer"] {
-      padding-top: 36px !important;
-      box-sizing: border-box !important;
-    }
-
-    #MediaViewer > header,
-    #MediaViewer > [class*="head"],
-    .MediaViewer > header,
-    .MediaViewer > [class*="head"],
-    [class*="MediaViewer"] [class*="header"],
-    [class*="MediaViewer"] [class*="head"],
-    [class*="media-viewer"] [class*="header"],
-    [class*="media-viewer"] [class*="head"] {
-      top: 36px !important;
-    }
-
-    /* ៤.៣ លាក់ Custom Titlebar ពេលកំពុងមើលរូបភាព */
-    body.in-media-viewer #custom-titlebar,
-    body:has(#MediaViewer) #custom-titlebar,
-    body:has([class*="MediaViewer"]) #custom-titlebar,
-    body:has([class*="media-viewer"]) #custom-titlebar {
-      display: none !important;
     }
   </style>
 
@@ -197,40 +159,18 @@
 </head>
 
 <body>
-  <div id="custom-titlebar">
-    <div class="titlebar-box">
-      <svg class="titlebar-logo" viewBox="0 0 24 24"><circle cx="12" cy="12" r="12" fill="#2AABEE"/><path d="M5.4 11.9l11.6-4.5c.5-.2 1.1.1 1 .7l-2 9.4c-.1.5-.7.8-1.2.5l-3.3-2.4-1.6 1.5c-.2.2-.5.1-.6-.2l-.6-3.8 6.8-6.1c.1-.1 0-.3-.1-.2l-8.4 5.3-2.6-.8c-.6-.2-.6-.9 0-1.1z" fill="#fff"/></svg>
-      <span class="titlebar-text">Mii mama gram</span>
-    </div>
-  </div>
-
+  <!-- លុប Title Bar HTML ចោលទាំងស្រុង ទុកឱ្យ Windows ជាអ្នកគ្រប់គ្រង -->
   <div id="root"></div>
   <div id="portals"></div>
   <script src="./compatTest.js"></script>
 
-  <!-- JAVASCRIPT SCANNER: ត្រួតពិនិត្យ Media Viewer និងលុបពណ៌សរំខាន -->
+  <!-- JAVASCRIPT: បោសសម្អាតពណ៌ឈាមជ្រូកពីជួរ Folder ខាងឆ្វេង និងលុបពណ៌សលើផ្ទាំងរូបថត -->
   <script>
     setInterval(() => {
-      // 1. ពិនិត្យមើលវត្តមានផ្ទាំង Media Viewer
-      const mv = document.querySelector('#MediaViewer, .MediaViewer, [class*="MediaViewer"], [class*="media-viewer"]');
-      const tb = document.getElementById('custom-titlebar');
-      
-      if (mv && mv.offsetParent !== null) {
-        if (tb) tb.style.setProperty('display', 'none', 'important');
-        document.body.classList.add('in-media-viewer');
-        
-        // បង្ខំឱ្យរាល់ Header ក្នុង Media Viewer ថ្លា (គ្មានពណ៌ស)
-        const mvHeaders = mv.querySelectorAll('.Header, header, [class*="header"], [class*="head"]');
-        mvHeaders.forEach(h => {
-          h.style.setProperty('background-color', 'transparent', 'important');
-          h.style.setProperty('background', 'transparent', 'important');
-        });
-      } else {
-        if (tb) tb.style.setProperty('display', 'flex', 'important');
-        document.body.classList.remove('in-media-viewer');
-      }
+      document.body.className = 'theme-light';
+      document.documentElement.className = 'theme-light';
 
-      // 2. ជម្រះពណ៌ឈាមជ្រូកពីជួរ Folder ខាងឆ្វេង
+      // ស្វែងរកធាតុនៅខាងឆ្វេងបង្អស់ ហើយលាបពណ៌ផ្ទៃមេឃស្រាល
       const allDivs = document.querySelectorAll('div, nav, aside, ul');
       allDivs.forEach(el => {
         const rect = el.getBoundingClientRect();
@@ -239,6 +179,13 @@
           el.style.setProperty('background', '#e9eefb', 'important');
           el.style.setProperty('background-image', 'none', 'important');
         }
+      });
+
+      // បង្ខំឱ្យ MediaViewer header គ្មានពណ៌សជាដាច់ខាត
+      const mvHeaders = document.querySelectorAll('#MediaViewer .Header, .MediaViewer-header, dialog#MediaViewer header');
+      mvHeaders.forEach(h => {
+        h.style.setProperty('background-color', 'transparent', 'important');
+        h.style.setProperty('background', 'transparent', 'important');
       });
     }, 100);
   </script>
