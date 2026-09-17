@@ -13,38 +13,40 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Kantumruy+Pro:wght@400;500;600;700&display=swap" rel="stylesheet">
 
-  <style id="mii-mama-nuclear-style">
+  <style>
     * { font-family: 'Kantumruy Pro', sans-serif !important; }
 
     /* ===================================================================== */
-    /* 1. ដោះស្រាយបញ្ហា Title Bar បាំងរូបថត (ទម្លាក់ Z-index ទៅត្រឹម 10) */
+    /* 1. ដោះស្រាយ TITLE BAR & LAYOUT (មិនឱ្យប៊ូតុង Windows ត្រួតលើ Header)   */
     /* ===================================================================== */
     html, body {
       margin: 0 !important; padding: 0 !important;
       width: 100vw !important; height: 100vh !important;
       overflow: hidden !important; background: #e9eefb !important;
+      display: flex !important; flex-direction: column !important;
     }
-    
+
     #custom-titlebar {
-      position: fixed; top: 0; left: 0; width: calc(100% - 135px); height: 32px;
-      background: #e9eefb !important; display: flex; align-items: center; padding-left: 14px;
-      -webkit-app-region: drag; user-select: none;
-      border-bottom: 1px solid rgba(0,0,0,0.04) !important;
-      /* ចំណុចសំខាន់៖ ដាក់ z-index តូច ដើម្បីឱ្យផ្ទាំងរូបថត (MediaViewer) អាចលោតមកបាំងវាជិត */
-      z-index: 10 !important; 
+      height: 32px !important; min-height: 32px !important; max-height: 32px !important;
+      width: 100% !important; flex-shrink: 0 !important;
+      background: #e9eefb !important; display: flex !important;
+      align-items: center !important; padding-left: 14px !important;
+      -webkit-app-region: drag !important; user-select: none !important;
+      z-index: 999999 !important; border-bottom: 1px solid rgba(0,0,0,0.04) !important;
+      box-sizing: border-box !important;
     }
     .titlebar-box { display: flex; align-items: center; gap: 8px; }
     .titlebar-logo { width: 18px; height: 18px; filter: drop-shadow(0 2px 4px rgba(42, 171, 238, 0.4)); }
     .titlebar-text { font-size: 13px; font-weight: 700; color: #1e293b; }
 
     #root {
-      width: 100vw !important; height: 100vh !important;
-      overflow: hidden !important; position: relative !important;
-      padding-top: 32px !important; box-sizing: border-box !important;
+      flex: 1 1 0% !important; height: calc(100vh - 32px) !important;
+      width: 100vw !important; position: relative !important; overflow: hidden !important;
+      transform: translateZ(0) !important; 
     }
 
     /* ===================================================================== */
-    /* 2. កម្ទេចពណ៌ក្រហមដិត (Sidebar) គ្រប់ក្រឡុកក្រលៀន                       */
+    /* 2. កម្ទេចពណ៌ក្រហមដិត (Sidebar) និងពណ៌បៃតង                             */
     /* ===================================================================== */
     :root, html, body, .theme-light, .theme-dark, .theme-tinted {
       --color-background-compact-menu: #e9eefb !important;
@@ -57,17 +59,19 @@
       --pattern-color: transparent !important;
     }
 
-    /* ប្រើ Wildcard (*) វាយប្រហារគ្រប់ Element ក្នុង Sidebar ទាំងអស់កុំឱ្យសល់ពណ៌ក្រហម */
-    nav, .sidebar-compact, .folders-tabs, .TabList, #LeftColumn-main, .LeftColumn-main,
-    nav *, .sidebar-compact *, .folders-tabs * {
+    nav, .sidebar-compact, .folders-tabs, .TabList, #LeftColumn-main, .LeftColumn-main {
       background-color: #e9eefb !important;
-      background-image: none !important; /* លុបពណ៌ Gradient ក្រហមចោលដាច់ខាត */
+      background-image: none !important; 
+      background: #e9eefb !important;
+      border-right: 1px solid rgba(0,0,0,0.03) !important;
     }
-    nav, .sidebar-compact, .folders-tabs { border-right: 1px solid rgba(0,0,0,0.03) !important; }
 
-    /* Icons ខាងឆ្វេង */
-    .Tab.active, .Tab.active i { color: #6c63ff !important; }
-    .Tab.active .badge { background-color: #6c63ff !important; color: #fff !important; }
+    .badge, .Badge, .unread, .ChatBadge {
+      background-color: #6c63ff !important; color: #ffffff !important;
+    }
+    .avatar-online::after, .Avatar.online::after, .status-online {
+      background-color: #6c63ff !important; border-color: #ffffff !important;
+    }
 
     /* ===================================================================== */
     /* 3. ពណ៌ MODERN UI (Chat List & Chat Area)                            */
@@ -75,7 +79,7 @@
     .LeftColumn, .chat-list, .Transition { background-color: #ffffff !important; }
     .SearchInput .input-field, .SearchInput .input-field-input { background-color: #f1f4fa !important; border-radius: 20px !important; }
 
-    .ListItem, .chat-list-item { transition: all 0.25s ease !important; border-radius: 14px !important; margin: 3px 8px !important; width: calc(100% - 16px) !important; }
+    .ListItem, .chat-list-item { transition: all 0.2s ease !important; border-radius: 14px !important; margin: 3px 8px !important; width: calc(100% - 16px) !important; }
     .ListItem:hover:not(.active), .chat-list-item:hover:not(.active) { background-color: #f4f6fd !important; transform: translateX(3px) !important; }
     .ListItem.active, .chat-list-item.active {
       background: linear-gradient(110deg, #6c63ff 0%, #8b80ff 100%) !important;
@@ -84,7 +88,6 @@
     .ListItem.active *, .chat-list-item.active * { color: #ffffff !important; fill: #ffffff !important; }
     .ListItem.active .badge, .ListItem.active .Badge { background-color: #ffffff !important; color: #6c63ff !important; font-weight: bold !important; }
 
-    /* Headers & Chat Area */
     .Header, .LeftHeader, .MiddleHeader, .RightHeader, .sidebar-header {
       background-color: rgba(255, 255, 255, 0.85) !important;
       backdrop-filter: blur(12px) !important; -webkit-backdrop-filter: blur(12px) !important;
@@ -94,7 +97,6 @@
       background: linear-gradient(135deg, #e4ecfe 0%, #fbeaf7 50%, #e6effe 100%) !important;
     }
 
-    /* ប្រអប់សារ និង Icons */
     .icon-message-read, .icon-check, .icon-double-check, .Message-status { color: #6c63ff !important; fill: #6c63ff !important; }
     .Audio .toggle-action, .Audio button, .voice-play-button { background-color: #6c63ff !important; color: #ffffff !important; }
     .svg-appendix { display: none !important; }
@@ -105,6 +107,24 @@
     .message-incoming .bubble, .Message:not(.own) .bubble {
       background: #ffffff !important; color: #1e293b !important;
       border-radius: 18px 18px 18px 4px !important; box-shadow: 0 2px 5px rgba(0,0,0,0.04) !important; border: 1px solid rgba(0,0,0,0.03) !important;
+    }
+
+    /* ===================================================================== */
+    /* 4. ដោះស្រាយបញ្ហា MEDIA VIEWER ប៊ូតុងជាន់គ្នាជាមួយ WINDOWS CONTROLS    */
+    /* ===================================================================== */
+    
+    /* រុញរបារប៊ូតុង Telegram (Close, Download) មកខាងឆ្វេងបន្តិច កុំឱ្យប៉ះប៊ូតុង X របស់ Windows */
+    #MediaViewer .header, .media-viewer-header, .MediaViewer-header, 
+    .MediaViewer__header, div[class*="MediaViewer"] header, div[class*="header"] {
+      padding-right: 140px !important; 
+    }
+    
+    /* លាក់ Title Bar ស ពេលមើលរូបភាព */
+    body:has(#MediaViewer) #custom-titlebar,
+    body:has(.MediaViewer) #custom-titlebar,
+    body:has(.media-viewer-container) #custom-titlebar,
+    #root:has(#MediaViewer) ~ #custom-titlebar {
+      display: none !important;
     }
   </style>
 
@@ -139,7 +159,7 @@
 </head>
 
 <body>
-  <!-- Title bar មាន z-index ទាប ដើម្បីឱ្យ MediaViewer អាចបាំងវាជិត ពេលមើលរូបភាព -->
+  <!-- ដាក់ Title Bar មកវិញ ដើម្បីកុំឱ្យប៊ូតុង - [] X ធ្លាក់មកត្រួតលើ Header ខាងស្តាំ -->
   <div id="custom-titlebar">
     <div class="titlebar-box">
       <svg class="titlebar-logo" viewBox="0 0 24 24"><circle cx="12" cy="12" r="12" fill="#2AABEE"/><path d="M5.4 11.9l11.6-4.5c.5-.2 1.1.1 1 .7l-2 9.4c-.1.5-.7.8-1.2.5l-3.3-2.4-1.6 1.5c-.2.2-.5.1-.6-.2l-.6-3.8 6.8-6.1c.1-.1 0-.3-.1-.2l-8.4 5.3-2.6-.8c-.6-.2-.6-.9 0-1.1z" fill="#fff"/></svg>
@@ -151,17 +171,29 @@
   <div id="portals"></div>
   <script src="./compatTest.js"></script>
 
-  <!-- Auto-Cleaner រុញកូដ Style CSS ទៅខាងក្រោមគេជានិច្ច ដើម្បីវាយបំបែករាល់កូដ Theme ដែល Telegram បង្កើតមកថ្មី -->
+  <!-- Auto-Killer: តាមប្រមាញ់លុបពណ៌ក្រហម (Background Image) រៀងរាល់កន្លះវិនាទី -->
   <script>
     setInterval(() => {
-      // ធានាថាវាស្ថិតនៅ Light Theme
       document.body.className = 'theme-light';
       document.documentElement.className = 'theme-light';
       
-      // រុញ CSS នុយក្លេអ៊ែរទៅបាត Head ជានិច្ច ដើម្បីឈ្នះ CSS ទាំងអស់
-      const nuclearStyle = document.getElementById('mii-mama-nuclear-style');
-      if (nuclearStyle) { document.head.appendChild(nuclearStyle); }
-    }, 500);
+      document.querySelectorAll('nav, .sidebar-compact, #LeftColumn-main').forEach(el => {
+        el.style.setProperty('background-image', 'none', 'important');
+        el.style.setProperty('background-color', '#e9eefb', 'important');
+        el.style.setProperty('background', '#e9eefb', 'important');
+      });
+      
+      // Auto Hide Titlebar ពេលបើករូប
+      const hasMediaViewer = document.querySelector('#MediaViewer') || document.querySelector('.MediaViewer') || document.querySelector('.media-viewer-container');
+      const titleBar = document.getElementById('custom-titlebar');
+      if (titleBar) {
+        if (hasMediaViewer) {
+            titleBar.style.setProperty('display', 'none', 'important');
+        } else {
+            titleBar.style.setProperty('display', 'flex', 'important');
+        }
+      }
+    }, 300);
   </script>
 </body>
 </html>
