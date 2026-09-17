@@ -17,7 +17,7 @@
     * { font-family: 'Kantumruy Pro', sans-serif !important; }
 
     /* ===================================================================== */
-    /* 1. TITLE BAR & MAIN FRAME                                             */
+    /* 1. TITLE BAR & BASE LAYOUT                                            */
     /* ===================================================================== */
     html, body {
       margin: 0 !important; padding: 0 !important;
@@ -47,7 +47,7 @@
     }
 
     /* ===================================================================== */
-    /* 2. កម្ទេចពណ៌ឈាមជ្រូក (MAROON) ទាំងស្រុងលើ SIDEBAR & MAIN CONTAINER    */
+    /* 2. THEME COLOR OVERRIDES (លុបពណ៌ឈាមជ្រូក និងបៃតង)                      */
     /* ===================================================================== */
     :root, html, body, .theme-light, .theme-dark, .theme-tinted {
       --color-background-compact-menu: #e9eefb !important;
@@ -60,7 +60,6 @@
       --pattern-color: transparent !important;
     }
 
-    /* បង្ខំផ្ទៃមេទាំងអស់ឱ្យចេញពណ៌ផ្ទៃមេឃស្រាល ដើម្បីកុំឱ្យធ្លុះពណ៌ឈាមជ្រូក */
     #Main, .Main, #LeftColumn, #LeftColumn-main, .LeftColumn-main, 
     nav, .sidebar-compact, .folders-tabs, .TabList {
       background-color: #e9eefb !important;
@@ -69,15 +68,11 @@
     }
     nav, .sidebar-compact, .folders-tabs { border-right: 1px solid rgba(0,0,0,0.04) !important; }
 
-    /* ប្តូរអក្សរ និង Icon ក្នុង Folder Sidebar ឱ្យចេញពណ៌ច្បាស់ស្អាត (មិនមែនសព្រាល) */
-    nav span, .sidebar-compact span, .folders-tabs span { color: #334155 !important; }
-    nav i, nav svg, .sidebar-compact i, .sidebar-compact svg { fill: #475569 !important; color: #475569 !important; }
-
     .badge, .Badge, .unread, .ChatBadge { background-color: #6c63ff !important; color: #ffffff !important; }
     .avatar-online::after, .Avatar.online::after, .status-online { background-color: #6c63ff !important; border-color: #ffffff !important; }
 
     /* ===================================================================== */
-    /* 3. MODERN UI FOR CHAT LIST & CHAT VIEW                               */
+    /* 3. CHAT LIST & HEADER ធម្មតា (មិនប៉ះពាល់ MEDIA VIEWER)                */
     /* ===================================================================== */
     .LeftColumn, .chat-list, .Transition { background-color: #ffffff !important; }
     .SearchInput .input-field, .SearchInput .input-field-input { background-color: #f1f4fa !important; border-radius: 20px !important; }
@@ -89,13 +84,14 @@
       box-shadow: 0 4px 12px rgba(108, 99, 255, 0.3) !important; border: none !important;
     }
     .ListItem.active *, .chat-list-item.active * { color: #ffffff !important; fill: #ffffff !important; }
-    .ListItem.active .badge, .ListItem.active .Badge { background-color: #ffffff !important; color: #6c63ff !important; font-weight: bold !important; }
+    .ListItem.active .badge, .ListItem.active .Badge { background-color: #ffffff !important; color: #6c63ff !important; }
 
-    /* Header នៃផ្ទាំង Chat ធម្មតា (ពណ៌ស Blur) */
-    .Header:not([class*="Media"]):not([class*="media"]), 
+    /* ចំណុចគន្លឹះ៖ កំណត់ Header ពណ៌ស សម្រាប់តែផ្ទាំង Chat ធម្មតា */
+    #Main > .Header, 
+    #LeftColumn .Header, 
+    #MiddleColumn .Header, 
     .LeftHeader, 
     .MiddleHeader, 
-    .RightHeader, 
     .sidebar-header {
       background-color: rgba(255, 255, 255, 0.85) !important;
       backdrop-filter: blur(12px) !important; -webkit-backdrop-filter: blur(12px) !important;
@@ -119,23 +115,21 @@
     }
 
     /* ===================================================================== */
-    /* 4. ដោះស្រាយផ្ទាំងមើលរូបភាព (MEDIA VIEWER FIX) - លុបរបារស & កុំឱ្យជាន់ប៊ូតុង */
+    /* 4. ដំណោះស្រាយផ្ទាំងរូបថត (MEDIA VIEWER FIX) - បំបាត់របារស & ជៀសប៊ូតុង X */
     /* ===================================================================== */
     
-    /* ៤.១ បង្ខំក្បាល Header នៃផ្ទាំងមើលរូបថត ឱ្យថ្លា (TRANSPARENT) ដាច់ខាត */
+    /* ៤.១ បង្ខំឱ្យ Header នៃផ្ទាំងមើលរូបថតថ្លា (Transparent) មិនឱ្យចេញរបារស */
     #MediaViewer .Header,
-    #MediaViewer header,
     .MediaViewer .Header,
-    .MediaViewer header,
     [class*="MediaViewer"] .Header,
+    [class*="media-viewer"] .Header,
     [class*="MediaViewer"] header,
     [class*="media-viewer"] header,
-    [class*="media-viewer"] .Header,
-    .MediaViewer-header,
-    .media-viewer-header,
+    [class*="MediaViewer"] [class*="head"],
+    [class*="media-viewer"] [class*="head"],
     #portals .Header,
     #portals header {
-      background: linear-gradient(to bottom, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0) 100%) !important;
+      background: transparent !important;
       background-color: transparent !important;
       backdrop-filter: none !important;
       -webkit-backdrop-filter: none !important;
@@ -143,24 +137,31 @@
       box-shadow: none !important;
     }
 
-    /* ៤.២ រុញប៊ូតុងបញ្ជារបស់ Telegram ចុះក្រោម និងមកឆ្វេង ឱ្យផុតពីប៊ូតុង Windows X */
-    #MediaViewer [class*="actions"],
-    #MediaViewer [class*="tools"],
-    .MediaViewer [class*="actions"],
-    [class*="MediaViewer"] [class*="actions"],
-    [class*="MediaViewer"] [class*="tools"],
-    .MediaViewer-header-actions,
-    .media-viewer-actions,
-    [class*="MediaViewer"] header > div:last-child {
-      margin-top: 36px !important;     /* រុញចុះក្រោម ឱ្យផុតពី 32px នៃប៊ូតុង Windows */
-      margin-right: 15px !important;
-      padding-right: 140px !important;  /* ទុកចន្លោះ 140px កុំឱ្យបុកប៊ូតុង [X] ក្រហម */
+    /* ៤.២ រុញផ្ទាំងរូបថត និងប៊ូតុងចុះក្រោម 36px ឱ្យផុតពីប៊ូតុង Windows X ក្រហម */
+    #MediaViewer,
+    .MediaViewer,
+    [class*="MediaViewer"],
+    [class*="media-viewer"] {
+      padding-top: 36px !important;
+      box-sizing: border-box !important;
+    }
+
+    #MediaViewer > header,
+    #MediaViewer > [class*="head"],
+    .MediaViewer > header,
+    .MediaViewer > [class*="head"],
+    [class*="MediaViewer"] [class*="header"],
+    [class*="MediaViewer"] [class*="head"],
+    [class*="media-viewer"] [class*="header"],
+    [class*="media-viewer"] [class*="head"] {
+      top: 36px !important;
     }
 
     /* ៤.៣ លាក់ Custom Titlebar ពេលកំពុងមើលរូបភាព */
+    body.in-media-viewer #custom-titlebar,
+    body:has(#MediaViewer) #custom-titlebar,
     body:has([class*="MediaViewer"]) #custom-titlebar,
-    body:has([class*="media-viewer"]) #custom-titlebar,
-    body:has(#MediaViewer) #custom-titlebar {
+    body:has([class*="media-viewer"]) #custom-titlebar {
       display: none !important;
     }
   </style>
@@ -207,14 +208,29 @@
   <div id="portals"></div>
   <script src="./compatTest.js"></script>
 
-  <!-- JAVASCRIPT SCANNER: បោសសម្អាតពណ៌ឈាមជ្រូក និងការពារការជាន់ប៊ូតុងពេលមើលរូប -->
+  <!-- JAVASCRIPT SCANNER: ត្រួតពិនិត្យ Media Viewer និងលុបពណ៌សរំខាន -->
   <script>
     setInterval(() => {
-      // 1. បង្ខំ Light Theme
-      document.body.className = 'theme-light';
-      document.documentElement.className = 'theme-light';
+      // 1. ពិនិត្យមើលវត្តមានផ្ទាំង Media Viewer
+      const mv = document.querySelector('#MediaViewer, .MediaViewer, [class*="MediaViewer"], [class*="media-viewer"]');
+      const tb = document.getElementById('custom-titlebar');
+      
+      if (mv && mv.offsetParent !== null) {
+        if (tb) tb.style.setProperty('display', 'none', 'important');
+        document.body.classList.add('in-media-viewer');
+        
+        // បង្ខំឱ្យរាល់ Header ក្នុង Media Viewer ថ្លា (គ្មានពណ៌ស)
+        const mvHeaders = mv.querySelectorAll('.Header, header, [class*="header"], [class*="head"]');
+        mvHeaders.forEach(h => {
+          h.style.setProperty('background-color', 'transparent', 'important');
+          h.style.setProperty('background', 'transparent', 'important');
+        });
+      } else {
+        if (tb) tb.style.setProperty('display', 'flex', 'important');
+        document.body.classList.remove('in-media-viewer');
+      }
 
-      // 2. ស្វែងរកធាតុទាំងឡាយណាដែលស្ថិតនៅជួរ Folder ខាងឆ្វេង (x < 90px) ហើយលាបពណ៌ផ្ទៃមេឃស្រាល
+      // 2. ជម្រះពណ៌ឈាមជ្រូកពីជួរ Folder ខាងឆ្វេង
       const allDivs = document.querySelectorAll('div, nav, aside, ul');
       allDivs.forEach(el => {
         const rect = el.getBoundingClientRect();
@@ -224,14 +240,7 @@
           el.style.setProperty('background-image', 'none', 'important');
         }
       });
-
-      // 3. ពិនិត្យមើលផ្ទាំងរូបភាព (MediaViewer) ដើម្បីលាក់ Titlebar
-      const hasViewer = document.querySelector('[class*="MediaViewer"], [class*="media-viewer"], #MediaViewer');
-      const titleBar = document.getElementById('custom-titlebar');
-      if (titleBar) {
-        titleBar.style.setProperty('display', hasViewer ? 'none' : 'flex', 'important');
-      }
-    }, 200);
+    }, 100);
   </script>
 </body>
 </html>
