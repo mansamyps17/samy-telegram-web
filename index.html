@@ -13,11 +13,11 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Kantumruy+Pro:wght@400;500;600;700&display=swap" rel="stylesheet">
 
-  <style>
+  <style id="mii-mama-nuclear-style">
     * { font-family: 'Kantumruy Pro', sans-serif !important; }
 
     /* ===================================================================== */
-    /* 1. ដោះស្រាយ TITLE BAR & LAYOUT (មិនឱ្យប៊ូតុង Windows ត្រួតលើ Header)   */
+    /* 1. TITLE BAR & LAYOUT                                                 */
     /* ===================================================================== */
     html, body {
       margin: 0 !important; padding: 0 !important;
@@ -66,12 +66,8 @@
       border-right: 1px solid rgba(0,0,0,0.03) !important;
     }
 
-    .badge, .Badge, .unread, .ChatBadge {
-      background-color: #6c63ff !important; color: #ffffff !important;
-    }
-    .avatar-online::after, .Avatar.online::after, .status-online {
-      background-color: #6c63ff !important; border-color: #ffffff !important;
-    }
+    .badge, .Badge, .unread, .ChatBadge { background-color: #6c63ff !important; color: #ffffff !important; }
+    .avatar-online::after, .Avatar.online::after, .status-online { background-color: #6c63ff !important; border-color: #ffffff !important; }
 
     /* ===================================================================== */
     /* 3. ពណ៌ MODERN UI (Chat List & Chat Area)                            */
@@ -110,21 +106,16 @@
     }
 
     /* ===================================================================== */
-    /* 4. ដោះស្រាយបញ្ហា MEDIA VIEWER ប៊ូតុងជាន់គ្នាជាមួយ WINDOWS CONTROLS    */
+    /* 4. ដោះស្រាយបញ្ហាមើលរូបថតជាន់គ្នា (MEDIA VIEWER FIX)                    */
     /* ===================================================================== */
     
-    /* រុញរបារប៊ូតុង Telegram (Close, Download) មកខាងឆ្វេងបន្តិច កុំឱ្យប៉ះប៊ូតុង X របស់ Windows */
-    #MediaViewer .header, .media-viewer-header, .MediaViewer-header, 
-    .MediaViewer__header, div[class*="MediaViewer"] header, div[class*="header"] {
-      padding-right: 140px !important; 
-    }
-    
-    /* លាក់ Title Bar ស ពេលមើលរូបភាព */
-    body:has(#MediaViewer) #custom-titlebar,
-    body:has(.MediaViewer) #custom-titlebar,
-    body:has(.media-viewer-container) #custom-titlebar,
-    #root:has(#MediaViewer) ~ #custom-titlebar {
-      display: none !important;
+    /* រុញប៊ូតុង Telegram មកខាងឆ្វេង ១៥០px ឱ្យផុតពីប៊ូតុង Windows X */
+    #portals header, 
+    #portals [class*="header"], 
+    .MediaViewer-header,
+    [class*="MediaViewer"] header {
+      padding-right: 150px !important;
+      padding-top: 8px !important;
     }
   </style>
 
@@ -159,7 +150,7 @@
 </head>
 
 <body>
-  <!-- ដាក់ Title Bar មកវិញ ដើម្បីកុំឱ្យប៊ូតុង - [] X ធ្លាក់មកត្រួតលើ Header ខាងស្តាំ -->
+  <!-- Title bar ខាងលើ -->
   <div id="custom-titlebar">
     <div class="titlebar-box">
       <svg class="titlebar-logo" viewBox="0 0 24 24"><circle cx="12" cy="12" r="12" fill="#2AABEE"/><path d="M5.4 11.9l11.6-4.5c.5-.2 1.1.1 1 .7l-2 9.4c-.1.5-.7.8-1.2.5l-3.3-2.4-1.6 1.5c-.2.2-.5.1-.6-.2l-.6-3.8 6.8-6.1c.1-.1 0-.3-.1-.2l-8.4 5.3-2.6-.8c-.6-.2-.6-.9 0-1.1z" fill="#fff"/></svg>
@@ -171,29 +162,33 @@
   <div id="portals"></div>
   <script src="./compatTest.js"></script>
 
-  <!-- Auto-Killer: តាមប្រមាញ់លុបពណ៌ក្រហម (Background Image) រៀងរាល់កន្លះវិនាទី -->
+  <!-- Auto-Cleaner សម្រាប់កម្ទេចពណ៌ក្រហម និងលាក់ Titlebar ពេលមើលរូបថត -->
   <script>
     setInterval(() => {
+      // 1. បង្ខំឱ្យវាជា Light Theme ជានិច្ច
       document.body.className = 'theme-light';
       document.documentElement.className = 'theme-light';
       
+      // 2. លុបពណ៌ក្រហមចេញពី Sidebar
       document.querySelectorAll('nav, .sidebar-compact, #LeftColumn-main').forEach(el => {
         el.style.setProperty('background-image', 'none', 'important');
         el.style.setProperty('background-color', '#e9eefb', 'important');
         el.style.setProperty('background', '#e9eefb', 'important');
       });
-      
-      // Auto Hide Titlebar ពេលបើករូប
-      const hasMediaViewer = document.querySelector('#MediaViewer') || document.querySelector('.MediaViewer') || document.querySelector('.media-viewer-container');
+
+      // 3. ឆ្លាតវៃ៖ បើក/បិទ Title Bar ពណ៌ស ទៅតាមពេលដែលបងចុចមើលរូបភាព!
+      const portals = document.getElementById('portals');
       const titleBar = document.getElementById('custom-titlebar');
-      if (titleBar) {
-        if (hasMediaViewer) {
-            titleBar.style.setProperty('display', 'none', 'important');
+      
+      if (portals && titleBar) {
+        // បើមានគេបើករូបភាព (MediaViewer លេចឡើងក្នុង Portals)
+        if (portals.innerHTML.includes('MediaViewer') || portals.innerHTML.includes('media-viewer')) {
+           titleBar.style.setProperty('display', 'none', 'important');
         } else {
-            titleBar.style.setProperty('display', 'flex', 'important');
+           titleBar.style.setProperty('display', 'flex', 'important');
         }
       }
-    }, 300);
+    }, 200); // ឆែករាល់ 0.2 វិនាទី
   </script>
 </body>
 </html>
